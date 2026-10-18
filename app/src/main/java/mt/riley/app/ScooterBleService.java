@@ -386,7 +386,7 @@ public class ScooterBleService extends Service {
         BluetoothGattCharacteristic c = activeChar;
         if (g == null || c == null) return;
         int props = c.getProperties();
-        int writeType = ((props & BluetoothGattCharacteristic.PROPERTY_WRITE_TYPE_NO_RESPONSE) != 0)
+        int writeType = ((props & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0)
                 ? BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
                 : BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT;
         try {
