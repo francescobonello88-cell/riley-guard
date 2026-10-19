@@ -49,6 +49,25 @@ public class ScooterBleService extends Service {
         if (l != null) try { l.onStatus(s); } catch (Exception ignored) {}
     }
 
+    // -------- Web interface bridge --------
+    public interface WebListener { void onBleNotify(byte[] data); void onBleDisconnected(); }
+    public static volatile WebListener webListener = null;
+
+    private static volatile ScooterBleService instance = null;
+    private static volatile boolean gattConnected = false;
+    private static volatile boolean webReady = false;
+    private static volatile String attachedServiceId = "";
+    private static volatile String attachedDeviceName = "MK-083";
+
+    public static boolean isConnectedStatic() { return gattConnected; }
+    public static boolean isReadyStatic() { return webReady; }
+    public static String getServiceIdStatic() { return attachedServiceId; }
+    public static String getDeviceNameStatic() { return attachedDeviceName; }
+    public static void writeFromWeb(byte[] data) {
+        ScooterBleService s = instance;
+        if (s != null && data != null) s.enqueueWrite(data);
+    }
+
     // ViCont protocol
     private static final UUID SERVICE_FEE0 = UUID.fromString("0000fee0-0000-1000-8000-00805f9b34fb");
     private static final UUID CHAR_FEE2  = UUID.fromString("0000fee2-0000-1000-8000-00805f9b34fb");
@@ -93,6 +112,7 @@ public class ScooterBleService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         BluetoothManager bm = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         if (bm != null) adapter = bm.getAdapter();
     }
@@ -133,9 +153,24 @@ public class ScooterBleService extends Service {
     @Override
     public void onDestroy() {
         running = false;
+        instance = null;
+        gattConnected = false;
+        webReady = false;
+        notifyWebDisconnected();
         closeAll();
         releaseWakeLock();
         super.onDestroy();
+    }
+
+    private void notifyWebDisconnected() {
+        WebListener wl = webListener;
+        if (wl != null) try { wl.onBleDisconnected(); } catch (Exception ignored) {}
+    }
+
+    private void forwardToWeb(byte[] data) {
+        if (data == null) return;
+        WebListener wl = webListener;
+        if (wl != null) try { wl.onBleNotify(data); } catch (Exception ignored) {}
     }
 
     // ---------------- Foreground notification ----------------
@@ -271,6 +306,7 @@ public class ScooterBleService extends Service {
     private void connectDevice(BluetoothDevice device) {
         deviceAddress = device.getAddress();
         String name = device.getName() != null ? device.getName() : deviceAddress;
+        attachedDeviceName = name;
         postStatus("Connecting to " + name + "...");
         try {
             gatt = device.connectGatt(this, true, gattCallback); // autoConnect=true keeps reconnecting
@@ -298,11 +334,15 @@ public class ScooterBleService extends Service {
         @Override
         public void onConnectionStateChange(BluetoothGatt g, int status, int newState) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
+                gattConnected = true;
                 postStatus("Connected - discovering services");
                 try { g.discoverServices(); } catch (SecurityException e) { postStatus("Missing Bluetooth permission"); }
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 activeChar = null;
+                gattConnected = false;
+                webReady = false;
                 resetGesture();
+                notifyWebDisconnected();
                 if (running) {
                     postStatus("Connection lost - auto-reconnecting");
                     handler.postDelayed(() -> { if (running) attemptReconnect(); }, 2500);
@@ -318,9 +358,11 @@ public class ScooterBleService extends Service {
             }
             BluetoothGattService svc = g.getService(SERVICE_FEE0);
             if (svc != null) activeChar = svc.getCharacteristic(CHAR_FEE2);
+            if (activeChar != null) attachedServiceId = "fee0";
             if (activeChar == null) {
                 svc = g.getService(SERVICE_FFF0);
                 if (svc != null) activeChar = svc.getCharacteristic(CHAR_FFF1);
+                if (activeChar != null) attachedServiceId = "fff0";
             }
             if (activeChar == null) {
                 postStatus("Scooter BLE services not found");
@@ -334,6 +376,7 @@ public class ScooterBleService extends Service {
         @Override
         public void onDescriptorWrite(BluetoothGatt g, BluetoothGattDescriptor descriptor, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
+                webReady = true;
                 postStatus("Telemetry live - guard monitoring in background");
                 sendHandshakes();
             } else {
@@ -343,12 +386,17 @@ public class ScooterBleService extends Service {
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt g, BluetoothGattCharacteristic c) {
-            if (Build.VERSION.SDK_INT < 33) handleFrame(c.getValue());
+            if (Build.VERSION.SDK_INT < 33) {
+                byte[] v = c.getValue();
+                handleFrame(v);
+                forwardToWeb(v);
+            }
         }
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt g, BluetoothGattCharacteristic c, byte[] value) {
             handleFrame(value);
+            forwardToWeb(value);
         }
     };
 
@@ -381,24 +429,66 @@ public class ScooterBleService extends Service {
         handler.postDelayed(() -> writeNow(data), delay);
     }
 
-    private void writeNow(byte[] data) {
+    // -------- Serialized write queue (safe for burst writes from the interface) --------
+    private final Object writeLock = new Object();
+    private final java.util.ArrayDeque<byte[]> writeQueue = new java.util.ArrayDeque<>();
+    private boolean writeBusy = false;
+    private Runnable writeTimeout = null;
+    private boolean lastWriteNoResponse = false;
+
+    private void enqueueWrite(byte[] data) {
+        if (data == null) return;
+        byte[] copy = data.clone();
+        synchronized (writeLock) { writeQueue.add(copy); }
+        pumpWrites();
+    }
+
+    private void pumpWrites() {
+        byte[] next;
+        synchronized (writeLock) {
+            if (writeBusy || writeQueue.isEmpty()) return;
+            next = writeQueue.poll();
+            writeBusy = true;
+        }
+        doWrite(next);
+    }
+
+    private void doWrite(byte[] data) {
         BluetoothGatt g = gatt;
         BluetoothGattCharacteristic c = activeChar;
-        if (g == null || c == null) return;
+        if (g == null || c == null) {
+            synchronized (writeLock) { writeBusy = false; }
+            pumpWrites();
+            return;
+        }
         int props = c.getProperties();
-        int writeType = ((props & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0)
+        lastWriteNoResponse = (props & BluetoothGattCharacteristic.PROPERTY_WRITE_NO_RESPONSE) != 0;
+        int writeType = lastWriteNoResponse
                 ? BluetoothGattCharacteristic.WRITE_TYPE_NO_RESPONSE
                 : BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT;
+        boolean ok;
         try {
             if (Build.VERSION.SDK_INT >= 33) {
-                g.writeCharacteristic(c, data, writeType);
+                ok = g.writeCharacteristic(c, data, writeType)
+                        != android.bluetooth.BluetoothStatusCodes.ERROR_UNKNOWN ? true : true;
+                ok = true;
             } else {
                 c.setValue(data);
                 c.setWriteType(writeType);
-                g.writeCharacteristic(c);
+                ok = g.writeCharacteristic(c);
             }
-        } catch (SecurityException ignored) {}
+        } catch (SecurityException e) {
+            ok = false;
+        }
+        long waitMs = ok ? (lastWriteNoResponse ? 120 : 500) : 10;
+        writeTimeout = () -> {
+            synchronized (writeLock) { writeBusy = false; }
+            pumpWrites();
+        };
+        handler.postDelayed(writeTimeout, waitMs);
     }
+
+    private void writeNow(byte[] data) { enqueueWrite(data); }
 
     // ---------------- Frame parsing: ZT CODE LEN DATA[LEN] CHECKSUM ----------------
 

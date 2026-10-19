@@ -62,6 +62,11 @@ public class MainActivity extends Activity {
         batteryView.setPadding(0, 0, 0, pad);
         root.addView(batteryView);
 
+        Button ifaceBtn = new Button(this);
+        ifaceBtn.setText("Open Interface");
+        ifaceBtn.setOnClickListener(v -> startActivity(new Intent(this, InterfaceActivity.class)));
+        root.addView(ifaceBtn);
+
         Button connectBtn = new Button(this);
         connectBtn.setText("Connect and Start Guard");
         connectBtn.setOnClickListener(v -> connect());
