@@ -146,7 +146,18 @@ public class MainActivity extends Activity {
         }
     }
 
+    private boolean batteryPromptShown = false;
+
     private void startGuard() {
+        // Doze can freeze the guard when the screen is off - ask once for an exemption
+        if (!batteryPromptShown) {
+            PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            if (pm != null && !pm.isIgnoringBatteryOptimizations(getPackageName())) {
+                batteryPromptShown = true;
+                requestIgnoreBatteryOptimizations();
+            }
+        }
+
         Intent i = new Intent(this, ScooterBleService.class);
         i.setAction(ScooterBleService.ACTION_CONNECT);
         if (Build.VERSION.SDK_INT >= 26) {

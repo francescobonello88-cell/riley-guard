@@ -88,7 +88,8 @@ public class ScooterBleService extends Service {
     private static final byte[] GEAR_3       = {(byte)0xFA,(byte)0xAF,(byte)0xA5,(byte)0x5A,0x42,0x01,0x03,(byte)0xA0};
 
     private static final long GESTURE_MS = 2000L;   // 2-second hold
-    private static final int THROTTLE_ADC_TRIGGER = 2000; // ~80% of 12-bit ADC
+    private static final int THROTTLE_PCT_TRIGGER = 80;    // throttle percent
+    private static final int THROTTLE_RAW_TRIGGER = 2000;  // raw ADC value
 
     private final Handler handler = new Handler(Looper.getMainLooper());
     private BluetoothAdapter adapter;
@@ -104,7 +105,8 @@ public class ScooterBleService extends Service {
 
     // Telemetry state
     private volatile int currentGear = 0;
-    private volatile int throttleAdc = 0;
+    private volatile int throttlePct = 0;   // sensors frame bytes 0-1: throttle %
+    private volatile int throttleRaw = 0;   // sensors frame bytes 6-7: raw ADC
     private long ecoHoldStart = 0L;
     private boolean ecoLatched = false;
 
@@ -559,9 +561,12 @@ public class ScooterBleService extends Service {
                     evaluateGesture();
                 }
                 break;
-            case 0x13: // throttle ADC, 16-bit big-endian
+            case 0x13: // sensors frame: throttle % at bytes 0-1, raw ADC at bytes 6-7
                 if (len >= 2) {
-                    throttleAdc = ((buf[off] & 0xFF) << 8) | (buf[off + 1] & 0xFF);
+                    throttlePct = ((buf[off] & 0xFF) << 8) | (buf[off + 1] & 0xFF);
+                    if (len >= 8) {
+                        throttleRaw = ((buf[off + 6] & 0xFF) << 8) | (buf[off + 7] & 0xFF);
+                    }
                     evaluateGesture();
                 }
                 break;
@@ -573,7 +578,8 @@ public class ScooterBleService extends Service {
     // ---------------- 2-second Eco stealth gesture ----------------
 
     private void evaluateGesture() {
-        boolean held = (currentGear == 1) && (throttleAdc >= THROTTLE_ADC_TRIGGER);
+        boolean held = (currentGear == 1)
+                && (throttlePct >= THROTTLE_PCT_TRIGGER || throttleRaw >= THROTTLE_RAW_TRIGGER);
         long now = System.currentTimeMillis();
         if (held) {
             if (ecoHoldStart == 0L) {
@@ -591,7 +597,8 @@ public class ScooterBleService extends Service {
     private void resetGesture() {
         ecoHoldStart = 0L;
         ecoLatched = false;
-        throttleAdc = 0;
+        throttlePct = 0;
+        throttleRaw = 0;
     }
 
     private void triggerPanicLimiter() {
