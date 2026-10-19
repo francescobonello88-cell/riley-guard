@@ -47,10 +47,7 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
             if (n == null || n.trim().isEmpty()) return;
             final String name = n.trim();
             final String addr = d.getAddress();
-            uiHandler.post(() -> {
-                found.put(name, addr);
-                if (pickDialog != null && pickDialog.isShowing()) refreshPickList();
-            });
+            uiHandler.post(() -> found.put(name, addr));
         }
     };
 
@@ -193,20 +190,6 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
                     }
                 })
                 .show();
-    }
-
-    private void refreshPickList() {
-        if (pickDialog == null || !pickDialog.isShowing()) return;
-        String[] labels = buildLabels();
-        pickDialog.setItems(labels, (d, which) -> {
-            String label = labels[which];
-            if (label.startsWith("Reconnect: ")) {
-                resolveDevice(ScooterBleService.getDeviceNameStatic(), ScooterBleService.chosenDeviceAddress);
-            } else {
-                String addr = found.get(label);
-                if (addr != null) resolveDevice(label, addr); else cancelDevice();
-            }
-        });
     }
 
     private String[] buildLabels() {
