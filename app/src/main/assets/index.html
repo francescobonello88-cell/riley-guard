@@ -18,13 +18,30 @@
     for (var i = 0; i < u.length; i++) s += String.fromCharCode(u[i]);
     return btoa(s);
   }
-  var bt = { requestDevice: function (opts) { return Promise.resolve(makeDevice()); } };
-  function makeDevice() {
+  var lastReqTime = 0;
+  var bt = {
+    requestDevice: function (opts) {
+      if (RileyBridge.ready()) {
+        lastReqTime = Date.now();
+        return Promise.resolve(makeDevice(RileyBridge.deviceName()));
+      }
+      if (Date.now() - lastReqTime < 5000) {
+        return Promise.reject(new Error('Device selection cancelled'));
+      }
+      lastReqTime = Date.now();
+      return new Promise(function (resolve, reject) {
+        window.__rileyDeviceFound = function (name) { resolve(makeDevice(name)); };
+        window.__rileyDeviceCancelled = function () { reject(new Error('No device selected')); };
+        try { RileyBridge.requestDevice(); } catch (e) { reject(e); }
+      });
+    }
+  };
+  function makeDevice(nameArg) {
     var discListeners = [];
     var charObj = null;
     var charListeners = [];
     var device = {
-      name: RileyBridge.deviceName(),
+      name: nameArg,
       addEventListener: function (t, f) { if (t === 'gattserverdisconnected') discListeners.push(f); },
       gatt: {
         connected: false,

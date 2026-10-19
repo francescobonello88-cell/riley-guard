@@ -59,6 +59,8 @@ public class ScooterBleService extends Service {
     private static volatile String attachedServiceId = "";
     private static volatile String attachedDeviceName = "MK-083";
 
+    public static volatile String chosenDeviceAddress = null;
+
     public static boolean isConnectedStatic() { return gattConnected; }
     public static boolean isReadyStatic() { return webReady; }
     public static String getServiceIdStatic() { return attachedServiceId; }
@@ -136,13 +138,17 @@ public class ScooterBleService extends Service {
         acquireWakeLock();
         if (!wasRunning) {
             postStatus("Speed Guard active");
-            if (gatt == null && deviceAddress == null) {
-                startScan();
-            } else if (gatt != null) {
+            if (gatt != null) {
                 postStatus("Re-attaching to scooter...");
+            } else if (chosenDeviceAddress != null) {
+                connectToAddress(chosenDeviceAddress);
+            } else if (webListener != null) {
+                postStatus("Ready - pick your scooter in the interface");
             } else {
-                attemptReconnect();
+                startScan();
             }
+        } else if (gatt == null && chosenDeviceAddress != null) {
+            connectToAddress(chosenDeviceAddress);
         }
         return START_STICKY;
     }
@@ -289,8 +295,9 @@ public class ScooterBleService extends Service {
                 return;
             }
             String name = d.getName() != null ? d.getName().toUpperCase() : "";
-            if (name.contains("MK-083") || name.contains("MK083") || name.contains("VOLPAM")
-                    || name.contains("VINCET") || name.contains("VICONT") || name.contains("PRO-VC")) {
+            if (name.startsWith("MK") || name.startsWith("PRO") || name.startsWith("VC")
+                    || name.startsWith("E-S") || name.startsWith("SN") || name.startsWith("ZL")
+                    || name.contains("VOLPAM") || name.contains("VINCET") || name.contains("VICONT")) {
                 stopScanInternal();
                 connectDevice(d);
             }
@@ -303,8 +310,24 @@ public class ScooterBleService extends Service {
 
     // ---------------- GATT ----------------
 
+    private void connectToAddress(String address) {
+        if (adapter == null) {
+            BluetoothManager bm = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+            if (bm != null) adapter = bm.getAdapter();
+        }
+        if (adapter == null) { postStatus("Bluetooth unavailable"); return; }
+        try {
+            connectDevice(adapter.getRemoteDevice(address));
+        } catch (Exception e) {
+            postStatus("Saved scooter unreachable - scan for a new one");
+            chosenDeviceAddress = null;
+            startScan();
+        }
+    }
+
     private void connectDevice(BluetoothDevice device) {
         deviceAddress = device.getAddress();
+        chosenDeviceAddress = deviceAddress;
         String name = device.getName() != null ? device.getName() : deviceAddress;
         attachedDeviceName = name;
         postStatus("Connecting to " + name + "...");
