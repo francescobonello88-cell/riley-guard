@@ -98,6 +98,7 @@
 
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="data:,">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -682,6 +683,194 @@
       font-weight: 600;
       color: var(--text-tertiary);
     }
+    .capsule-ticks span { min-width: 28px; text-align: center; }
+    .liquid-capsule:focus-visible {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 3px;
+    }
+    .liquid-capsule.is-adjusting .liquid-fill-track::after {
+      animation: knobPulse 0.36s ease-out;
+    }
+    @keyframes knobPulse {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.16); }
+      100% { transform: scale(1); }
+    }
+
+    /* SPEED LIMIT CONTROL — a visible target separate from live telemetry */
+    .speed-control-card { padding: 17px 16px 16px; }
+    .speed-setting-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 14px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.14), rgba(10, 132, 255, 0.035));
+      border: 1px solid rgba(10, 132, 255, 0.26);
+      margin-bottom: 12px;
+    }
+    .speed-setting-label {
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.75px;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .speed-setting-copy {
+      font-size: 11px;
+      line-height: 1.35;
+      color: var(--text-secondary);
+    }
+    .speed-setting-number {
+      flex: 0 0 auto;
+      font-family: var(--font-mono);
+      font-weight: 900;
+      font-size: 42px;
+      line-height: 0.92;
+      letter-spacing: -2.5px;
+      color: #ffffff;
+      text-align: right;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s;
+    }
+    .speed-setting-number small {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: 0;
+      color: var(--text-secondary);
+      margin-left: 3px;
+    }
+    .speed-setting-number.pop { animation: settingPop 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes settingPop {
+      0% { transform: scale(0.86); color: var(--accent-blue); }
+      55% { transform: scale(1.12); color: #ffffff; }
+      100% { transform: scale(1); }
+    }
+    .speed-range {
+      width: 100%;
+      height: 30px;
+      appearance: none;
+      -webkit-appearance: none;
+      background: transparent;
+      cursor: pointer;
+      touch-action: pan-y;
+    }
+    .speed-range::-webkit-slider-runnable-track {
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green) 52%, var(--accent-orange) 78%, var(--accent-red));
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.4);
+    }
+    .speed-range::-moz-range-track {
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-green) 52%, var(--accent-orange) 78%, var(--accent-red));
+    }
+    .speed-range::-webkit-slider-thumb {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      margin-top: -8px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid rgba(10, 132, 255, 0.9);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.6), 0 0 0 5px rgba(10,132,255,0.15);
+    }
+    .speed-range::-moz-range-thumb {
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3px solid rgba(10, 132, 255, 0.9);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.6), 0 0 0 5px rgba(10,132,255,0.15);
+    }
+    .speed-range-labels {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-tertiary);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 0 3px;
+      margin-top: -1px;
+    }
+    .speed-preset-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .speed-preset {
+      appearance: none;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: 10px;
+      padding: 8px 4px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.18s, background 0.18s, border-color 0.18s, color 0.18s;
+    }
+    .speed-preset:active { transform: scale(0.94); }
+    .speed-preset.active {
+      color: #ffffff;
+      background: var(--accent-blue-dim);
+      border-color: rgba(10, 132, 255, 0.65);
+      box-shadow: 0 0 14px rgba(10,132,255,0.2);
+    }
+    .speed-control-hint {
+      color: var(--text-tertiary);
+      font-size: 10px;
+      line-height: 1.35;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Brief full-screen style confirmation on the main speed display. */
+    .speed-selection-overlay {
+      position: absolute;
+      inset: 12px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      border-radius: 18px;
+      opacity: 0;
+      transform: scale(0.94);
+      pointer-events: none;
+      background: rgba(7, 12, 22, 0.93);
+      border: 1px solid rgba(10, 132, 255, 0.48);
+      box-shadow: 0 0 34px rgba(10,132,255,0.22), inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: opacity 0.2s, transform 0.25s cubic-bezier(0.16,1,0.3,1);
+    }
+    .speed-selection-overlay.visible { opacity: 1; transform: scale(1); }
+    .speed-selection-eyebrow {
+      color: var(--accent-blue);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+    .speed-selection-number {
+      color: #ffffff;
+      font-size: 62px;
+      line-height: 0.9;
+      letter-spacing: -4px;
+      font-family: var(--font-mono);
+      font-weight: 900;
+      text-shadow: 0 0 24px rgba(10,132,255,0.5);
+    }
+    .speed-selection-unit {
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
 
     /* ==========================================================================
        SPRINT BENCHMARK (TIME TO DESIRED TOP SPEED)
@@ -1008,6 +1197,92 @@
       border-color: var(--accent-green);
       box-shadow: 0 0 32px rgba(48, 209, 88, 0.85);
     }
+    .power-disc.holding {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 32px rgba(10, 132, 255, 0.78);
+      animation: powerHold 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .power-ring.holding {
+      border-style: solid;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 22px rgba(10, 132, 255, 0.42);
+      animation: holdRing 2s linear forwards;
+    }
+    @keyframes powerHold {
+      0% { transform: scale(1); filter: brightness(0.78); }
+      45% { transform: scale(0.9); filter: brightness(1); }
+      100% { transform: scale(1); filter: brightness(1.35); }
+    }
+    @keyframes holdRing {
+      0% { transform: rotate(-90deg) scale(0.84); opacity: 0.35; }
+      100% { transform: rotate(270deg) scale(1); opacity: 1; }
+    }
+    .power-disc.tapping { animation: powerPress 0.55s ease-in-out; }
+    @keyframes powerPress {
+      0%, 100% { transform: scale(1); }
+      45% { transform: scale(0.9); }
+    }
+    .power-hand {
+      position: absolute;
+      right: -7px;
+      bottom: 1px;
+      z-index: 2;
+      font-size: 28px;
+      filter: drop-shadow(0 3px 4px rgba(0,0,0,0.6));
+      animation: fingerTap 1.8s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes fingerTap {
+      0%, 45%, 100% { transform: translateY(-9px) rotate(-16deg); opacity: 0.64; }
+      62% { transform: translateY(4px) rotate(-7deg) scale(0.96); opacity: 1; }
+    }
+    .reboot-step-list {
+      display: grid;
+      gap: 7px;
+      margin-bottom: 14px;
+      text-align: left;
+    }
+    .reboot-step {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      padding: 8px 10px;
+      color: var(--text-secondary);
+      font-size: 11px;
+      line-height: 1.3;
+      transition: border-color 0.22s, background 0.22s, color 0.22s;
+    }
+    .reboot-step-num {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+      display: grid;
+      place-items: center;
+      color: var(--text-tertiary);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .reboot-step.active {
+      color: #ffffff;
+      background: rgba(255,159,10,0.12);
+      border-color: rgba(255,159,10,0.48);
+    }
+    .reboot-step.active .reboot-step-num {
+      color: #000;
+      background: var(--accent-orange);
+      border-color: var(--accent-orange);
+    }
+    .reboot-safety-note {
+      color: var(--text-tertiary);
+      font-size: 10px;
+      line-height: 1.35;
+      margin: -4px 0 13px;
+    }
 
     /* FULLSCREEN COCKPIT HUD */
     .cockpit-screen {
@@ -1113,6 +1388,11 @@
       <div class="info-pill sport" id="modeBadge">UNLIMITED (47 KM/H)</div>
       <div class="info-pill mono" id="hudTimer">00:00</div>
     </div>
+    <div class="speed-selection-overlay" id="speedSelectionOverlay" aria-live="polite" aria-atomic="true">
+      <span class="speed-selection-eyebrow">Speed limit selected</span>
+      <span class="speed-selection-number" id="speedSelectionNumber">47</span>
+      <span class="speed-selection-unit">KM/H</span>
+    </div>
   </div>
 
   <!-- QUICK SWITCH TILES (47 & 20) -->
@@ -1135,6 +1415,34 @@
     </div>
   </div>
 
+  <!-- SPEED LIMIT SETTINGS — selection is confirmed on the main display -->
+  <section class="card speed-control-card" aria-labelledby="speedLimitHeading">
+    <div class="section-headline">
+      <div class="section-title" id="speedLimitHeading">
+        <svg class="icon" style="color:var(--accent-blue);" viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-9"/><path d="M17 6h4v4"/></svg>
+        Speed Limit
+      </div>
+      <span class="capsule-level-tag" id="speedApplyState">47 km/h active</span>
+    </div>
+    <div class="speed-setting-panel">
+      <div>
+        <span class="speed-setting-label">Selected limit</span>
+        <div class="speed-setting-copy" id="speedProfileText">Fast Track profile — sport gear</div>
+      </div>
+      <div class="speed-setting-number" id="selectedSpeedValue">47<small>km/h</small></div>
+    </div>
+    <input class="speed-range" id="speedLimitRange" type="range" min="10" max="99" value="47" step="1" aria-label="Speed limit in kilometres per hour">
+    <div class="speed-range-labels"><span>10</span><span>47</span><span>99 km/h</span></div>
+    <div class="speed-preset-row" aria-label="Quick speed presets">
+      <button class="speed-preset" type="button" data-speed="15" onclick="selectSpeedPreset(15)">15</button>
+      <button class="speed-preset" type="button" data-speed="20" onclick="selectSpeedPreset(20)">20</button>
+      <button class="speed-preset" type="button" data-speed="25" onclick="selectSpeedPreset(25)">25</button>
+      <button class="speed-preset" type="button" data-speed="30" onclick="selectSpeedPreset(30)">30</button>
+      <button class="speed-preset active" type="button" data-speed="47" onclick="selectSpeedPreset(47)">47</button>
+    </div>
+    <p class="speed-control-hint">Choose a value, then release the slider to send it. The display confirms the selected number.</p>
+  </section>
+
   <!-- IOS CONTROL CENTER CAPSULE SLIDERS -->
   <div class="card slider-section-card">
     <div class="section-headline">
@@ -1142,27 +1450,27 @@
         <svg class="icon" style="color:var(--accent-orange);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Drive Dynamics
       </div>
-      <span class="reboot-guide-link" onclick="openRebootModal()">Reboot Guide</span>
+      <span class="reboot-guide-link" onclick="openRebootModal()">Apply Guide</span>
     </div>
 
     <!-- ACCELERATION CAPSULE SLIDER -->
     <div class="capsule-slider-wrap">
       <div class="capsule-label-row">
         <span>Acceleration Sensitivity</span>
-        <span class="capsule-level-tag" id="lblAccelTag">Level 3 • Balanced</span>
+        <span class="capsule-level-tag" id="lblAccelTag">Level 3 / 10 • 30%</span>
       </div>
       <div class="liquid-capsule" id="capsuleAccel">
-        <div class="liquid-fill-track accel-theme" id="trackAccel" style="width: 60%;"></div>
+        <div class="liquid-fill-track accel-theme" id="trackAccel" style="width: 30%;"></div>
         <div class="capsule-content-overlay">
           <div class="capsule-title-box">
             <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             <span>Throttle Bite</span>
           </div>
-          <div class="capsule-val-badge" id="badgeAccelVal">Lv 3</div>
+          <div class="capsule-val-badge" id="badgeAccelVal">3 / 10</div>
         </div>
       </div>
       <div class="capsule-ticks">
-        <span>1 Eco</span><span>2 City</span><span>3 Normal</span><span>4 Sport</span><span>5 Beast</span>
+        <span>1</span><span>3</span><span>5</span><span>7</span><span>10</span>
       </div>
     </div>
 
@@ -1170,20 +1478,20 @@
     <div class="capsule-slider-wrap">
       <div class="capsule-label-row">
         <span>Regenerative E-Brake</span>
-        <span class="capsule-level-tag" id="lblBrakeTag">Level 3 • Balanced</span>
+        <span class="capsule-level-tag" id="lblBrakeTag">Level 3 / 10 • 30%</span>
       </div>
       <div class="liquid-capsule" id="capsuleBrake">
-        <div class="liquid-fill-track brake-theme" id="trackBrake" style="width: 60%;"></div>
+        <div class="liquid-fill-track brake-theme" id="trackBrake" style="width: 30%;"></div>
         <div class="capsule-content-overlay">
           <div class="capsule-title-box">
             <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
             <span>Braking Force</span>
           </div>
-          <div class="capsule-val-badge" id="badgeBrakeVal">Lv 3</div>
+          <div class="capsule-val-badge" id="badgeBrakeVal">3 / 10</div>
         </div>
       </div>
       <div class="capsule-ticks">
-        <span>1 Glide</span><span>2 Soft</span><span>3 Medium</span><span>4 Firm</span><span>5 Hard</span>
+        <span>1</span><span>3</span><span>5</span><span>7</span><span>10</span>
       </div>
     </div>
   </div>
@@ -1335,27 +1643,29 @@
 <div id="toastNotice">Action Completed</div>
 
 <!-- REBOOT POWER-CYCLE MODAL -->
-<div id="rebootModal" class="modal-overlay">
+<div id="rebootModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="rebootChangeTitle" aria-hidden="true">
   <div class="modal-sheet">
-    <div style="font-size: 16px; font-weight: 800; color: var(--accent-orange);">ACCELERATION SAVED</div>
-    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
-      Power cycle your scooter once to activate the new map!
+    <div id="rebootChangeTitle" style="font-size: 16px; font-weight: 800; color: var(--accent-orange);">SETTINGS SAVED</div>
+    <div id="rebootChangeDetails" style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+      Power cycle your scooter once to apply the selected setting.
     </div>
-    <div class="power-cycle-cluster">
-      <div class="power-ring"></div>
+    <div class="power-cycle-cluster" aria-hidden="true">
+      <div class="power-ring" id="rebootPowerRing"></div>
       <div class="power-disc" id="rebootAnimBtn">
         <svg class="icon" style="width:24px;height:24px;" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
-        <span style="font-size:8px; font-weight:800; margin-top:3px;" id="rebootStatusText">HOLD 3S</span>
+        <span style="font-size:8px; font-weight:800; margin-top:3px;" id="rebootStatusText">POWER OFF</span>
       </div>
+      <span class="power-hand">☝</span>
     </div>
-    <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:var(--radius-md); padding:10px 14px; text-align:left; font-size:11px; line-height:1.5; margin-bottom:14px; color:var(--text-secondary);">
-      1. Turn scooter power button OFF<br>
-      2. Wait 2 seconds for controller discharge<br>
-      3. Power scooter back ON • New torque profile active!
+    <div class="reboot-step-list" aria-live="polite">
+      <div class="reboot-step" id="rebootStepOff"><span class="reboot-step-num">1</span><span id="rebootStepOffText">Press and hold your scooter’s physical power button to turn it <strong>off</strong>.</span></div>
+      <div class="reboot-step" id="rebootStepWait"><span class="reboot-step-num">2</span><span id="rebootStepWaitText">Wait 2 seconds while the controller powers down.</span></div>
+      <div class="reboot-step" id="rebootStepOn"><span class="reboot-step-num">3</span><span id="rebootStepOnText">Press the physical power button again to turn it <strong>on</strong>.</span></div>
     </div>
+    <p class="reboot-safety-note" id="rebootSafetyNote">Guide animation only — the app cannot turn the scooter’s physical power off or on.</p>
     <div style="display:flex; gap:8px;">
-      <button class="demo-action-btn" style="flex:1; padding:10px;" onclick="playRebootAnimationDemo()">Replay</button>
-      <button class="connect-pill-btn" style="flex:2; padding:10px;" onclick="closeRebootModal()">Got It</button>
+      <button class="demo-action-btn" style="flex:1; padding:10px;" onclick="replayApplyAnimation()">Replay</button>
+      <button class="connect-pill-btn" style="flex:2; padding:10px;" onclick="closeRebootModal()">Done</button>
     </div>
   </div>
 </div>
@@ -1531,119 +1841,240 @@ function sendCommand(code, data = [], label = '') {
 }
 
 /* ==========================================================================
-   SPEED LIMIT SWITCHER (47 UNLIMIT & 20 STRICT LIMIT)
+   SPEED LIMIT SWITCHER & SETTING CONFIRMATION
    ========================================================================== */
-async function applySpeedLimit(kmh, type = 'custom') {
-  if (!isConnected && !isDemoMode && !isSimulatingEcoDemo) {
-    showToast("Connect to scooter first");
-    return;
+let speedSelectionTimer = null;
+
+function clampSpeedLimit(value) {
+  const parsed = Math.round(Number(value));
+  return Math.max(10, Math.min(99, Number.isFinite(parsed) ? parsed : 47));
+}
+
+function speedProfileFor(kmh) {
+  if (kmh <= 20) return 'Low-speed / commute profile';
+  if (kmh <= 30) return 'City profile — balanced range';
+  if (kmh < 47) return 'Custom profile — sport gear';
+  return 'Fast Track profile — sport gear';
+}
+
+function previewSpeedLimit(kmh) {
+  const value = clampSpeedLimit(kmh);
+  const range = document.getElementById('speedLimitRange');
+  const readout = document.getElementById('selectedSpeedValue');
+  const state = document.getElementById('speedApplyState');
+  const profile = document.getElementById('speedProfileText');
+  if (range) range.value = value;
+  if (readout) {
+    readout.innerHTML = `${value}<small>km/h</small>`;
+    readout.classList.remove('pop');
+    void readout.offsetWidth;
+    readout.classList.add('pop');
   }
-  sendCommand(CMD_SET_MAX_SPEED, [kmh], `Set Max Speed -> ${kmh}`);
-  sendCommand(CMD_PARAM_WRITE, [9, kmh], `Write P10 (Sport EEPROM) -> ${kmh}`);
-  if (kmh > 25) {
-    sendCommand(CMD_SET_GEAR, [3], "Set Gear 3 (Sport)");
+  if (state) state.textContent = `${value} km/h selected`;
+  if (profile) profile.textContent = speedProfileFor(value);
+  document.querySelectorAll('.speed-preset').forEach(btn => {
+    btn.classList.toggle('active', Number(btn.dataset.speed) === value);
+  });
+  return value;
+}
+
+function updateSpeedLimitUI(kmh, type = 'custom') {
+  const value = previewSpeedLimit(kmh);
+  const t47 = document.getElementById('tile47');
+  const t20 = document.getElementById('tile20');
+  const isFast = type === 'unlimit' || value === 47;
+  const isCommute = type === 'limit' || value === 20;
+
+  if (t47) t47.className = isFast ? 'switch-tile active-unlimit' : 'switch-tile';
+  if (t20) t20.className = isCommute ? 'switch-tile active-limit' : 'switch-tile';
+
+  if (modeBadge) {
+    modeBadge.textContent = isFast ? `UNLIMITED (${value} KM/H)` : `LIMIT ${value} KM/H`;
+    modeBadge.className = isFast || value > 25 ? 'info-pill sport' : 'info-pill eco';
+  }
+  const state = document.getElementById('speedApplyState');
+  if (state) state.textContent = `${value} km/h active`;
+}
+
+function animateSpeedSelection(kmh) {
+  const overlay = document.getElementById('speedSelectionOverlay');
+  const number = document.getElementById('speedSelectionNumber');
+  if (!overlay || !number) return;
+  number.textContent = clampSpeedLimit(kmh);
+  overlay.classList.remove('visible');
+  void overlay.offsetWidth;
+  overlay.classList.add('visible');
+  if (speedSelectionTimer) clearTimeout(speedSelectionTimer);
+  speedSelectionTimer = setTimeout(() => overlay.classList.remove('visible'), 1450);
+}
+
+async function applySpeedLimit(kmh, type = 'custom') {
+  const value = clampSpeedLimit(kmh);
+  previewSpeedLimit(value);
+  if (!isConnected && !isDemoMode && !isSimulatingEcoDemo) {
+    showToast('Connect a scooter or enable Demo to apply this limit');
+    return false;
+  }
+
+  await sendCommand(CMD_SET_MAX_SPEED, [value], `Set Max Speed -> ${value}`);
+  await sendCommand(CMD_PARAM_WRITE, [9, value], `Write P10 (Sport EEPROM) -> ${value}`);
+  if (value > 25) {
+    await sendCommand(CMD_SET_GEAR, [3], 'Set Gear 3 (Sport)');
     scooterState.gear = 3;
     updateGearUI();
   }
-  sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit");
-  scooterState.activeLimit = kmh;
+  await sendCommand(CMD_SET_MAX_SPEED, [0], 'Query Active Limit');
 
-  const t47 = document.getElementById('tile47');
-  const t20 = document.getElementById('tile20');
-  if (type === 'unlimit') {
-    if (t47) t47.className = 'switch-tile active-unlimit';
-    if (t20) t20.className = 'switch-tile';
-    modeBadge.textContent = "UNLIMITED (47 KM/H)";
-    modeBadge.className = "info-pill sport";
-    showToast("Fast Track: 47 KM/H Active");
+  scooterState.activeLimit = value;
+  updateSpeedLimitUI(value, type);
+  animateSpeedSelection(value);
+  queueSpeedApplyGuide(value);
+
+  if (type === 'unlimit' || value === 47) {
+    showToast(`Fast Track: ${value} KM/H Active`);
     if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
-  } else if (type === 'limit') {
-    if (t47) t47.className = 'switch-tile';
-    if (t20) t20.className = 'switch-tile active-limit';
-    modeBadge.textContent = "LIMITED (20 KM/H)";
-    modeBadge.className = "info-pill eco";
-    showToast("Commute Mode: 20 KM/H Locked");
+  } else if (type === 'limit' || value === 20) {
+    showToast(`Commute Mode: ${value} KM/H Locked`);
     if (navigator.vibrate) navigator.vibrate(60);
   } else {
-    showToast(`Speed set to ${kmh} km/h`);
+    showToast(`Speed limit set to ${value} km/h`);
   }
 
   if (targetSprint.isAuto) {
-    targetSprint.targetSpeed = kmh;
+    targetSprint.targetSpeed = value;
     updateSprintTargetUI();
   }
+  updateCockpit();
+  return true;
 }
 
-/* ==========================================================================
-   TRUE IOS CONTROL CENTER CAPSULE SLIDER CONTROLLERS
+function selectSpeedPreset(kmh) {
+  const value = previewSpeedLimit(kmh);
+  return applySpeedLimit(value, value === 47 ? 'unlimit' : (value === 20 ? 'limit' : 'custom'));
+}
+
+const speedLimitRange = document.getElementById('speedLimitRange');
+if (speedLimitRange) {
+  speedLimitRange.addEventListener('input', (event) => previewSpeedLimit(event.target.value));
+  speedLimitRange.addEventListener('change', (event) => {
+    const value = clampSpeedLimit(event.target.value);
+    applySpeedLimit(value, value === 47 ? 'unlimit' : (value === 20 ? 'limit' : 'custom'));
+  });
+}
+
+/* ===========================================================================
+   1–10 DYNAMICS CONTROLS (each displayed step maps to 10–100%)
    ========================================================================== */
-const accelLevels = {
-  1: { tag: "Level 1 • Eco", badge: "Lv 1" },
-  2: { tag: "Level 2 • City", badge: "Lv 2" },
-  3: { tag: "Level 3 • Normal", badge: "Lv 3" },
-  4: { tag: "Level 4 • Sport", badge: "Lv 4" },
-  5: { tag: "Level 5 • Beast", badge: "Lv 5" }
-};
+const ACCEL_NAMES = ['Gentle', 'Soft', 'Balanced', 'Responsive', 'Sport', 'Quick', 'Fast', 'Very Fast', 'Race', 'Maximum'];
+const BRAKE_NAMES = ['Freewheel', 'Light', 'Soft', 'Comfort', 'Balanced', 'Firm', 'Strong', 'Sport', 'Maximum', 'Hardest'];
 
-const brakeLevels = {
-  1: { tag: "Level 1 • Glide", badge: "Lv 1" },
-  2: { tag: "Level 2 • Soft", badge: "Lv 2" },
-  3: { tag: "Level 3 • Medium", badge: "Lv 3" },
-  4: { tag: "Level 4 • Firm", badge: "Lv 4" },
-  5: { tag: "Level 5 • Hard", badge: "Lv 5" }
-};
+function makeDynamicsLevels(names) {
+  return Object.fromEntries(names.map((name, index) => {
+    const level = index + 1;
+    const raw = level * 10;
+    return [level, {
+      raw,
+      tag: `Level ${level} / 10 • ${name} • ${raw}%`,
+      badge: `${level} / 10`
+    }];
+  }));
+}
 
-function setupCapsuleSlider(capsuleId, trackId, tagId, badgeId, levelDict, onChange) {
+const accelLevels = makeDynamicsLevels(ACCEL_NAMES);
+const brakeLevels = makeDynamicsLevels(BRAKE_NAMES);
+
+function setupCapsuleSlider(capsuleId, trackId, tagId, badgeId, levelDict, initialLevel, onCommit) {
   const capsule = document.getElementById(capsuleId);
   const track = document.getElementById(trackId);
   const tag = document.getElementById(tagId);
   const badge = document.getElementById(badgeId);
+  if (!capsule || !track || !tag || !badge) return;
 
   let isDragging = false;
+  let pendingLevel = initialLevel;
+  let shownLevel = null;
+  capsule.setAttribute('role', 'slider');
+  capsule.setAttribute('tabindex', '0');
+  capsule.setAttribute('aria-valuemin', '1');
+  capsule.setAttribute('aria-valuemax', '10');
+  capsule.setAttribute('aria-label', capsuleId === 'capsuleAccel' ? 'Acceleration sensitivity' : 'Regenerative e-brake');
 
-  function updateFromPosition(clientX) {
-    const rect = capsule.getBoundingClientRect();
-    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-    const level = Math.max(1, Math.min(5, Math.round(ratio * 4) + 1));
-    const fillPct = ((level - 1) / 4) * 80 + 20;
-
-    track.style.width = fillPct + "%";
-    tag.textContent = levelDict[level].tag;
-    badge.textContent = levelDict[level].badge;
-    if (navigator.vibrate) navigator.vibrate(20);
-    onChange(level);
+  function renderLevel(level, animate = true) {
+    const safeLevel = Math.max(1, Math.min(10, Number(level) || 1));
+    const info = levelDict[safeLevel];
+    track.style.width = `${safeLevel * 10}%`;
+    tag.textContent = info.tag;
+    badge.textContent = info.badge;
+    capsule.setAttribute('aria-valuenow', safeLevel);
+    capsule.setAttribute('aria-valuetext', info.tag);
+    if (animate && shownLevel !== safeLevel) {
+      capsule.classList.remove('is-adjusting');
+      void capsule.offsetWidth;
+      capsule.classList.add('is-adjusting');
+      if (navigator.vibrate) navigator.vibrate(14);
+    }
+    shownLevel = safeLevel;
+    pendingLevel = safeLevel;
+    return safeLevel;
   }
 
-  capsule.addEventListener('pointerdown', (e) => {
+  function levelAt(clientX) {
+    const rect = capsule.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    return Math.max(1, Math.min(10, Math.round(ratio * 9) + 1));
+  }
+
+  function previewAt(clientX) { return renderLevel(levelAt(clientX)); }
+
+  capsule.addEventListener('pointerdown', (event) => {
     isDragging = true;
-    capsule.setPointerCapture(e.pointerId);
-    updateFromPosition(e.clientX);
+    capsule.setPointerCapture(event.pointerId);
+    previewAt(event.clientX);
   });
-  capsule.addEventListener('pointermove', (e) => {
-    if (isDragging) updateFromPosition(e.clientX);
+  capsule.addEventListener('pointermove', (event) => {
+    if (isDragging) previewAt(event.clientX);
   });
-  capsule.addEventListener('pointerup', (e) => {
-    if (isDragging) {
-      isDragging = false;
-      try { capsule.releasePointerCapture(e.pointerId); } catch(err){}
-    }
+  capsule.addEventListener('pointerup', (event) => {
+    if (!isDragging) return;
+    isDragging = false;
+    try { capsule.releasePointerCapture(event.pointerId); } catch (err) {}
+    onCommit(pendingLevel);
   });
   capsule.addEventListener('pointercancel', () => { isDragging = false; });
+  capsule.addEventListener('keydown', (event) => {
+    if (!['ArrowLeft', 'ArrowDown', 'ArrowRight', 'ArrowUp', 'Home', 'End', 'Enter', ' '].includes(event.key)) return;
+    event.preventDefault();
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowDown') renderLevel(pendingLevel - 1);
+    else if (event.key === 'ArrowRight' || event.key === 'ArrowUp') renderLevel(pendingLevel + 1);
+    else if (event.key === 'Home') renderLevel(1);
+    else if (event.key === 'End') renderLevel(10);
+    if (['Enter', ' '].includes(event.key)) onCommit(pendingLevel);
+  });
+  renderLevel(initialLevel, false);
 }
 
-setupCapsuleSlider('capsuleAccel', 'trackAccel', 'lblAccelTag', 'badgeAccelVal', accelLevels, (lvl) => {
-  currentAccelLevel = lvl;
-  sendCommand(CMD_PARAM_WRITE, [6, lvl], `P7 Accel -> Lv${lvl}`);
-  sendCommand(CMD_ACCEL_RUN, [lvl], `0x39 Accel -> Lv${lvl}`);
-  showToast(`Acceleration: ${accelLevels[lvl].tag}`);
-  openRebootModal();
+async function saveDynamicsSetting(kind, level, levelDict, paramIndex, command) {
+  const info = levelDict[level];
+  if (!info) return;
+  if (!isConnected && !isDemoMode && !isSimulatingEcoDemo) {
+    showToast(`Level ${level} / 10 previewed — connect or enable Demo to save`);
+    return false;
+  }
+  await sendCommand(CMD_PARAM_WRITE, [paramIndex, info.raw], `P${paramIndex + 1} ${kind} -> ${info.raw}%`);
+  await sendCommand(command, [info.raw], `${kind} runtime -> ${info.raw}%`);
+  showToast(`${kind}: Level ${level} / 10 (${info.raw}%) saved`);
+  openRebootModal(kind, level, info.raw);
+  return true;
+}
+
+setupCapsuleSlider('capsuleAccel', 'trackAccel', 'lblAccelTag', 'badgeAccelVal', accelLevels, 3, (level) => {
+  currentAccelLevel = level;
+  saveDynamicsSetting('Acceleration', level, accelLevels, 6, CMD_ACCEL_RUN);
 });
 
-setupCapsuleSlider('capsuleBrake', 'trackBrake', 'lblBrakeTag', 'badgeBrakeVal', brakeLevels, (lvl) => {
-  currentEBrakeLevel = lvl;
-  sendCommand(CMD_PARAM_WRITE, [7, lvl], `P8 E-Brake -> Lv${lvl}`);
-  sendCommand(CMD_EBRAKE_RUN, [lvl], `0x3A E-Brake -> Lv${lvl}`);
-  showToast(`E-Brake: ${brakeLevels[lvl].tag}`);
+setupCapsuleSlider('capsuleBrake', 'trackBrake', 'lblBrakeTag', 'badgeBrakeVal', brakeLevels, 3, (level) => {
+  currentEBrakeLevel = level;
+  saveDynamicsSetting('E-Brake', level, brakeLevels, 7, CMD_EBRAKE_RUN);
 });
 
 /* ==========================================================================
@@ -1850,42 +2281,177 @@ function simulateEcoThrottleDemo() {
   }, 100);
 }
 
-/* ==========================================================================
-   REBOOT POWER CYCLE MODAL
+/* ===========================================================================
+   APPLY GUIDE — physical scooter power-button sequences
    ========================================================================== */
-let rebootTimer = null;
+let rebootTimers = [];
+let speedApplyGuideTimer = null;
+let activeApplyMode = 'dynamics';
+let lastSavedSetting = { kind: 'Drive settings', level: 3, raw: 30 };
 
-function openRebootModal() {
+function clearRebootTimers() {
+  rebootTimers.forEach(timer => clearTimeout(timer));
+  rebootTimers = [];
+}
+
+function resetPowerVisual() {
+  const btn = document.getElementById('rebootAnimBtn');
+  const ring = document.getElementById('rebootPowerRing');
+  if (btn) btn.className = 'power-disc';
+  if (ring) ring.className = 'power-ring';
+}
+
+function setGuideCopy(offText, waitText, onText, noteText) {
+  const off = document.getElementById('rebootStepOffText');
+  const wait = document.getElementById('rebootStepWaitText');
+  const on = document.getElementById('rebootStepOnText');
+  const note = document.getElementById('rebootSafetyNote');
+  if (off) off.innerHTML = offText;
+  if (wait) wait.innerHTML = waitText;
+  if (on) on.innerHTML = onText;
+  if (note) note.textContent = noteText;
+}
+
+function setRebootStep(activeId) {
+  ['rebootStepOff', 'rebootStepWait', 'rebootStepOn'].forEach(id => {
+    const step = document.getElementById(id);
+    if (step) step.classList.toggle('active', id === activeId);
+  });
+}
+
+function showApplyModal() {
   const modal = document.getElementById('rebootModal');
-  if (modal) modal.classList.add('active');
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+}
+
+function openRebootModal(kind = lastSavedSetting.kind, level = lastSavedSetting.level, raw = lastSavedSetting.raw) {
+  if (speedApplyGuideTimer) {
+    clearTimeout(speedApplyGuideTimer);
+    speedApplyGuideTimer = null;
+  }
+  activeApplyMode = 'dynamics';
+  lastSavedSetting = { kind, level, raw };
+  const title = document.getElementById('rebootChangeTitle');
+  const details = document.getElementById('rebootChangeDetails');
+  if (title) title.textContent = `${kind.toUpperCase()} SAVED`;
+  if (details) details.textContent = `Level ${level} / 10 maps to ${raw}%. Power cycle once to apply this setting.`;
+  setGuideCopy(
+    'Press and hold your scooter’s physical power button to turn it <strong>off</strong>.',
+    'Wait 2 seconds while the controller powers down.',
+    'Press the physical power button again to turn it <strong>on</strong>.',
+    'Guide animation only — the app cannot turn the scooter’s physical power off or on.'
+  );
+  showApplyModal();
   playRebootAnimationDemo();
+}
+
+function openSpeedApplyModal(kmh) {
+  const value = clampSpeedLimit(kmh);
+  activeApplyMode = 'speed';
+  const title = document.getElementById('rebootChangeTitle');
+  const details = document.getElementById('rebootChangeDetails');
+  if (title) title.textContent = 'SPEED LIMIT SAVED';
+  if (details) details.textContent = `${value} km/h selected. Hold the physical power button for 2 seconds to apply it.`;
+  setGuideCopy(
+    'Press and <strong>hold</strong> your scooter’s physical power button.',
+    'Keep holding for <strong>2 seconds</strong> while the blue ring completes.',
+    `Release the button when complete — the <strong>${value} km/h</strong> limit is active.`,
+    'Guide animation only — hold the scooter’s physical power button only when it is safe to do so.'
+  );
+  showApplyModal();
+  playSpeedApplyAnimation();
+}
+
+function queueSpeedApplyGuide(kmh) {
+  if (speedApplyGuideTimer) clearTimeout(speedApplyGuideTimer);
+  const value = clampSpeedLimit(kmh);
+  speedApplyGuideTimer = setTimeout(() => {
+    speedApplyGuideTimer = null;
+    openSpeedApplyModal(value);
+  }, 1500);
 }
 
 function closeRebootModal() {
   const modal = document.getElementById('rebootModal');
-  if (modal) modal.classList.remove('active');
-  if (rebootTimer) clearTimeout(rebootTimer);
-  showToast("Torque map confirmed");
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+  clearRebootTimers();
+  if (speedApplyGuideTimer) clearTimeout(speedApplyGuideTimer);
+  speedApplyGuideTimer = null;
+  resetPowerVisual();
+  setRebootStep('');
+  showToast(activeApplyMode === 'speed' ? 'Speed limit saved — complete the 2-second hold when safe' : 'Setting saved — complete the power cycle when safe');
+}
+
+function replayApplyAnimation() {
+  if (activeApplyMode === 'speed') playSpeedApplyAnimation();
+  else playRebootAnimationDemo();
 }
 
 function playRebootAnimationDemo() {
   const btn = document.getElementById('rebootAnimBtn');
   const txt = document.getElementById('rebootStatusText');
-  if (rebootTimer) clearTimeout(rebootTimer);
+  clearRebootTimers();
+  resetPowerVisual();
+  setRebootStep('rebootStepOff');
 
-  if (btn) btn.className = 'power-disc off';
+  if (btn) {
+    btn.className = 'power-disc off tapping';
+    void btn.offsetWidth;
+  }
   if (txt) txt.textContent = 'POWER OFF';
-  if (navigator.vibrate) navigator.vibrate(100);
+  if (navigator.vibrate) navigator.vibrate(70);
 
-  rebootTimer = setTimeout(() => {
+  rebootTimers.push(setTimeout(() => {
     if (btn) btn.className = 'power-disc';
     if (txt) txt.textContent = 'WAIT 2S';
-    rebootTimer = setTimeout(() => {
-      if (btn) btn.className = 'power-disc on';
-      if (txt) txt.textContent = 'POWER ON';
-      if (navigator.vibrate) navigator.vibrate([80, 40, 150]);
-    }, 1800);
-  }, 1800);
+    setRebootStep('rebootStepWait');
+  }, 1150));
+
+  rebootTimers.push(setTimeout(() => {
+    if (btn) btn.className = 'power-disc on tapping';
+    if (txt) txt.textContent = 'POWER ON';
+    setRebootStep('rebootStepOn');
+    if (navigator.vibrate) navigator.vibrate([60, 35, 120]);
+  }, 3150));
+}
+
+function playSpeedApplyAnimation() {
+  const btn = document.getElementById('rebootAnimBtn');
+  const ring = document.getElementById('rebootPowerRing');
+  const txt = document.getElementById('rebootStatusText');
+  clearRebootTimers();
+  resetPowerVisual();
+  setRebootStep('rebootStepOff');
+
+  if (btn) {
+    btn.className = 'power-disc holding';
+    void btn.offsetWidth;
+  }
+  if (ring) {
+    ring.className = 'power-ring holding';
+    void ring.offsetWidth;
+  }
+  if (txt) txt.textContent = 'HOLD 2S';
+  if (navigator.vibrate) navigator.vibrate([35, 40, 35]);
+
+  rebootTimers.push(setTimeout(() => {
+    if (txt) txt.textContent = 'KEEP HOLDING';
+    setRebootStep('rebootStepWait');
+  }, 800));
+
+  rebootTimers.push(setTimeout(() => {
+    if (btn) btn.className = 'power-disc on';
+    if (ring) ring.className = 'power-ring';
+    if (txt) txt.textContent = 'LIMIT ACTIVE';
+    setRebootStep('rebootStepOn');
+    if (navigator.vibrate) navigator.vibrate([60, 35, 120]);
+  }, 2000));
 }
 
 /* ==========================================================================
@@ -2281,6 +2847,7 @@ function toggleDemoMode() {
     scooterState.odometerKm = 248;
     scooterState.tripKm = 5.40;
     scooterState.activeLimit = 47;
+    updateSpeedLimitUI(scooterState.activeLimit, 'unlimit');
     valOdo.innerHTML = `248 <small>km</small>`;
     valTrip.textContent = "5.40";
     txtBattery.innerHTML = `94 <small>%</small>`;
@@ -2289,10 +2856,15 @@ function toggleDemoMode() {
 
     let simSpd = 20.0;
     demoInterval = setInterval(() => {
+      const activeLimit = clampSpeedLimit(scooterState.activeLimit || 47);
+      const demoCeiling = Math.max(10, activeLimit - 0.3);
+      const demoFloor = Math.min(14, Math.max(8, demoCeiling - 1.2));
       simSpd += (Math.random() * 2.4 - 1.1);
-      if (simSpd > 46.5) simSpd = 46.5;
-      if (simSpd < 14.0) simSpd = 14.0;
+      if (simSpd > demoCeiling) simSpd = demoCeiling;
+      if (simSpd < demoFloor) simSpd = demoFloor;
+      scooterState.speed = simSpd;
       renderSpeedometer(simSpd);
+      updateCockpit();
     }, 250);
     showToast("Demo Simulation Active");
   } else {
@@ -2322,6 +2894,7 @@ function simulateDemoReply(code, data) {
   }, 100);
 }
 
+updateSpeedLimitUI(scooterState.activeLimit, 'unlimit');
 updateSprintTargetUI();
 </script>
 </body>
