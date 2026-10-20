@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Riley Speed Unlocker</title>
-  <meta name="theme-color" content="#07090e">
+  <meta name="theme-color" content="#000000">
 <script>
 (function () {
   if (navigator.bluetooth) return;
@@ -96,425 +96,1304 @@
 })();
 </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
   <style>
+    /* ==========================================================================
+       RILEY SPEED UNLOCKER - ULTRA-PREMIUM IOS LIQUID GLASS DESIGN SYSTEM
+       ========================================================================== */
     :root {
-      --bg: #07090e;
-      --card-bg: rgba(16, 20, 30, 0.85);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --gold: #f59e0b;
-      --gold-light: #fbbf24;
-      --emerald: #10b981;
-      --emerald-light: #34d399;
-      --cyan: #06b6d4;
-      --red: #ef4444;
+      --bg: #000000;
+      --surface: rgba(18, 20, 26, 0.72);
+      --surface-elevated: rgba(26, 29, 38, 0.82);
+      --surface-subtle: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(255, 255, 255, 0.16);
+      --glass-glow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 20px 40px -15px rgba(0, 0, 0, 0.85);
+
+      --text-primary: #ffffff;
+      --text-secondary: #98989f;
+      --text-tertiary: #636366;
+
+      --accent-orange: #ff9f0a;
+      --accent-orange-dim: rgba(255, 159, 10, 0.16);
+      --accent-green: #30d158;
+      --accent-green-dim: rgba(48, 209, 88, 0.16);
+      --accent-blue: #0a84ff;
+      --accent-blue-dim: rgba(10, 132, 255, 0.16);
+      --accent-red: #ff453a;
+      --accent-red-dim: rgba(255, 69, 58, 0.16);
+
+      --radius-xl: 24px;
       --radius-lg: 18px;
       --radius-md: 12px;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; -webkit-tap-highlight-color: transparent; }
-    body { background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px 14px 40px; display: flex; justify-content: center; }
-    .app-container { width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 14px; }
-    header { display: flex; justify-content: space-between; align-items: center; padding: 4px 2px; }
-    .brand-title { font-size: 19px; font-weight: 900; letter-spacing: -0.5px; background: linear-gradient(135deg, #fff 30%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .brand-sub { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; }
-    .status-badge { display: flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); }
-    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #64748b; }
-    .status-dot.connected { background: var(--emerald-light); box-shadow: 0 0 10px var(--emerald); }
-    .status-dot.connecting { background: var(--gold); animation: pulse 1s infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-lg); padding: 14px; }
-    .demo-bar { background: rgba(245,158,11,0.1); border: 1px dashed rgba(245,158,11,0.4); border-radius: var(--radius-md); padding: 8px 12px; font-size: 12px; color: #fbbf24; display: flex; justify-content: space-between; align-items: center; }
-    .demo-btn { background: #f59e0b; color: #07090e; border: none; border-radius: 8px; padding: 5px 10px; font-weight: 800; font-size: 11px; cursor: pointer; }
-    .btn-connect { width: 100%; background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; border: none; border-radius: var(--radius-md); padding: 13px; font-size: 15px; font-weight: 800; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.2s; }
-    .btn-connect.connected { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(255,255,255,0.15); color: #cbd5e1; }
-    .connect-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-top: 8px; padding: 0 4px; }
-    .speedo-card { text-align: center; padding: 14px 10px 10px; }
-    .speedo-wrap { position: relative; width: 200px; height: 140px; margin: 0 auto; overflow: hidden; }
-    .speedo-svg { width: 200px; height: 200px; transform: rotate(-90deg); }
-    .speedo-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 14; stroke-dasharray: 335.1; stroke-dashoffset: 0; stroke-linecap: round; }
-    .speedo-fill { fill: none; stroke: url(#speedGrad); stroke-width: 14; stroke-dasharray: 502.65; stroke-dashoffset: 502.65; stroke-linecap: round; transition: stroke-dashoffset 0.15s ease-out; }
-    .speedo-display { position: absolute; top: 58px; left: 0; width: 100%; text-align: center; }
-    .speedo-val { font-size: 52px; font-weight: 900; line-height: 1; letter-spacing: -2px; }
-    .speedo-unit-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--text-muted); font-size: 11px; font-weight: 800; padding: 3px 10px; margin-top: 4px; cursor: pointer; }
-    .hud-row { display: flex; justify-content: center; gap: 8px; margin-top: 6px; }
-    .hud-badge { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); padding: 4px 10px; border-radius: 14px; font-size: 11px; font-weight: 700; color: var(--text-muted); }
-    .hud-badge.highlight { color: #fbbf24; border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.08); }
-    .switch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .speed-btn { border-radius: var(--radius-lg); padding: 14px 12px; text-align: left; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; display: flex; flex-direction: column; justify-content: space-between; }
-    .speed-btn:active { transform: scale(0.97); }
-    .speed-btn.unlimit { background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(13,17,23,0.95) 100%); border-color: rgba(245,158,11,0.35); }
-    .speed-btn.limit { background: linear-gradient(135deg, rgba(16,185,129,0.15) 0%, rgba(13,17,23,0.95) 100%); border-color: rgba(16,185,129,0.35); }
-    .speed-btn-top { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
-    .speed-btn.unlimit .speed-btn-top { color: #fbbf24; }
-    .speed-btn.limit .speed-btn-top { color: #34d399; }
-    .speed-btn-main { font-size: 32px; font-weight: 900; line-height: 1; }
-    .speed-btn-main .unit { font-size: 13px; font-weight: 700; opacity: 0.7; }
-    .speed-btn-desc { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
-    .stealth-card { background: linear-gradient(135deg, rgba(239,68,68,0.1) 0%, rgba(16,20,30,0.85) 100%); border: 1px solid rgba(239,68,68,0.3); }
-    .stealth-toggle-row { display: flex; justify-content: space-between; align-items: center; }
-    .stealth-title-group { display: flex; align-items: center; gap: 8px; }
-    .stealth-title { font-size: 13px; font-weight: 800; color: #fca5a5; text-transform: uppercase; }
-    .stealth-sub { font-size: 11px; color: var(--text-dim); }
-    .toggle-switch { position: relative; width: 44px; height: 24px; }
-    .toggle-switch input { opacity: 0; width: 0; height: 0; }
-    .slider { position: absolute; cursor: pointer; inset: 0; background: #334155; border-radius: 24px; transition: 0.3s; }
-    .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: 0.3s; }
-    input:checked + .slider { background: #ef4444; }
-    input:checked + .slider:before { transform: translateX(20px); }
-    .live-sensor-pill { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 4px 8px; font-size: 11px; font-weight: 700; color: #94a3b8; }
-    .panic-bar-btn { width: 100%; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: var(--radius-md); padding: 12px; font-size: 13px; font-weight: 900; cursor: pointer; box-shadow: 0 4px 15px rgba(239,68,68,0.35); margin-top: 8px; }
-    .transmitter-card { border: 1px solid rgba(14,165,233,0.35); background: linear-gradient(135deg, rgba(14,165,233,0.08) 0%, rgba(13,17,23,0.95) 100%); }
-    .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-    .section-title { font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--text); }
-    .text-action { font-size: 12px; color: #38bdf8; font-weight: 700; cursor: pointer; }
-    .tx-buttons-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-bottom: 10px; }
-    .tx-btn { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 10px 12px; text-align: left; cursor: pointer; display: flex; flex-direction: column; gap: 3px; }
-    .tx-btn-hdr { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; color: var(--text); }
-    .tx-hex-preview { font-family: monospace; font-size: 10px; color: #94a3b8; background: rgba(0,0,0,0.35); padding: 2px 6px; border-radius: 4px; width: fit-content; }
-    .badge-mini { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,0.1); color: var(--text-dim); }
-    .raw-hex-box { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-md); padding: 8px; }
-    .hex-input-row { display: flex; gap: 6px; margin-bottom: 6px; }
-    .hex-input { flex: 1; background: rgba(15,23,42,0.85); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 6px 10px; color: #38bdf8; font-family: monospace; font-size: 11px; outline: none; }
-    .hex-send-btn { background: #0284c7; color: white; border: none; border-radius: 8px; padding: 6px 12px; font-weight: 800; font-size: 11px; cursor: pointer; }
-    .quick-chips { display: flex; flex-wrap: wrap; gap: 4px; }
-    .chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 2px 6px; font-size: 10px; font-family: monospace; color: #94a3b8; cursor: pointer; }
-    .metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .battery-card { grid-column: span 2; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 10px; }
-    .metric-cell { background: rgba(0,0,0,0.3); border-radius: var(--radius-md); padding: 10px; }
-    .metric-title { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-weight: 700; }
-    .metric-val { font-size: 20px; font-weight: 800; margin: 3px 0; }
-    .battery-track { height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden; margin: 6px 0; }
-    .battery-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #10b981, #06b6d4); transition: width 0.3s; }
-    .controls-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-    .ctrl-btn { background: rgba(255,255,255,0.04); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 10px 4px; text-align: center; color: var(--text-muted); cursor: pointer; }
-    .ctrl-btn.active { border-color: #38bdf8; color: #38bdf8; background: rgba(56,189,248,0.1); }
-    .ctrl-btn .icon { font-size: 18px; display: block; margin-bottom: 2px; }
-    .presets-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
-    .preset-pill { background: rgba(255,255,255,0.05); border: 1px solid var(--card-border); color: var(--text); border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
-    .log-box { background: #030712; border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius-md); padding: 8px; height: 110px; overflow-y: auto; font-family: monospace; font-size: 10px; color: #94a3b8; }
-    .log-entry { margin-bottom: 2px; }
-    .log-tx { color: #38bdf8; } .log-rx { color: #4ade80; } .log-warn { color: #facc15; } .log-err { color: #f87171; } .log-ack { color: #c084fc; font-weight: bold; }
-    #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(80px); background: #1e293b; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; opacity: 0; transition: all 0.3s; z-index: 999; pointer-events: none; }
-    #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+      --radius-pill: 999px;
 
-/* ===== Premium theme overlay ===== */
-:root{--bg:#05060a;--card-bg:rgba(18,21,30,.72);--card-border:rgba(255,255,255,.07);--radius-lg:22px;--radius-md:14px}
-*{font-family:"Inter Tight","SF Pro Display",-apple-system,BlinkMacSystemFont,sans-serif;}
-.tx-hex-preview,.hex-input,.chip,.log-box,#txtEcoCountdownVal,#hudTimer{font-family:"JetBrains Mono",ui-monospace,monospace!important}
-body{background:radial-gradient(900px 500px at 15% -10%,rgba(245,158,11,.14),transparent 60%),radial-gradient(800px 500px at 110% 10%,rgba(6,182,212,.12),transparent 60%),radial-gradient(700px 600px at 50% 120%,rgba(16,185,129,.08),transparent 60%),var(--bg);background-attachment:fixed;padding:calc(18px + env(safe-area-inset-top)) 16px 48px}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:32px 32px;mask-image:radial-gradient(ellipse at top,#000 20%,transparent 75%);z-index:0}
-.app-container{position:relative;z-index:1;gap:16px;animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
-.app-container>*{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
-.app-container>*:nth-child(2){animation-delay:.04s}.app-container>*:nth-child(3){animation-delay:.08s}.app-container>*:nth-child(4){animation-delay:.12s}.app-container>*:nth-child(5){animation-delay:.16s}.app-container>*:nth-child(6){animation-delay:.2s}.app-container>*:nth-child(n+7){animation-delay:.24s}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.brand-title{font-size:22px;letter-spacing:-.8px;background:linear-gradient(120deg,#fff 0%,#fde68a 55%,#f59e0b 100%);-webkit-background-clip:text}
-.brand-sub{font-size:10px;letter-spacing:2px;color:var(--text-dim);margin-top:2px}
-.status-badge{backdrop-filter:blur(12px);background:rgba(255,255,255,.04);padding:7px 14px;letter-spacing:.3px}
-.card{backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 20px 40px -20px rgba(0,0,0,.8);padding:16px;border-radius:var(--radius-lg)}
-.demo-bar{border-style:solid;border-color:rgba(245,158,11,.25);background:linear-gradient(90deg,rgba(245,158,11,.12),rgba(245,158,11,.03));border-radius:var(--radius-md);padding:10px 14px}
-.demo-btn{background:linear-gradient(135deg,#fbbf24,#f59e0b);border-radius:10px;padding:7px 12px;box-shadow:0 6px 18px -6px rgba(245,158,11,.7)}
-.btn-connect{background:linear-gradient(135deg,#38bdf8 0%,#2563eb 60%,#1e40af 100%);padding:16px;font-size:16px;letter-spacing:.2px;box-shadow:0 12px 30px -10px rgba(37,99,235,.8),inset 0 1px 0 rgba(255,255,255,.25)}
-.btn-connect:active{transform:scale(.98)}
-.btn-connect.connected{box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
-.connect-meta{margin-top:12px;font-size:11px}
-.speedo-card{padding:22px 12px 16px;background:radial-gradient(circle at 50% 35%,rgba(56,189,248,.12),transparent 60%),var(--card-bg);position:relative;overflow:hidden}
-.speedo-wrap{width:240px;height:165px}
-.speedo-svg{width:240px;height:240px;filter:drop-shadow(0 0 14px rgba(56,189,248,.45))}
-.speedo-track{stroke:rgba(255,255,255,.05)}
-.speedo-display{top:70px}
-.speedo-val{font-size:64px;letter-spacing:-3px;background:linear-gradient(180deg,#fff,#cbd5e1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-shadow:none}
-.speedo-unit-btn{margin-top:8px;border-radius:999px;padding:4px 12px;letter-spacing:1px}
-.hud-row{margin-top:12px;flex-wrap:wrap}
-.hud-badge{border-radius:999px;padding:6px 12px;letter-spacing:.3px}
-.switch-grid{gap:12px}
-.speed-btn{padding:18px 14px;border-radius:var(--radius-lg);position:relative;overflow:hidden;box-shadow:0 20px 40px -24px rgba(0,0,0,.9);color:var(--text)}
-.speed-btn:after{content:"";position:absolute;width:140px;height:140px;right:-50px;top:-50px;border-radius:50%;filter:blur(30px);opacity:.5}
-.speed-btn.unlimit:after{background:#f59e0b}.speed-btn.limit:after{background:#10b981}
-.speed-btn.unlimit{background:linear-gradient(160deg,rgba(245,158,11,.22),rgba(12,14,20,.95) 70%)}
-.speed-btn.limit{background:linear-gradient(160deg,rgba(16,185,129,.22),rgba(12,14,20,.95) 70%)}
-.speed-btn-top{font-size:10px;letter-spacing:1px;position:relative;z-index:1}
-.speed-btn-main{font-size:44px;letter-spacing:-2px;margin-top:10px;position:relative;z-index:1}
-.speed-btn-desc{position:relative;z-index:1}
-.stealth-card{background:linear-gradient(160deg,rgba(239,68,68,.14),rgba(18,21,30,.8) 60%);border-color:rgba(239,68,68,.25)}
-.stealth-title{letter-spacing:.6px;font-size:12px}
-.slider{background:#1f2937;box-shadow:inset 0 1px 3px rgba(0,0,0,.6)}
-.slider:before{box-shadow:0 2px 6px rgba(0,0,0,.5)}
-input:checked+.slider{background:linear-gradient(135deg,#f87171,#dc2626);box-shadow:0 0 14px rgba(239,68,68,.6)}
-.panic-bar-btn{padding:16px;border-radius:var(--radius-md);letter-spacing:.8px;box-shadow:0 14px 30px -12px rgba(239,68,68,.9),inset 0 1px 0 rgba(255,255,255,.25);animation:glow 2.4s ease-in-out infinite}
-.panic-bar-btn:active{transform:scale(.98)}
-@keyframes glow{50%{box-shadow:0 14px 40px -8px rgba(239,68,68,1),inset 0 1px 0 rgba(255,255,255,.25)}}
-.live-sensor-pill{border-radius:999px;padding:5px 10px}
-.transmitter-card{background:linear-gradient(160deg,rgba(14,165,233,.1),rgba(18,21,30,.8) 60%);border-color:rgba(14,165,233,.22)}
-.section-header{margin-bottom:14px}
-.section-title{font-size:11px;letter-spacing:1.4px;color:var(--text-muted)}
-.text-action{padding:5px 10px;border-radius:999px;background:rgba(56,189,248,.1);font-size:11px}
-.tx-btn{padding:12px 14px;transition:all .2s;color:var(--text)}
-.tx-btn:active{transform:scale(.98);background:rgba(255,255,255,.07)}
-.tx-hex-preview{margin-top:6px}
-.raw-hex-box{padding:10px}
-.hex-input{padding:10px 12px;border-radius:10px;outline:none}
-.hex-input:focus{border-color:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,.2)}
-.hex-send-btn{border-radius:10px;padding:8px 14px;background:linear-gradient(135deg,#38bdf8,#0284c7)}
-.chip{padding:4px 8px;border-radius:999px;cursor:pointer;transition:.15s}
-.chip:active{background:rgba(56,189,248,.2)}
-.metrics-grid{gap:10px}
-.battery-card,.metric-cell{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);padding:12px}
-.metric-val{font-size:24px;letter-spacing:-.5px}
-.battery-track{height:10px;border-radius:999px}
-.battery-fill{border-radius:999px;box-shadow:0 0 12px rgba(16,185,129,.7)}
-.controls-grid{gap:8px}
-.ctrl-btn{padding:12px 4px;transition:.2s}
-.ctrl-btn.active{box-shadow:0 0 0 1px #38bdf8,0 8px 20px -8px rgba(56,189,248,.7)}
-.preset-pill{border-radius:999px}
-.log-box{border-radius:var(--radius-md);background:rgba(0,0,0,.55);height:140px}
-#toast{backdrop-filter:blur(16px);background:rgba(30,41,59,.85);border-radius:14px;box-shadow:0 20px 40px -10px rgba(0,0,0,.8)}
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 50% -10%, rgba(10, 132, 255, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 10% 40%, rgba(255, 159, 10, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 90% 85%, rgba(48, 209, 88, 0.05) 0%, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: calc(12px + env(safe-area-inset-top)) 14px calc(36px + env(safe-area-inset-bottom));
+      display: flex;
+      justify-content: center;
+      overflow-x: hidden;
+      letter-spacing: -0.2px;
+    }
+
+    .app-viewport {
+      width: 100%;
+      max-width: 430px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .mono { font-family: var(--font-mono); }
+
+    /* SVG ICONS BASE */
+    .icon {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    /* CARD CONTAINERS */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(32px) saturate(190%);
+      -webkit-backdrop-filter: blur(32px) saturate(190%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 16px;
+      box-shadow: var(--glass-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+      pointer-events: none;
+    }
+
+    /* HEADER */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 6px;
+    }
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-logo-disc {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.04));
+      border: 1px solid var(--border-highlight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .brand-title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .status-capsule {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #555;
+      transition: all 0.3s;
+    }
+    .status-dot.connected {
+      background: var(--accent-green);
+      box-shadow: 0 0 10px var(--accent-green);
+    }
+    .status-dot.connecting {
+      background: var(--accent-orange);
+      animation: pulse 1s infinite alternate;
+    }
+    @keyframes pulse { from { opacity: 0.3; } to { opacity: 1; } }
+
+    /* DEMO BANNER */
+    .demo-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 159, 10, 0.08);
+      border: 1px solid rgba(255, 159, 10, 0.25);
+      border-radius: var(--radius-md);
+      padding: 8px 12px;
+      font-size: 11px;
+      color: #ffb340;
+    }
+    .demo-action-btn {
+      background: rgba(255, 159, 10, 0.2);
+      border: 1px solid rgba(255, 159, 10, 0.4);
+      color: #fff;
+      font-weight: 600;
+      font-size: 10px;
+      border-radius: var(--radius-pill);
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .demo-action-btn:active { transform: scale(0.95); }
+
+    /* PRIMARY CONNECT BUTTON */
+    .connect-tile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: linear-gradient(135deg, rgba(10, 132, 255, 0.18) 0%, rgba(10, 132, 255, 0.05) 100%);
+      border: 1px solid rgba(10, 132, 255, 0.35);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .connect-tile:active { transform: scale(0.985); }
+    .connect-tile.connected {
+      background: linear-gradient(135deg, rgba(48, 209, 88, 0.16) 0%, rgba(48, 209, 88, 0.04) 100%);
+      border-color: rgba(48, 209, 88, 0.35);
+    }
+    .connect-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .connect-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(10, 132, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-blue);
+    }
+    .connect-tile.connected .connect-icon-box {
+      background: rgba(48, 209, 88, 0.2);
+      color: var(--accent-green);
+    }
+    .connect-tile-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .connect-tile-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .connect-pill-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: #ffffff;
+      color: #000000;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+    }
+    .connect-tile.connected .connect-pill-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      box-shadow: none;
+      border: 1px solid var(--border);
+    }
+
+    /* ==========================================================================
+       HERO DIGITAL SPEEDOMETER (TESLA / VANMOOF AESTHETIC)
+       ========================================================================== */
+    .speedo-module {
+      text-align: center;
+      padding: 22px 16px 18px;
+      position: relative;
+    }
+    .speedo-arc-container {
+      position: relative;
+      width: 250px;
+      height: 145px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .speedo-svg {
+      position: absolute;
+      top: -30px;
+      width: 250px;
+      height: 250px;
+      transform: rotate(135deg);
+    }
+    .speedo-bg-track {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.06);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 534;
+      stroke-dashoffset: 178;
+    }
+    .speedo-live-arc {
+      fill: none;
+      stroke: url(#speedGrad);
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 534;
+      stroke-dashoffset: 534;
+      filter: drop-shadow(0 0 12px rgba(10, 132, 255, 0.5));
+      transition: stroke-dashoffset 0.1s linear;
+    }
+    .speedo-hero-content {
+      position: relative;
+      z-index: 2;
+      top: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .speedo-digits {
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -3.5px;
+      color: #ffffff;
+      font-family: var(--font-mono);
+    }
+    .speedo-unit-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .unit-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--text-secondary);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+    .hud-toggle-btn {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-blue-dim);
+      border: 1px solid rgba(10, 132, 255, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .speedo-status-pills {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .info-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .info-pill.sport {
+      color: var(--accent-orange);
+      background: var(--accent-orange-dim);
+      border-color: rgba(255, 159, 10, 0.3);
+    }
+    .info-pill.eco {
+      color: var(--accent-green);
+      background: var(--accent-green-dim);
+      border-color: rgba(48, 209, 88, 0.3);
+    }
+
+    /* ==========================================================================
+       THE CORE SWITCH TILES (47 FAST TRACK vs 20 COMMUTE)
+       ========================================================================== */
+    .switch-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .switch-tile {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      border: 1.5px solid var(--border);
+      padding: 16px 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .switch-tile:active { transform: scale(0.97); }
+    .switch-tile.active-unlimit {
+      background: linear-gradient(160deg, rgba(255, 159, 10, 0.2) 0%, rgba(26, 20, 15, 0.8) 100%);
+      border-color: rgba(255, 159, 10, 0.55);
+      box-shadow: 0 12px 30px -8px rgba(255, 159, 10, 0.35);
+    }
+    .switch-tile.active-limit {
+      background: linear-gradient(160deg, rgba(48, 209, 88, 0.18) 0%, rgba(15, 26, 18, 0.8) 100%);
+      border-color: rgba(48, 209, 88, 0.55);
+      box-shadow: 0 12px 30px -8px rgba(48, 209, 88, 0.35);
+    }
+    .tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+    .switch-tile.active-unlimit .tile-header { color: #ffb340; }
+    .switch-tile.active-limit .tile-header { color: #4ade80; }
+    .tile-speed-number {
+      font-size: 42px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      line-height: 1;
+      letter-spacing: -2px;
+      color: #ffffff;
+      margin: 4px 0;
+    }
+    .tile-speed-number small {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--text-secondary);
+    }
+    .tile-subtext {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       TRUE IOS CONTROL CENTER LIQUID GLASS CAPSULE SLIDERS
+       ========================================================================== */
+    .slider-section-card {
+      padding: 18px 16px;
+    }
+    .section-headline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.2px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .reboot-guide-link {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-orange);
+      background: var(--accent-orange-dim);
+      border: 1px solid rgba(255, 159, 10, 0.3);
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+    }
+
+    /* Capsule Container */
+    .capsule-slider-wrap {
+      margin-bottom: 14px;
+    }
+    .capsule-slider-wrap:last-child { margin-bottom: 0; }
+    .capsule-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      padding: 0 2px;
+    }
+    .capsule-level-tag {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .liquid-capsule {
+      position: relative;
+      height: 52px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      cursor: pointer;
+      touch-action: none;
+      box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+    .liquid-fill-track {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 60%;
+      border-radius: var(--radius-pill);
+      transition: width 0.08s ease-out;
+      pointer-events: none;
+      position: relative;
+    }
+    .liquid-fill-track.accel-theme {
+      background: linear-gradient(90deg, #10b981 0%, #0a84ff 45%, #ff9f0a 80%, #ff453a 100%);
+      box-shadow: 0 0 24px rgba(255, 159, 10, 0.4);
+    }
+    .liquid-fill-track.brake-theme {
+      background: linear-gradient(90deg, #0a84ff 0%, #30d158 50%, #ff453a 100%);
+      box-shadow: 0 0 24px rgba(10, 132, 255, 0.4);
+    }
+    /* Top Specular Sheen Arc */
+    .liquid-fill-track::before {
+      content: "";
+      position: absolute;
+      top: 2px; left: 8px; right: 8px; height: 40%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
+      border-radius: var(--radius-pill);
+    }
+    /* Liquid Knob */
+    .liquid-fill-track::after {
+      content: "";
+      position: absolute;
+      right: 4px; top: 4px; bottom: 4px;
+      width: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #ffffff 40%, rgba(255, 255, 255, 0.6) 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 255, 255, 0.8);
+    }
+
+    .capsule-content-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .capsule-title-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    }
+    .capsule-val-badge {
+      font-size: 12px;
+      font-weight: 800;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      backdrop-filter: blur(8px);
+    }
+
+    .capsule-ticks {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 8px 0;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+    }
+
+    /* ==========================================================================
+       SPRINT BENCHMARK (TIME TO DESIRED TOP SPEED)
+       ========================================================================== */
+    .sprint-target-selector {
+      display: flex;
+      gap: 6px;
+      margin: 10px 0 14px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .sprint-chip {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .sprint-chip.active {
+      background: rgba(10, 132, 255, 0.2);
+      border-color: var(--accent-blue);
+      color: #ffffff;
+      box-shadow: 0 0 12px rgba(10, 132, 255, 0.35);
+    }
+    .sprint-readout-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      text-align: center;
+    }
+    .sprint-readout-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      color: var(--accent-blue);
+      text-transform: uppercase;
+    }
+    .sprint-digital-timer {
+      font-size: 44px;
+      font-weight: 900;
+      font-family: var(--font-mono);
+      line-height: 1.1;
+      margin: 4px 0;
+      color: #ffffff;
+    }
+    .sprint-digital-timer small {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+    .sprint-eta-bubble {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffb340;
+      background: var(--accent-orange-dim);
+      border: 1px solid rgba(255, 159, 10, 0.3);
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .sprint-footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       STEALTH 2S GESTURE & BACKGROUND PROTECTION
+       ========================================================================== */
+    .switch-control {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    .switch-control input { opacity: 0; width: 0; height: 0; }
+    .switch-slider {
+      position: absolute;
+      inset: 0;
+      cursor: pointer;
+      background: #2c2c2e;
+      border-radius: 24px;
+      transition: 0.25s;
+    }
+    .switch-slider::before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: 0.25s;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    }
+    input:checked + .switch-slider {
+      background: var(--accent-green);
+    }
+    input:checked + .switch-slider::before {
+      transform: translateX(20px);
+    }
+
+    .gesture-countdown-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    .gesture-countdown-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff9f0a, #ff453a);
+      border-radius: var(--radius-pill);
+      transition: width 0.1s linear;
+    }
+
+    /* ==========================================================================
+       TELEMETRY 4-PACK GRID
+       ========================================================================== */
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .telemetry-cell {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px;
+    }
+    .telemetry-cell-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .telemetry-cell-val {
+      font-size: 20px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: #ffffff;
+    }
+    .telemetry-cell-val small {
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       HARDWARE CONTROLS QUICK BAR
+       ========================================================================== */
+    .hardware-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .hw-btn {
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 6px;
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .hw-btn:active { transform: scale(0.96); }
+    .hw-btn.active {
+      color: var(--accent-blue);
+      background: var(--accent-blue-dim);
+      border-color: rgba(10, 132, 255, 0.4);
+    }
+    .hw-btn.locked {
+      color: var(--accent-red);
+      background: var(--accent-red-dim);
+      border-color: rgba(255, 69, 58, 0.4);
+    }
+
+    /* DIRECT HEX & DIAGNOSTICS */
+    .hex-input-field {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      color: var(--accent-blue);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      outline: none;
+    }
+    .hex-input-field:focus {
+      border-color: var(--accent-blue);
+    }
+    .terminal-log {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      height: 110px;
+      overflow-y: auto;
+      color: var(--text-secondary);
+      margin-top: 8px;
+    }
+    .log-tx { color: #0a84ff; }
+    .log-rx { color: #30d158; }
+    .log-ack { color: #ff9f0a; font-weight: 600; }
+    .log-err { color: #ff453a; }
+
+    /* TOAST OVERLAY */
+    #toastNotice {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: rgba(28, 28, 30, 0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-highlight);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 999999;
+      pointer-events: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #toastNotice.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* MODALS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-sheet {
+      background: #14161f;
+      border: 1px solid var(--border-highlight);
+      border-radius: var(--radius-xl);
+      max-width: 390px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.95);
+      text-align: center;
+    }
+
+    /* REBOOT POWER CYCLE CLUSTER */
+    .power-cycle-cluster {
+      width: 120px;
+      height: 120px;
+      margin: 16px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .power-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px dashed rgba(255, 159, 10, 0.4);
+      animation: spinRing 7s linear infinite;
+    }
+    @keyframes spinRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .power-disc {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: #1c1e28;
+      border: 2px solid var(--accent-orange);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 24px rgba(255, 159, 10, 0.4);
+      transition: all 0.3s;
+    }
+    .power-disc.off {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 28px rgba(255, 69, 58, 0.8);
+    }
+    .power-disc.on {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 32px rgba(48, 209, 88, 0.85);
+    }
+
+    /* FULLSCREEN COCKPIT HUD */
+    .cockpit-screen {
+      position: fixed;
+      inset: 0;
+      background: #000000;
+      z-index: 9999999;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .cockpit-screen.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .cockpit-giant-num {
+      font-size: 118px;
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -5px;
+      font-family: var(--font-mono);
+      color: #ffffff;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
 
-<div class="app-container">
-  <header>
-    <div>
-      <div class="brand-title">Riley Speed Unlocker</div>
-      <div class="brand-sub">Volpam MK-083 Controller</div>
+<div class="app-viewport">
+  <!-- TOP HEADER -->
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-disc">
+        <svg class="icon" style="color:#0a84ff;" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">Riley Speed Unlocker</div>
+        <div class="brand-subtitle" id="devName">MK-083 (PRO-VC)</div>
+      </div>
     </div>
-    <div class="status-badge">
+    <div class="status-capsule" onclick="toggleDemoMode()">
       <div class="status-dot" id="statusDot"></div>
       <span id="statusLabel">Offline</span>
     </div>
   </header>
 
-  <div class="demo-bar" id="demoBanner">
-    <span>💡 <strong>Demo Mode:</strong> Test dials & gesture offline</span>
-    <button class="demo-btn" id="demoToggleBtn" onclick="toggleDemoMode()">Enable Demo</button>
+  <!-- DEMO MODE STRIP -->
+  <div class="demo-strip" id="demoBanner">
+    <span>Simulation Mode Available</span>
+    <button class="demo-action-btn" id="demoBtn" onclick="toggleDemoMode()">Enable Demo</button>
   </div>
 
-  <div class="card">
-    <button class="btn-connect" id="btnConnect" onclick="handleConnectClick()">
-      <span id="connectIcon">🔗</span>
-      <span id="connectLabel">Connect Scooter</span>
-    </button>
-    <div class="connect-meta">
-      <span>Device: <strong id="devName">MK-083 (Not Connected)</strong></span>
-      <span id="activeLimitTag">Limit: — km/h</span>
+  <!-- BLUETOOTH CONNECTION TILE -->
+  <div class="connect-tile" id="connectTile" onclick="handleConnectClick()">
+    <div class="connect-left">
+      <div class="connect-icon-box">
+        <svg class="icon" viewBox="0 0 24 24">
+          <polyline points="6.5 6.5 17.5 17.5 12 23 12 1 17.5 6.5 6.5 17.5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="connect-tile-title" id="connectTitle">Connect Scooter</div>
+        <div class="connect-tile-desc" id="connectDesc">MK-083 • Bluetooth GATT</div>
+      </div>
     </div>
+    <button class="connect-pill-btn" id="connectBtn">Connect</button>
   </div>
 
-  <div class="card speedo-card">
-    <div class="speedo-wrap">
-      <svg class="speedo-svg" viewBox="0 0 220 220">
+  <!-- HERO SPEEDOMETER CARD -->
+  <div class="card speedo-module">
+    <div class="speedo-arc-container">
+      <svg class="speedo-svg" viewBox="0 0 240 240">
         <defs>
           <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#06b6d4" />
-            <stop offset="60%" stop-color="#3b82f6" />
-            <stop offset="100%" stop-color="#f59e0b" />
+            <stop offset="0%" stop-color="#0a84ff" />
+            <stop offset="60%" stop-color="#30d158" />
+            <stop offset="100%" stop-color="#ff9f0a" />
           </linearGradient>
         </defs>
-        <circle class="speedo-track" cx="110" cy="110" r="80" />
-        <circle class="speedo-fill" id="speedArc" cx="110" cy="110" r="80" />
+        <circle class="speedo-bg-track" cx="120" cy="120" r="85" />
+        <circle class="speedo-live-arc" id="speedArc" cx="120" cy="120" r="85" />
       </svg>
-      <div class="speedo-display">
-        <div class="speedo-val" id="liveSpeed">0.0</div>
-        <button class="speedo-unit-btn" onclick="toggleUnit()">
-          <span id="unitText">KM/H</span> ⇄
-        </button>
-      </div>
-    </div>
-    <div class="hud-row">
-      <div class="hud-badge" id="gearBadge">⚙️ GEAR 3 (SPORT)</div>
-      <div class="hud-badge highlight" id="modeBadge">⚡ UNLIMITED</div>
-      <div class="hud-badge" id="hudTimer">⏱️ 00:00</div>
-    </div>
-  </div>
-
-  <div class="switch-grid">
-    <button class="speed-btn unlimit" onclick="applySpeedLimit(47, 'unlimit')">
-      <div class="speed-btn-top"><span>🚀 Fast Track</span><span>P10 + 0x3C</span></div>
-      <div class="speed-btn-main">47 <span class="unit">KM/H</span></div>
-      <div class="speed-btn-desc">Full unlimit • P10 EEPROM & Gear 3</div>
-    </button>
-    <button class="speed-btn limit" onclick="applySpeedLimit(20, 'limit')">
-      <div class="speed-btn-top"><span>🛡️ Commute</span><span>P10 + 0x3C</span></div>
-      <div class="speed-btn-main">20 <span class="unit">KM/H</span></div>
-      <div class="speed-btn-desc">Strict 20 km/h limiter</div>
-    </button>
-  </div>
-
-  <!-- STEALTH PANIC TRIGGERS (ECO 5S GESTURE & EMERGENCY LOCK) -->
-  <div class="card stealth-card" id="stealthCard">
-    <div class="stealth-toggle-row">
-      <div class="stealth-title-group">
-        <span class="stealth-badge-icon">🚨</span>
-        <div>
-          <div class="stealth-title">Stealth Panic Limiter (20 KM/H)</div>
-          <div class="stealth-sub">Full-throttle Eco gesture & emergency speed lock</div>
+      <div class="speedo-hero-content">
+        <div class="speedo-digits" id="liveSpeed">0.0</div>
+        <div class="speedo-unit-row">
+          <span class="unit-badge" onclick="toggleUnit()"><span id="unitText">KM/H</span></span>
+          <span class="hud-toggle-btn" onclick="toggleCockpit(true)">
+            <svg class="icon" style="width:12px;height:12px;" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            HUD
+          </span>
         </div>
       </div>
-      <label class="toggle-switch">
-        <input type="checkbox" id="chkStealthMode" checked onchange="onStealthToggle(this.checked)">
-        <span class="slider"></span>
+    </div>
+    <div class="speedo-status-pills">
+      <div class="info-pill" id="gearBadge">Gear 3 (Sport)</div>
+      <div class="info-pill sport" id="modeBadge">UNLIMITED (47 KM/H)</div>
+      <div class="info-pill mono" id="hudTimer">00:00</div>
+    </div>
+  </div>
+
+  <!-- QUICK SWITCH TILES (47 & 20) -->
+  <div class="switch-row">
+    <div class="switch-tile active-unlimit" id="tile47" onclick="applySpeedLimit(47, 'unlimit')">
+      <div class="tile-header">
+        <span>Fast Track</span>
+        <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="tile-speed-number">47 <small>KM/H</small></div>
+      <div class="tile-subtext">P10 EEPROM • Gear 3</div>
+    </div>
+    <div class="switch-tile" id="tile20" onclick="applySpeedLimit(20, 'limit')">
+      <div class="tile-header">
+        <span>Commute</span>
+        <svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="tile-speed-number">20 <small>KM/H</small></div>
+      <div class="tile-subtext">Strict 20 km/h Limiter</div>
+    </div>
+  </div>
+
+  <!-- IOS CONTROL CENTER CAPSULE SLIDERS -->
+  <div class="card slider-section-card">
+    <div class="section-headline">
+      <div class="section-title">
+        <svg class="icon" style="color:var(--accent-orange);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Drive Dynamics
+      </div>
+      <span class="reboot-guide-link" onclick="openRebootModal()">Reboot Guide</span>
+    </div>
+
+    <!-- ACCELERATION CAPSULE SLIDER -->
+    <div class="capsule-slider-wrap">
+      <div class="capsule-label-row">
+        <span>Acceleration Sensitivity</span>
+        <span class="capsule-level-tag" id="lblAccelTag">Level 3 • Balanced</span>
+      </div>
+      <div class="liquid-capsule" id="capsuleAccel">
+        <div class="liquid-fill-track accel-theme" id="trackAccel" style="width: 60%;"></div>
+        <div class="capsule-content-overlay">
+          <div class="capsule-title-box">
+            <svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Throttle Bite</span>
+          </div>
+          <div class="capsule-val-badge" id="badgeAccelVal">Lv 3</div>
+        </div>
+      </div>
+      <div class="capsule-ticks">
+        <span>1 Eco</span><span>2 City</span><span>3 Normal</span><span>4 Sport</span><span>5 Beast</span>
+      </div>
+    </div>
+
+    <!-- REGENERATIVE E-BRAKE CAPSULE SLIDER -->
+    <div class="capsule-slider-wrap">
+      <div class="capsule-label-row">
+        <span>Regenerative E-Brake</span>
+        <span class="capsule-level-tag" id="lblBrakeTag">Level 3 • Balanced</span>
+      </div>
+      <div class="liquid-capsule" id="capsuleBrake">
+        <div class="liquid-fill-track brake-theme" id="trackBrake" style="width: 60%;"></div>
+        <div class="capsule-content-overlay">
+          <div class="capsule-title-box">
+            <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            <span>Braking Force</span>
+          </div>
+          <div class="capsule-val-badge" id="badgeBrakeVal">Lv 3</div>
+        </div>
+      </div>
+      <div class="capsule-ticks">
+        <span>1 Glide</span><span>2 Soft</span><span>3 Medium</span><span>4 Firm</span><span>5 Hard</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIME TO DESIRED TOP SPEED SPRINT BENCHMARK -->
+  <div class="card">
+    <div class="section-headline">
+      <div class="section-title">
+        <svg class="icon" style="color:var(--accent-blue);" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Sprint Benchmark
+      </div>
+      <span style="font-size:11px; color:var(--text-secondary); cursor:pointer; font-weight:600;" onclick="resetSprintBenchmark()">Reset</span>
+    </div>
+
+    <div class="sprint-target-selector">
+      <div class="sprint-chip" onclick="setSprintTarget(20, this)">20 km/h</div>
+      <div class="sprint-chip" onclick="setSprintTarget(25, this)">25 km/h</div>
+      <div class="sprint-chip" onclick="setSprintTarget(30, this)">30 km/h</div>
+      <div class="sprint-chip active" onclick="setSprintTarget(47, this)">47 km/h</div>
+      <div class="sprint-chip" onclick="setSprintTarget('auto', this)">Auto Limit</div>
+    </div>
+
+    <div class="sprint-readout-card">
+      <div class="sprint-readout-label" id="lblSprintTitle">Time to reach 47 km/h</div>
+      <div class="sprint-digital-timer" id="lblSprintTimer">0.00<small>s</small></div>
+      <div class="sprint-eta-bubble" id="lblSprintEta">Est. ~4.2s to target speed</div>
+    </div>
+
+    <div class="sprint-footer-row">
+      <span id="lblSprintStatus" style="color:var(--accent-green);">🟢 Ready: Launch from 0 km/h</span>
+      <button class="demo-action-btn" onclick="simulateTargetSprintDemo()">Test Launch Demo</button>
+    </div>
+  </div>
+
+  <!-- STEALTH 2-SECOND ECO FULL-THROTTLE GESTURE -->
+  <div class="card">
+    <div class="section-headline">
+      <div>
+        <div class="section-title" style="color:var(--accent-red);">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Stealth Panic Limiter
+        </div>
+        <div style="font-size:11px; color:var(--text-secondary); margin-top:2px;">
+          Hold full throttle on ECO for 2.0s to lock 20 km/h
+        </div>
+      </div>
+      <label class="switch-control">
+        <input type="checkbox" id="chkStealth" checked onchange="toggleStealth(this.checked)">
+        <span class="switch-slider"></span>
       </label>
     </div>
 
-    <div style="margin-top: 10px;">
-      <!-- USER PHYSICAL TRIGGER: 5-SECOND ECO FULL-THROTTLE GESTURE -->
-      <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); padding: 10px; margin-bottom: 8px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-          <div style="font-size: 12px; font-weight: 800; color: #fbbf24;">⚡ ECO 5-SECOND FULL-THROTTLE GESTURE</div>
-          <span class="badge-mini" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24;">Active Trigger</span>
-        </div>
-        <div style="font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-bottom: 8px;">
-          Switch to <strong>ECO mode</strong> and hold <strong>Full Throttle for 2 seconds</strong>:
-          <br>• Automatically reverts Sport limit from <strong>47 ➔ 20 km/h</strong>!
-          <br>• Automatically shifts scooter back from <strong>ECO ➔ SPORT mode</strong>.
-          <br>• <em>Will NEVER trigger while riding in Drive or Sport!</em>
-        </div>
-
-        <div style="display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap;">
-          <span id="pillEcoGear" class="live-sensor-pill">⚙️ Gear: <strong id="txtEcoGearStatus">Drive / Sport</strong></span>
-          <span id="pillEcoThrottle" class="live-sensor-pill">🚀 Throttle: <strong id="txtEcoThrottleStatus">0%</strong></span>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.4); border-radius: 8px; padding: 4px 6px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 6px;">
-          <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; margin-bottom: 3px;">
-            <span style="color: #94a3b8;">Gesture Countdown</span>
-            <span id="txtEcoCountdownVal" style="color: #fbbf24; font-family: monospace;">0.0s / 2.0s</span>
-          </div>
-          <div style="height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
-            <div id="barEcoCountdown" style="height: 100%; width: 0%; background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 4px; transition: width 0.1s linear;"></div>
-          </div>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span id="txtEcoPrompt" style="font-size: 10px; color: var(--text-muted); font-style: italic;">Double-click to ECO & pin throttle for 2s to lock</span>
-          <button class="preset-pill" style="padding: 3px 8px; font-size: 10px; background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fbbf24;" onclick="simulateEcoThrottleDemo()">⚡ Test 2s Demo</button>
-        </div>
+    <div style="background:rgba(255,255,255,0.03); border-radius:var(--radius-md); padding:10px 12px; margin-top:8px;">
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-secondary);">
+        <span>Gear: <strong id="txtEcoGearStatus" style="color:#ffffff;">Drive/Sport</strong></span>
+        <span>Throttle: <strong id="txtEcoThrottleStatus" style="color:#ffffff;">0%</strong></span>
       </div>
-
-      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: var(--radius-md); margin-bottom: 6px;">
-        <span style="font-size: 11px; color: var(--text-muted);">🔊 1-Click Pocket Trigger:</span>
-        <span style="font-size: 11px; font-weight: 700; color: #34d399;">Phone Volume Down Key</span>
+      <div class="gesture-countdown-track">
+        <div class="gesture-countdown-fill" id="barEcoCountdown"></div>
       </div>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span id="txtEcoPrompt" style="font-size:10px; color:var(--text-secondary);">Pin throttle in ECO for 2s to activate</span>
+        <button class="demo-action-btn" onclick="simulateEcoThrottleDemo()">Test 2s Demo</button>
+      </div>
+    </div>
+  </div>
 
-      <button class="panic-bar-btn" onclick="triggerStealthPanic('Emergency Panic Button')">
-        🚨 TAP FOR EMERGENCY 20 KM/H LIMIT 🚨
+  <!-- TELEMETRY 4-PACK -->
+  <div class="card">
+    <div class="section-headline">
+      <div class="section-title">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        Live Telemetry
+      </div>
+      <span style="font-size:11px; color:var(--accent-orange); cursor:pointer; font-weight:600;" onclick="resetTripMeter()">Reset Trip</span>
+    </div>
+    <div class="telemetry-grid">
+      <div class="telemetry-cell">
+        <div class="telemetry-cell-label"><span>Battery</span><svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><rect x="1" y="6" width="18" height="12" rx="2"/><line x1="23" y1="13" x2="23" y2="11"/></svg></div>
+        <div class="telemetry-cell-val" id="txtBattery">-- <small>%</small></div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="telemetry-cell-label"><span>Pack Voltage</span><svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="telemetry-cell-val" id="txtVoltage">--.- <small>V</small></div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="telemetry-cell-label"><span>Motor Power</span><svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="telemetry-cell-val" id="valWatts">0 <small>W</small></div>
+        <div style="font-size:10px; color:var(--text-tertiary); margin-top:2px;">Peak: <span id="valPeakWatts">0</span> W</div>
+      </div>
+      <div class="telemetry-cell">
+        <div class="telemetry-cell-label"><span>Odometer</span><svg class="icon" style="width:14px;height:14px;" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg></div>
+        <div class="telemetry-cell-val" id="valOdo">-- <small>km</small></div>
+        <div style="font-size:10px; color:var(--text-tertiary); margin-top:2px;">Trip: <span id="valTrip">0.00</span> km</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HARDWARE CONTROLS QUICK BAR -->
+  <div class="card">
+    <div class="section-headline">
+      <div class="section-title">Hardware Controls</div>
+    </div>
+    <div class="hardware-bar">
+      <button class="hw-btn" id="btnLight" onclick="toggleLight()">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+        <span id="lblLight">Light</span>
+      </button>
+      <button class="hw-btn" id="btnLock" onclick="toggleLock()">
+        <svg class="icon" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span id="lblLock">Unlock</span>
+      </button>
+      <button class="hw-btn" id="btnCruise" onclick="toggleCruise()">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M16 12l-4-4v8z"/></svg>
+        <span id="lblCruise">Cruise</span>
+      </button>
+      <button class="hw-btn" id="btnGear" onclick="cycleGear()">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span id="lblGear">Gear 3</span>
+      </button>
+    </div>
+    <div style="display:flex; gap:8px; margin-top:8px;">
+      <button class="hw-btn" style="flex:1;" onclick="toggleZeroStart()">
+        <span id="lblZeroStartBtn">Zero-Start ON</span>
+      </button>
+      <button class="hw-btn" style="flex:1;" onclick="customSpeedPrompt()">
+        <span>Custom Speed</span>
       </button>
     </div>
   </div>
 
-  <div class="card transmitter-card">
-    <div class="section-header">
-      <span class="section-title">📤 Direct Command Transmitter</span>
-      <span class="text-action" onclick="sendWakeupPackets()">⚡ Handshake</span>
-    </div>
-    <div class="tx-buttons-grid">
-      <button class="tx-btn" style="border-color: rgba(245,158,11,0.4);" onclick="applySpeedLimit(47, 'unlimit')">
-        <div class="tx-btn-hdr"><span style="color: #fbbf24;">🚀 TRANSMIT 47 KM/H UNLOCK</span><span class="badge-mini">3 Frames</span></div>
-        <div class="tx-hex-preview">0x3C Limit (47) • P10 EEPROM (47) • Gear 3</div>
-      </button>
-      <button class="tx-btn" style="border-color: rgba(16,185,129,0.4);" onclick="applySpeedLimit(20, 'limit')">
-        <div class="tx-btn-hdr"><span style="color: #34d399;">🛡️ TRANSMIT 20 KM/H LIMIT</span><span class="badge-mini">2 Frames</span></div>
-        <div class="tx-hex-preview">0x3C Limit (20) • P10 EEPROM (20)</div>
-      </button>
-      <button class="tx-btn" style="border-color: rgba(56,189,248,0.4);" onclick="sendWakeupPackets()">
-        <div class="tx-btn-hdr"><span style="color: #38bdf8;">🔌 TRANSMIT WAKEUP HANDSHAKE</span><span class="badge-mini">3 Packets</span></div>
-        <div class="tx-hex-preview">0x01 Wake (5B) • 0xFA Alt (FB) • 0x31 Stream (8D)</div>
-      </button>
-    </div>
-    <div class="raw-hex-box">
-      <div class="hex-input-row">
-        <input type="text" id="customHexInput" class="hex-input" placeholder="Hex bytes..." value="FA AF A5 5A 3C 01 2F C6">
-        <button class="hex-send-btn" onclick="sendCustomHex()">Send Hex</button>
-      </div>
-      <div class="quick-chips">
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A 3C 01 2F C6', '0x3C=47')">0x3C=47</span>
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A 3C 01 14 AB', '0x3C=20')">0x3C=20</span>
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A D2 02 09 2F 66', 'P10=47')">P10=47</span>
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A D2 02 09 14 4B', 'P10=20')">P10=20</span>
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A 42 01 03 A0', 'Gear 3')">Gear 3</span>
-        <span class="chip" onclick="setHexPayload('FA AF A5 5A 3C 01 00 97', 'Query Limit')">Query</span>
-      </div>
-    </div>
-  </div>
-
+  <!-- DIRECT HEX TRANSMITTER -->
   <div class="card">
-    <div class="section-header">
-      <span class="section-title">📊 Trip & Odometer Telemetry</span>
-      <span class="text-action" onclick="resetTripMeter()">🔄 Reset Trip</span>
+    <div class="section-headline">
+      <div class="section-title">Direct Byte Transmitter</div>
+      <span style="font-size:11px; color:var(--accent-blue); cursor:pointer; font-weight:600;" onclick="sendWakeupPackets()">Handshake</span>
     </div>
-    <div class="metrics-grid">
-      <div class="battery-card">
-        <div class="metric-title"><span>Battery Pack</span><span id="txtBattery">-- %</span></div>
-        <div class="battery-track"><div class="battery-fill" id="barBattery"></div></div>
-        <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
-          <span>Pack Voltage: <strong id="txtVoltage" style="color:var(--text);">--.- V</strong></span>
-          <span>Motor Current: <strong id="txtCurrent" style="color:var(--text);">0.0 A</strong></span>
-        </div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-title"><span>Odometer (Total)</span><span>🛣️</span></div>
-        <div class="metric-val" id="valOdo">-- <small>km</small></div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-title"><span>Current Trip</span><span>📍</span></div>
-        <div class="metric-val" id="valTrip">0.00 <small>km</small></div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-title"><span>Session Peak</span><span>🏁</span></div>
-        <div class="metric-val" id="valTopSpeed">0.0 <small>km/h</small></div>
-      </div>
-      <div class="metric-cell">
-        <div class="metric-title"><span>Ride Time</span><span>⏱️</span></div>
-        <div class="metric-val" id="valElapsed">00:00</div>
-      </div>
+    <div style="display:flex; gap:6px;">
+      <input type="text" id="customHexInput" class="hex-input-field" value="FA AF A5 5A 3C 01 2F C6">
+      <button class="demo-action-btn" style="padding:0 14px; background:var(--accent-blue);" onclick="sendCustomHex()">Send</button>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="section-header"><span class="section-title">⚙️ Scooter Controls</span></div>
-    <div class="controls-grid">
-      <button class="ctrl-btn" id="btnLight" onclick="toggleLight()"><span class="icon">💡</span><span id="lblLight">Light OFF</span></button>
-      <button class="ctrl-btn" id="btnLock" onclick="toggleLock()"><span class="icon">🔒</span><span id="lblLock">Unlock</span></button>
-      <button class="ctrl-btn" id="btnCruise" onclick="toggleCruise()"><span class="icon">⚡</span><span id="lblCruise">Cruise</span></button>
-      <button class="ctrl-btn" id="btnGear" onclick="cycleGear()"><span class="icon">⚙️</span><span id="lblGear">Gear 3</span></button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="section-header">
-      <span class="section-title">🎯 Quick Speed Presets</span>
-      <span class="text-action" onclick="customSpeedPrompt()">Custom...</span>
-    </div>
-    <div class="presets-wrap">
-      <button class="preset-pill" onclick="applySpeedLimit(15)">15</button>
-      <button class="preset-pill" onclick="applySpeedLimit(20)">20</button>
-      <button class="preset-pill" onclick="applySpeedLimit(25)">25</button>
-      <button class="preset-pill" onclick="applySpeedLimit(30)">30</button>
-      <button class="preset-pill" onclick="applySpeedLimit(35)">35</button>
-      <button class="preset-pill" onclick="applySpeedLimit(40)">40</button>
-      <button class="preset-pill" onclick="applySpeedLimit(47)">47</button>
-      <button class="preset-pill" onclick="applySpeedLimit(60)">60</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="section-header">
-      <span class="section-title">📡 Bluetooth Traffic</span>
-      <span class="text-action" style="color:var(--text-dim);" onclick="clearLogs()">Clear</span>
-    </div>
-    <div class="log-box" id="logConsole">
-      <div class="log-entry">Riley Speed Unlocker Ready.</div>
-      <div class="log-entry">Turn on your MK-083 scooter and tap "Connect Scooter".</div>
+    <div class="terminal-log" id="logConsole">
+      <div>Riley Speed Unlocker Ready.</div>
     </div>
   </div>
 </div>
 
-<div id="toast"><span id="toastIcon">🚀</span><span id="toastText">Speed Updated</span></div>
+<!-- FLOATING TOAST -->
+<div id="toastNotice">Action Completed</div>
+
+<!-- REBOOT POWER-CYCLE MODAL -->
+<div id="rebootModal" class="modal-overlay">
+  <div class="modal-sheet">
+    <div style="font-size: 16px; font-weight: 800; color: var(--accent-orange);">ACCELERATION SAVED</div>
+    <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
+      Power cycle your scooter once to activate the new map!
+    </div>
+    <div class="power-cycle-cluster">
+      <div class="power-ring"></div>
+      <div class="power-disc" id="rebootAnimBtn">
+        <svg class="icon" style="width:24px;height:24px;" viewBox="0 0 24 24"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+        <span style="font-size:8px; font-weight:800; margin-top:3px;" id="rebootStatusText">HOLD 3S</span>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:var(--radius-md); padding:10px 14px; text-align:left; font-size:11px; line-height:1.5; margin-bottom:14px; color:var(--text-secondary);">
+      1. Turn scooter power button OFF<br>
+      2. Wait 2 seconds for controller discharge<br>
+      3. Power scooter back ON • New torque profile active!
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button class="demo-action-btn" style="flex:1; padding:10px;" onclick="playRebootAnimationDemo()">Replay</button>
+      <button class="connect-pill-btn" style="flex:2; padding:10px;" onclick="closeRebootModal()">Got It</button>
+    </div>
+  </div>
+</div>
+
+<!-- FULLSCREEN COCKPIT HUD -->
+<div id="cockpitModal" class="cockpit-screen">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:15px; font-weight:800;" id="cockpitDevName">MK-083</span>
+      <span class="info-pill sport" id="cockpitModeBadge">UNLIMITED</span>
+    </div>
+    <button onclick="toggleCockpit(false)" style="background:rgba(255,255,255,0.1); border:none; color:#fff; width:36px; height:36px; border-radius:50%; font-size:16px; cursor:pointer;">✕</button>
+  </div>
+  <div style="text-align:center; margin: auto 0;">
+    <div class="cockpit-giant-num" id="cockpitSpeedVal">0.0</div>
+    <div style="font-size:18px; font-weight:800; color:var(--accent-blue); letter-spacing:1px;" id="cockpitUnitVal">KM/H</div>
+    <div style="display:flex; justify-content:center; gap:18px; margin-top:14px; font-size:13px; font-weight:700;">
+      <span style="color:var(--accent-green);">🔋 <strong id="cockpitBattery">--%</strong></span>
+      <span style="color:var(--accent-blue);">⚡ <strong id="cockpitVoltage">--.- V</strong></span>
+      <span style="color:var(--accent-orange);">🔥 <strong id="cockpitWatts">0 W</strong></span>
+    </div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+    <button class="switch-tile active-unlimit" style="height:80px; padding:12px;" onclick="applySpeedLimit(47, 'unlimit')">
+      <div class="tile-speed-number" style="font-size:26px;">47 <small>KM/H</small></div>
+      <div class="tile-subtext">Fast Track</div>
+    </button>
+    <button class="switch-tile" style="height:80px; padding:12px;" onclick="applySpeedLimit(20, 'limit')">
+      <div class="tile-speed-number" style="font-size:26px;">20 <small>KM/H</small></div>
+      <div class="tile-subtext">Commute</div>
+    </button>
+  </div>
+</div>
 
 <script>
+/* ==========================================================================
+   BLUETOOTH GATT PROTOCOL & ENGINE (VICONT / MK-083 / PRO-VC)
+   ========================================================================== */
 const MAGIC = [0xFA, 0xAF, 0xA5];
 const SERVICE_FEE0 = "0000fee0-0000-1000-8000-00805f9b34fb";
 const CHAR_FEE2    = "0000fee2-0000-1000-8000-00805f9b34fb";
@@ -523,10 +1402,12 @@ const CHAR_FFF1    = "0000fff1-0000-1000-8000-00805f9b34fb";
 
 const CMD_TELEMETRY_MOTOR   = 16;
 const CMD_TELEMETRY_STATUS  = 17;
-const CMD_TELEMETRY_VERSION = 18;
 const CMD_TELEMETRY_SENSORS = 19;
 const CMD_LOCK_TOGGLE       = 51;
 const CMD_CRUISE            = 54;
+const CMD_START_MODE        = 55;
+const CMD_ACCEL_RUN         = 57;
+const CMD_EBRAKE_RUN        = 58;
 const CMD_SET_MAX_SPEED     = 60;
 const CMD_SET_GEAR          = 66;
 const CMD_SPEED_UNIT        = 67;
@@ -543,35 +1424,36 @@ let isDemoMode = false;
 let writeQueue = Promise.resolve();
 
 let scooterState = {
-  speed: 0.0,
-  topSpeed: 0.0,
-  battery: 0,
-  voltage: 0.0,
-  currentAmps: 0.0,
-  tripKm: 0.00,
-  odometerKm: 0,
-  activeLimit: null,
-  gear: 3,
-  headlight: false,
-  locked: false,
-  cruise: false,
-  isMiles: false,
-  isBraking: false,
-  throttle: 0,
-  throttleRaw: 0,
-  sessionStartTime: null,
-  sessionTimer: null
+  speed: 0.0, battery: 0, voltage: 0.0, currentAmps: 0.0,
+  tripKm: 0.00, odometerKm: 0, activeLimit: 47, gear: 3,
+  headlight: false, locked: false, cruise: false, isMiles: false,
+  throttle: 0, throttleRaw: 0, sessionStartTime: null, sessionTimer: null
 };
 
 let stealthEnabled = true;
-let lastObservedHeadlight = false;
-let lastObservedGear = 3;
+let ecoThrottleStartTime = null;
+let isSimulatingEcoDemo = false;
+let currentAccelLevel = 3;
+let currentEBrakeLevel = 3;
+let zeroStartEnabled = true;
+let peakWatts = 0;
 
+let targetSprint = {
+  targetSpeed: 47.0,
+  isAuto: false,
+  state: 'ARMED',
+  startTime: null,
+  timerInterval: null
+};
+
+// UI Elements
 const statusDot = document.getElementById('statusDot');
 const statusLabel = document.getElementById('statusLabel');
-const btnConnect = document.getElementById('btnConnect');
+const connectTile = document.getElementById('connectTile');
+const connectTitle = document.getElementById('connectTitle');
+const connectDesc = document.getElementById('connectDesc');
+const connectBtn = document.getElementById('connectBtn');
 const devName = document.getElementById('devName');
-const activeLimitTag = document.getElementById('activeLimitTag');
 const liveSpeed = document.getElementById('liveSpeed');
 const speedArc = document.getElementById('speedArc');
 const unitText = document.getElementById('unitText');
@@ -579,44 +1461,28 @@ const gearBadge = document.getElementById('gearBadge');
 const modeBadge = document.getElementById('modeBadge');
 const hudTimer = document.getElementById('hudTimer');
 const txtBattery = document.getElementById('txtBattery');
-const barBattery = document.getElementById('barBattery');
 const txtVoltage = document.getElementById('txtVoltage');
-const txtCurrent = document.getElementById('txtCurrent');
+const valWatts = document.getElementById('valWatts');
+const valPeakWatts = document.getElementById('valPeakWatts');
 const valOdo = document.getElementById('valOdo');
 const valTrip = document.getElementById('valTrip');
-const valTopSpeed = document.getElementById('valTopSpeed');
-const valElapsed = document.getElementById('valElapsed');
 const logConsole = document.getElementById('logConsole');
-const toastEl = document.getElementById('toast');
-const toastText = document.getElementById('toastText');
-const toastIcon = document.getElementById('toastIcon');
-const pillEcoGear = document.getElementById('pillEcoGear');
-const txtEcoGearStatus = document.getElementById('txtEcoGearStatus');
-const pillEcoThrottle = document.getElementById('pillEcoThrottle');
-const txtEcoThrottleStatus = document.getElementById('txtEcoThrottleStatus');
-const barEcoCountdown = document.getElementById('barEcoCountdown');
-const txtEcoCountdownVal = document.getElementById('txtEcoCountdownVal');
-const txtEcoPrompt = document.getElementById('txtEcoPrompt');
+const toastNotice = document.getElementById('toastNotice');
 
 function log(msg, cls = '') {
   const line = document.createElement('div');
-  line.className = 'log-entry ' + cls;
+  line.className = cls;
   const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
   line.textContent = `[${time}] ${msg}`;
   logConsole.appendChild(line);
   logConsole.scrollTop = logConsole.scrollHeight;
-  while (logConsole.children.length > 80) logConsole.removeChild(logConsole.firstChild);
+  while (logConsole.children.length > 50) logConsole.removeChild(logConsole.firstChild);
 }
 
-function clearLogs() {
-  logConsole.innerHTML = '<div class="log-entry">Traffic log cleared.</div>';
-}
-
-function showToast(msg, icon = '⚡') {
-  toastIcon.textContent = icon;
-  toastText.textContent = msg;
-  toastEl.classList.add('show');
-  setTimeout(() => toastEl.classList.remove('show'), 2600);
+function showToast(msg) {
+  toastNotice.textContent = msg;
+  toastNotice.classList.add('visible');
+  setTimeout(() => toastNotice.classList.remove('visible'), 2400);
 }
 
 function toHex(buffer) {
@@ -642,7 +1508,7 @@ function sendCommand(code, data = [], label = '') {
     if (isDemoMode || isSimulatingEcoDemo) {
       log(`TX (Simulated): ${toHex(packet)} [${label}]`, 'log-tx');
       simulateDemoReply(code, data);
-      await new Promise(r => setTimeout(r, 60));
+      await new Promise(r => setTimeout(r, 40));
       return;
     }
     if (!activeChar) throw new Error("Scooter not connected");
@@ -657,19 +1523,21 @@ function sendCommand(code, data = [], label = '') {
       await activeChar.writeValue(packet);
       log(`TX (retry): ${toHex(packet)} [${label}]`, 'log-tx');
     }
-    await new Promise(r => setTimeout(r, 70));
+    await new Promise(r => setTimeout(r, 60));
   }).catch(err => {
-    log(`Write error (${label}): ${err.message}`, 'log-err');
+    log(`Write error: ${err.message}`, 'log-err');
   });
   return writeQueue;
 }
 
+/* ==========================================================================
+   SPEED LIMIT SWITCHER (47 UNLIMIT & 20 STRICT LIMIT)
+   ========================================================================== */
 async function applySpeedLimit(kmh, type = 'custom') {
   if (!isConnected && !isDemoMode && !isSimulatingEcoDemo) {
-    showToast("Please connect to scooter first!", "⚠️");
+    showToast("Connect to scooter first");
     return;
   }
-  log(`--- SETTING SPEED LIMIT: ${kmh} KM/H ---`, 'log-ack');
   sendCommand(CMD_SET_MAX_SPEED, [kmh], `Set Max Speed -> ${kmh}`);
   sendCommand(CMD_PARAM_WRITE, [9, kmh], `Write P10 (Sport EEPROM) -> ${kmh}`);
   if (kmh > 25) {
@@ -679,176 +1547,478 @@ async function applySpeedLimit(kmh, type = 'custom') {
   }
   sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit");
   scooterState.activeLimit = kmh;
-  activeLimitTag.textContent = `Limit: ${kmh} km/h`;
+
+  const t47 = document.getElementById('tile47');
+  const t20 = document.getElementById('tile20');
   if (type === 'unlimit') {
-    modeBadge.textContent = "⚡ UNLIMITED (47 KM/H)";
-    modeBadge.style.color = "#fbbf24";
-    showToast("UNLIMITED TO 47 KM/H! 🚀", "⚡");
-    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+    if (t47) t47.className = 'switch-tile active-unlimit';
+    if (t20) t20.className = 'switch-tile';
+    modeBadge.textContent = "UNLIMITED (47 KM/H)";
+    modeBadge.className = "info-pill sport";
+    showToast("Fast Track: 47 KM/H Active");
+    if (navigator.vibrate) navigator.vibrate([80, 40, 80]);
   } else if (type === 'limit') {
-    modeBadge.textContent = "🛡️ LIMITED (20 KM/H)";
-    modeBadge.style.color = "#34d399";
-    showToast("LIMITED TO 20 KM/H 🛡️", "🛡️");
-    if (navigator.vibrate) navigator.vibrate(80);
+    if (t47) t47.className = 'switch-tile';
+    if (t20) t20.className = 'switch-tile active-limit';
+    modeBadge.textContent = "LIMITED (20 KM/H)";
+    modeBadge.className = "info-pill eco";
+    showToast("Commute Mode: 20 KM/H Locked");
+    if (navigator.vibrate) navigator.vibrate(60);
   } else {
-    showToast(`Speed set to ${kmh} km/h`, "🎯");
+    showToast(`Speed set to ${kmh} km/h`);
+  }
+
+  if (targetSprint.isAuto) {
+    targetSprint.targetSpeed = kmh;
+    updateSprintTargetUI();
   }
 }
 
+/* ==========================================================================
+   TRUE IOS CONTROL CENTER CAPSULE SLIDER CONTROLLERS
+   ========================================================================== */
+const accelLevels = {
+  1: { tag: "Level 1 • Eco", badge: "Lv 1" },
+  2: { tag: "Level 2 • City", badge: "Lv 2" },
+  3: { tag: "Level 3 • Normal", badge: "Lv 3" },
+  4: { tag: "Level 4 • Sport", badge: "Lv 4" },
+  5: { tag: "Level 5 • Beast", badge: "Lv 5" }
+};
 
+const brakeLevels = {
+  1: { tag: "Level 1 • Glide", badge: "Lv 1" },
+  2: { tag: "Level 2 • Soft", badge: "Lv 2" },
+  3: { tag: "Level 3 • Medium", badge: "Lv 3" },
+  4: { tag: "Level 4 • Firm", badge: "Lv 4" },
+  5: { tag: "Level 5 • Hard", badge: "Lv 5" }
+};
 
+function setupCapsuleSlider(capsuleId, trackId, tagId, badgeId, levelDict, onChange) {
+  const capsule = document.getElementById(capsuleId);
+  const track = document.getElementById(trackId);
+  const tag = document.getElementById(tagId);
+  const badge = document.getElementById(badgeId);
 
+  let isDragging = false;
 
-async function sendWakeupPackets() {
-  if (!isConnected && !isDemoMode) return showToast("Please connect to scooter first!", "⚠️");
-  log(">>> [TX] INITIALIZING WAKEUP & TELEMETRY HANDSHAKE...", "log-warn");
-  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x01, 0x00, 0x5B]), "Handshake #1 (0x01 Start)");
-  await new Promise(r => setTimeout(r, 90));
-  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0xFA, 0x01, 0x00, 0xFB]), "Handshake #2 (0xFA Alt)");
-  await new Promise(r => setTimeout(r, 90));
-  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x31, 0x01, 0x01, 0x8D]), "Handshake #3 (0x31 Legacy)");
-  await new Promise(r => setTimeout(r, 90));
-  await sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit (0x3C)");
-  showToast("Wakeup Handshake Transmitted! 🔌", "✅");
+  function updateFromPosition(clientX) {
+    const rect = capsule.getBoundingClientRect();
+    const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    const level = Math.max(1, Math.min(5, Math.round(ratio * 4) + 1));
+    const fillPct = ((level - 1) / 4) * 80 + 20;
+
+    track.style.width = fillPct + "%";
+    tag.textContent = levelDict[level].tag;
+    badge.textContent = levelDict[level].badge;
+    if (navigator.vibrate) navigator.vibrate(20);
+    onChange(level);
+  }
+
+  capsule.addEventListener('pointerdown', (e) => {
+    isDragging = true;
+    capsule.setPointerCapture(e.pointerId);
+    updateFromPosition(e.clientX);
+  });
+  capsule.addEventListener('pointermove', (e) => {
+    if (isDragging) updateFromPosition(e.clientX);
+  });
+  capsule.addEventListener('pointerup', (e) => {
+    if (isDragging) {
+      isDragging = false;
+      try { capsule.releasePointerCapture(e.pointerId); } catch(err){}
+    }
+  });
+  capsule.addEventListener('pointercancel', () => { isDragging = false; });
 }
 
-function setHexPayload(hexStr, label = "") {
-  const input = document.getElementById('customHexInput');
-  if (input) {
-    input.value = hexStr;
-    showToast(`Loaded: ${label || hexStr}`, "📋");
+setupCapsuleSlider('capsuleAccel', 'trackAccel', 'lblAccelTag', 'badgeAccelVal', accelLevels, (lvl) => {
+  currentAccelLevel = lvl;
+  sendCommand(CMD_PARAM_WRITE, [6, lvl], `P7 Accel -> Lv${lvl}`);
+  sendCommand(CMD_ACCEL_RUN, [lvl], `0x39 Accel -> Lv${lvl}`);
+  showToast(`Acceleration: ${accelLevels[lvl].tag}`);
+  openRebootModal();
+});
+
+setupCapsuleSlider('capsuleBrake', 'trackBrake', 'lblBrakeTag', 'badgeBrakeVal', brakeLevels, (lvl) => {
+  currentEBrakeLevel = lvl;
+  sendCommand(CMD_PARAM_WRITE, [7, lvl], `P8 E-Brake -> Lv${lvl}`);
+  sendCommand(CMD_EBRAKE_RUN, [lvl], `0x3A E-Brake -> Lv${lvl}`);
+  showToast(`E-Brake: ${brakeLevels[lvl].tag}`);
+});
+
+/* ==========================================================================
+   TARGET SPRINT BENCHMARK
+   ========================================================================== */
+function setSprintTarget(spd, chipEl) {
+  document.querySelectorAll('.sprint-chip').forEach(c => c.classList.remove('active'));
+  if (chipEl) chipEl.classList.add('active');
+  if (spd === 'auto') {
+    targetSprint.isAuto = true;
+    targetSprint.targetSpeed = scooterState.activeLimit || 47.0;
+  } else {
+    targetSprint.isAuto = false;
+    targetSprint.targetSpeed = parseFloat(spd);
+  }
+  updateSprintTargetUI();
+  resetSprintBenchmark();
+}
+
+function updateSprintTargetUI() {
+  const title = document.getElementById('lblSprintTitle');
+  if (title) title.textContent = `Time to reach ${targetSprint.targetSpeed} km/h`;
+}
+
+function updateSprintEngine(speed) {
+  const spd = parseFloat(speed) || 0.0;
+  const timerEl = document.getElementById('lblSprintTimer');
+  const statusEl = document.getElementById('lblSprintStatus');
+  const etaEl = document.getElementById('lblSprintEta');
+
+  if (targetSprint.state === 'ARMED') {
+    if (spd < 0.8) {
+      if (statusEl) {
+        statusEl.textContent = "🟢 Ready: Launch from 0 km/h";
+        statusEl.style.color = "var(--accent-green)";
+      }
+    } else if (spd >= 1.0) {
+      targetSprint.state = 'RUNNING';
+      targetSprint.startTime = performance.now();
+      if (navigator.vibrate) navigator.vibrate(50);
+
+      targetSprint.timerInterval = setInterval(() => {
+        if (targetSprint.state !== 'RUNNING') {
+          clearInterval(targetSprint.timerInterval);
+          return;
+        }
+        const elapsed = (performance.now() - targetSprint.startTime) / 1000.0;
+        if (timerEl) timerEl.innerHTML = `${elapsed.toFixed(2)}<small>s</small>`;
+
+        const cur = scooterState.speed;
+        if (cur > 2.0 && cur < targetSprint.targetSpeed) {
+          const rate = cur / Math.max(0.4, elapsed);
+          if (rate > 0.5) {
+            const eta = ((targetSprint.targetSpeed - cur) / rate).toFixed(1);
+            if (etaEl) etaEl.textContent = `Est. ~${eta}s to reach ${targetSprint.targetSpeed} km/h`;
+          }
+        }
+      }, 40);
+    }
+  } else if (targetSprint.state === 'RUNNING') {
+    if (spd >= targetSprint.targetSpeed) {
+      const elapsed = (performance.now() - targetSprint.startTime) / 1000.0;
+      targetSprint.state = 'FINISHED';
+      clearInterval(targetSprint.timerInterval);
+
+      if (timerEl) timerEl.innerHTML = `${elapsed.toFixed(2)}<small>s</small>`;
+      if (statusEl) {
+        statusEl.textContent = `🎯 Reached ${targetSprint.targetSpeed} km/h in ${elapsed.toFixed(2)}s!`;
+        statusEl.style.color = "var(--accent-blue)";
+      }
+      if (etaEl) etaEl.textContent = `Sprint finished in ${elapsed.toFixed(2)}s`;
+      showToast(`🎯 Finished in ${elapsed.toFixed(2)}s!`);
+      if (navigator.vibrate) navigator.vibrate([100, 50, 100, 50, 250]);
+    }
+  } else if (targetSprint.state === 'FINISHED') {
+    if (spd < 0.5) {
+      targetSprint.state = 'ARMED';
+      if (statusEl) {
+        statusEl.textContent = "🟢 Ready: Launch from 0 km/h";
+        statusEl.style.color = "var(--accent-green)";
+      }
+      if (etaEl) etaEl.textContent = `Ready for next run`;
+    }
   }
 }
 
-async function sendCustomHex() {
-  const input = document.getElementById('customHexInput');
-  if (!input) return;
-  const raw = input.value.trim().replace(/[^0-9a-fA-F]/g, '');
-  if (raw.length < 2 || raw.length % 2 !== 0) {
-    alert("Please enter a valid hex byte string (e.g. FA AF A5 5A 3C 01 2F C6)");
-    return;
+function resetSprintBenchmark() {
+  targetSprint.state = 'ARMED';
+  targetSprint.startTime = null;
+  if (targetSprint.timerInterval) clearInterval(targetSprint.timerInterval);
+  const timerEl = document.getElementById('lblSprintTimer');
+  const statusEl = document.getElementById('lblSprintStatus');
+  const etaEl = document.getElementById('lblSprintEta');
+  if (timerEl) timerEl.innerHTML = `0.00<small>s</small>`;
+  if (statusEl) {
+    statusEl.textContent = "🟢 Ready: Launch from 0 km/h";
+    statusEl.style.color = "var(--accent-green)";
   }
-  const bytes = new Uint8Array(raw.length / 2);
-  for (let i = 0; i < raw.length; i += 2) bytes[i / 2] = parseInt(raw.substr(i, 2), 16);
-  log(`TX (Direct Hex): ${toHex(bytes)}`, 'log-tx');
-  await sendRawDirect(bytes, "Custom Hex");
-  showToast("Hex Frame Sent to Scooter! ⚡", "⚡");
+  if (etaEl) etaEl.textContent = `Ready to launch`;
 }
 
-function onStealthToggle(checked) {
+function simulateTargetSprintDemo() {
+  resetSprintBenchmark();
+  showToast("Simulating 0➔47 Launch Sprint...");
+  let spd = 0.0;
+  updateSprintEngine(spd);
+
+  setTimeout(() => {
+    spd = 2.0;
+    updateSprintEngine(spd);
+    renderSpeedometer(spd);
+    let start = Date.now();
+    const sim = setInterval(() => {
+      const el = (Date.now() - start) / 1000.0;
+      spd = Math.min(targetSprint.targetSpeed, Math.pow(el / 4.4, 1.2) * targetSprint.targetSpeed);
+      renderSpeedometer(spd);
+      updateSprintEngine(spd);
+      if (spd >= targetSprint.targetSpeed || el >= 5.0) clearInterval(sim);
+    }, 40);
+  }, 300);
+}
+
+/* ==========================================================================
+   STEALTH 2S ECO GESTURE
+   ========================================================================== */
+function toggleStealth(checked) {
   stealthEnabled = checked;
-  const card = document.getElementById('stealthCard');
-  if (card) card.classList.toggle('active', checked);
-  showToast(checked ? "Stealth Limiter Armed 🚨" : "Stealth Limiter Disabled");
+  showToast(checked ? "Stealth Limiter Armed" : "Stealth Limiter Off");
 }
 
-function triggerStealthPanic(triggerSource) {
-  log(`🚨 EMERGENCY STEALTH PANIC (${triggerSource})! LIMITING TO 20 KM/H!`, 'log-err');
-  applySpeedLimit(20, 'limit');
-  if (navigator.vibrate) navigator.vibrate([250, 100, 250, 100, 400]);
-  showToast("🚨 EMERGENCY 20 KM/H LOCKED!", "🛡️");
+function checkEcoThrottleTicker() {
+  const isEco = (scooterState.gear === 1);
+  const isFullThrottle = isEco && (
+    (scooterState.throttle && scooterState.throttle >= 80) ||
+    (scooterState.throttleRaw && scooterState.throttleRaw >= 2000) ||
+    (scooterState.speed >= 12 && parseFloat(scooterState.currentAmps || 0) >= 3.0)
+  );
+
+  const txtGear = document.getElementById('txtEcoGearStatus');
+  const txtThrottle = document.getElementById('txtEcoThrottleStatus');
+  const barCountdown = document.getElementById('barEcoCountdown');
+  const txtPrompt = document.getElementById('txtEcoPrompt');
+
+  if (txtGear) txtGear.textContent = isEco ? "ECO (Gear 1) 🟢" : `Gear ${scooterState.gear}`;
+  if (txtThrottle) txtThrottle.textContent = isFullThrottle ? "100% (HELD)" : `${scooterState.throttle || 0}%`;
+
+  if (isSimulatingEcoDemo) return;
+
+  if (stealthEnabled && isEco && isFullThrottle) {
+    if (!ecoThrottleStartTime) ecoThrottleStartTime = Date.now();
+    const elapsed = (Date.now() - ecoThrottleStartTime) / 1000.0;
+    const pct = Math.min(100, (elapsed / 2.0) * 100);
+    if (barCountdown) barCountdown.style.width = pct + "%";
+    if (txtPrompt) txtPrompt.textContent = `Holding throttle... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
+    if (elapsed >= 2.0) {
+      ecoThrottleStartTime = null;
+      triggerEcoPanic();
+    }
+  } else {
+    if (ecoThrottleStartTime) {
+      ecoThrottleStartTime = null;
+      if (barCountdown) barCountdown.style.width = "0%";
+      if (txtPrompt) txtPrompt.textContent = "Pin throttle in ECO for 2s to activate";
+    }
+  }
 }
 
+setInterval(checkEcoThrottleTicker, 100);
+
+async function triggerEcoPanic() {
+  await applySpeedLimit(20, 'limit');
+  await sendCommand(CMD_SET_GEAR, [3], "Switch ECO -> SPORT (Gear 3)");
+  scooterState.gear = 3;
+  updateGearUI();
+  showToast("Stealth: 20 KM/H Locked & Shifted to Sport");
+  if (navigator.vibrate) navigator.vibrate([300, 100, 300, 100, 500]);
+  const bar = document.getElementById('barEcoCountdown');
+  if (bar) bar.style.width = "100%";
+  setTimeout(() => { if (bar) bar.style.width = "0%"; }, 3500);
+}
+
+function simulateEcoThrottleDemo() {
+  if (isSimulatingEcoDemo) return;
+  isSimulatingEcoDemo = true;
+  showToast("Simulating ECO 2s gesture...");
+  scooterState.gear = 1;
+  scooterState.throttle = 100;
+  updateGearUI();
+
+  let start = Date.now();
+  const demoTimer = setInterval(() => {
+    const elapsed = (Date.now() - start) / 1000.0;
+    const pct = Math.min(100, (elapsed / 2.0) * 100);
+    const bar = document.getElementById('barEcoCountdown');
+    const prompt = document.getElementById('txtEcoPrompt');
+    if (bar) bar.style.width = pct + "%";
+    if (prompt) prompt.textContent = `[Demo] Holding throttle... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
+    if (elapsed >= 2.0) {
+      clearInterval(demoTimer);
+      isSimulatingEcoDemo = false;
+      scooterState.throttle = 0;
+      triggerEcoPanic();
+    }
+  }, 100);
+}
+
+/* ==========================================================================
+   REBOOT POWER CYCLE MODAL
+   ========================================================================== */
+let rebootTimer = null;
+
+function openRebootModal() {
+  const modal = document.getElementById('rebootModal');
+  if (modal) modal.classList.add('active');
+  playRebootAnimationDemo();
+}
+
+function closeRebootModal() {
+  const modal = document.getElementById('rebootModal');
+  if (modal) modal.classList.remove('active');
+  if (rebootTimer) clearTimeout(rebootTimer);
+  showToast("Torque map confirmed");
+}
+
+function playRebootAnimationDemo() {
+  const btn = document.getElementById('rebootAnimBtn');
+  const txt = document.getElementById('rebootStatusText');
+  if (rebootTimer) clearTimeout(rebootTimer);
+
+  if (btn) btn.className = 'power-disc off';
+  if (txt) txt.textContent = 'POWER OFF';
+  if (navigator.vibrate) navigator.vibrate(100);
+
+  rebootTimer = setTimeout(() => {
+    if (btn) btn.className = 'power-disc';
+    if (txt) txt.textContent = 'WAIT 2S';
+    rebootTimer = setTimeout(() => {
+      if (btn) btn.className = 'power-disc on';
+      if (txt) txt.textContent = 'POWER ON';
+      if (navigator.vibrate) navigator.vibrate([80, 40, 150]);
+    }, 1800);
+  }, 1800);
+}
+
+/* ==========================================================================
+   COCKPIT FULLSCREEN HUD
+   ========================================================================== */
+function toggleCockpit(show) {
+  const modal = document.getElementById('cockpitModal');
+  if (modal) modal.classList.toggle('open', show);
+  if (show) updateCockpit();
+}
+
+function updateCockpit() {
+  const spd = document.getElementById('cockpitSpeedVal');
+  const unit = document.getElementById('cockpitUnitVal');
+  const bat = document.getElementById('cockpitBattery');
+  const volt = document.getElementById('cockpitVoltage');
+  const watts = document.getElementById('cockpitWatts');
+  const badge = document.getElementById('cockpitModeBadge');
+
+  if (spd) spd.textContent = (scooterState.speed || 0.0).toFixed(1);
+  if (unit) unit.textContent = scooterState.isMiles ? 'MPH' : 'KM/H';
+  if (bat) bat.textContent = (scooterState.battery || 0) + '%';
+  if (volt) volt.textContent = (scooterState.voltage || 0.0) + ' V';
+  const liveW = Math.round((scooterState.voltage || 0) * (scooterState.currentAmps || 0));
+  if (watts) watts.textContent = liveW + ' W';
+  if (badge) {
+    badge.textContent = scooterState.activeLimit >= 30 ? 'UNLIMITED' : 'LIMITED';
+    badge.className = scooterState.activeLimit >= 30 ? 'info-pill sport' : 'info-pill eco';
+  }
+}
+
+/* ==========================================================================
+   SPEEDOMETER & TELEMETRY RENDERING
+   ========================================================================== */
 function renderSpeedometer(spd) {
   let val = parseFloat(spd);
   if (isNaN(val) || val < 0) val = 0.0;
   liveSpeed.textContent = val.toFixed(1);
   const maxDisplay = Math.max(50, scooterState.activeLimit || 50);
   const ratio = Math.max(0, Math.min(1, val / maxDisplay));
-  const dashOffset = 502.65 - (ratio * 335.1);
+  const dashOffset = 534 - (ratio * 356);
   if (!isNaN(dashOffset)) speedArc.style.strokeDashoffset = dashOffset;
 }
 
 function resetTripMeter() {
-  if (!isConnected && !isDemoMode) return showToast("Connect to scooter first!", "⚠️");
-  sendCommand(CMD_END_TRIP, [1], "Reset Trip Meter");
+  if (!isConnected && !isDemoMode) return showToast("Connect scooter first");
+  sendCommand(CMD_END_TRIP, [1], "Reset Trip");
   scooterState.tripKm = 0.00;
-  valTrip.innerHTML = `0.00 <small>${scooterState.isMiles ? 'mi' : 'km'}</small>`;
+  valTrip.textContent = '0.00';
   scooterState.sessionStartTime = Date.now();
-  updateTimerUI();
-  showToast("Trip Meter Reset! 🔄");
+  updateTimer();
+  showToast("Trip meter reset");
 }
 
-function startRideTimer() {
+function startTimer() {
   scooterState.sessionStartTime = Date.now();
   if (scooterState.sessionTimer) clearInterval(scooterState.sessionTimer);
-  scooterState.sessionTimer = setInterval(updateTimerUI, 1000);
+  scooterState.sessionTimer = setInterval(updateTimer, 1000);
 }
 
-function updateTimerUI() {
+function updateTimer() {
   if (!scooterState.sessionStartTime) return;
-  const elapsedSec = Math.floor((Date.now() - scooterState.sessionStartTime) / 1000);
-  const mins = Math.floor(elapsedSec / 60).toString().padStart(2, '0');
-  const secs = (elapsedSec % 60).toString().padStart(2, '0');
-  const str = `${mins}:${secs}`;
-  hudTimer.textContent = `⏱️ ${str}`;
-  valElapsed.textContent = str;
+  const sec = Math.floor((Date.now() - scooterState.sessionStartTime) / 1000);
+  const m = Math.floor(sec / 60).toString().padStart(2, '0');
+  const s = (sec % 60).toString().padStart(2, '0');
+  hudTimer.textContent = `${m}:${s}`;
 }
 
+/* ==========================================================================
+   HARDWARE CONTROLS
+   ========================================================================== */
 function toggleLight() {
-  if (!isConnected && !isDemoMode) return showToast("Connect scooter first!", "⚠️");
+  if (!isConnected && !isDemoMode) return showToast("Connect scooter first");
   scooterState.headlight = !scooterState.headlight;
   sendCommand(CMD_HEADLIGHT, [scooterState.headlight ? 2 : 1], `Headlight ${scooterState.headlight ? 'ON' : 'OFF'}`);
-  updateLightUI();
-  showToast(`Headlight ${scooterState.headlight ? 'ON' : 'OFF'}`, "💡");
-}
-
-function updateLightUI() {
   const btn = document.getElementById('btnLight');
-  btn.classList.toggle('active', scooterState.headlight);
-  document.getElementById('lblLight').textContent = scooterState.headlight ? 'Light ON' : 'Light OFF';
+  if (btn) btn.classList.toggle('active', scooterState.headlight);
+  document.getElementById('lblLight').textContent = scooterState.headlight ? 'Light ON' : 'Light';
+  showToast(`Headlight ${scooterState.headlight ? 'ON' : 'OFF'}`);
 }
 
 function toggleLock() {
-  if (!isConnected && !isDemoMode) return showToast("Connect scooter first!", "⚠️");
+  if (!isConnected && !isDemoMode) return showToast("Connect scooter first");
   scooterState.locked = !scooterState.locked;
   sendCommand(CMD_LOCK_TOGGLE, [scooterState.locked ? 2 : 1], scooterState.locked ? "Lock" : "Unlock");
-  updateLockUI();
-  showToast(scooterState.locked ? "Scooter LOCKED" : "Scooter UNLOCKED", scooterState.locked ? "🔒" : "🔓");
-}
-
-function updateLockUI() {
   const btn = document.getElementById('btnLock');
-  btn.classList.toggle('locked', scooterState.locked);
-  btn.querySelector('.icon').textContent = scooterState.locked ? '🔒' : '🔓';
-  document.getElementById('lblLock').textContent = scooterState.locked ? 'LOCKED' : 'Unlocked';
+  if (btn) btn.classList.toggle('locked', scooterState.locked);
+  document.getElementById('lblLock').textContent = scooterState.locked ? 'LOCKED' : 'Unlock';
+  showToast(scooterState.locked ? "Scooter Locked" : "Scooter Unlocked");
 }
 
 function toggleCruise() {
-  if (!isConnected && !isDemoMode) return showToast("Connect scooter first!", "⚠️");
+  if (!isConnected && !isDemoMode) return showToast("Connect scooter first");
   scooterState.cruise = !scooterState.cruise;
   sendCommand(CMD_CRUISE, [scooterState.cruise ? 2 : 1], `Cruise ${scooterState.cruise ? 'ON' : 'OFF'}`);
-  updateCruiseUI();
-  showToast(`Cruise ${scooterState.cruise ? 'ON' : 'OFF'}`, "⚡");
-}
-
-function updateCruiseUI() {
   const btn = document.getElementById('btnCruise');
-  btn.classList.toggle('active', scooterState.cruise);
-  document.getElementById('lblCruise').textContent = scooterState.cruise ? 'Cruise ON' : 'Cruise OFF';
+  if (btn) btn.classList.toggle('active', scooterState.cruise);
+  document.getElementById('lblCruise').textContent = scooterState.cruise ? 'Cruise ON' : 'Cruise';
+  showToast(`Cruise ${scooterState.cruise ? 'ON' : 'OFF'}`);
 }
 
 function cycleGear() {
-  if (!isConnected && !isDemoMode) return showToast("Connect scooter first!", "⚠️");
+  if (!isConnected && !isDemoMode) return showToast("Connect scooter first");
   scooterState.gear = (scooterState.gear % 3) + 1;
   sendCommand(CMD_SET_GEAR, [scooterState.gear], `Set Gear -> ${scooterState.gear}`);
   updateGearUI();
-  showToast(`Switched to Gear ${scooterState.gear}`, "⚙️");
+  showToast(`Gear ${scooterState.gear} selected`);
 }
 
 function updateGearUI() {
-  const names = { 1: "ECO", 2: "DRIVE", 3: "SPORT" };
-  document.getElementById('lblGear').textContent = `Gear ${scooterState.gear}`;
-  gearBadge.textContent = `⚙️ GEAR ${scooterState.gear} (${names[scooterState.gear] || 'SPORT'})`;
+  const names = { 1: "Eco", 2: "Drive", 3: "Sport" };
+  const lbl = document.getElementById('lblGear');
+  if (lbl) lbl.textContent = `Gear ${scooterState.gear}`;
+  if (gearBadge) gearBadge.textContent = `Gear ${scooterState.gear} (${names[scooterState.gear] || 'Sport'})`;
+}
+
+function toggleZeroStart() {
+  zeroStartEnabled = !zeroStartEnabled;
+  const val = zeroStartEnabled ? 0 : 1;
+  sendCommand(CMD_PARAM_WRITE, [4, val], `P5 Start Mode -> ${val}`);
+  sendCommand(CMD_START_MODE, [val], `0x37 Start Mode -> ${val}`);
+  const btn = document.getElementById('lblZeroStartBtn');
+  if (btn) btn.textContent = `Zero-Start ${zeroStartEnabled ? 'ON' : 'OFF'}`;
+  showToast(`Start Mode: ${zeroStartEnabled ? 'Zero-Start' : 'Kick-Start'}`);
 }
 
 function toggleUnit() {
   scooterState.isMiles = !scooterState.isMiles;
   unitText.textContent = scooterState.isMiles ? 'MPH' : 'KM/H';
   if (isConnected || isDemoMode) {
-    sendCommand(CMD_SPEED_UNIT, [scooterState.isMiles ? 2 : 1], `Set Unit -> ${scooterState.isMiles ? 'MPH' : 'KM/H'}`);
+    sendCommand(CMD_SPEED_UNIT, [scooterState.isMiles ? 2 : 1], `Unit -> ${scooterState.isMiles ? 'MPH' : 'KM/H'}`);
   }
-  showToast(`Switched to ${scooterState.isMiles ? 'MPH' : 'KM/H'}`);
+  showToast(`Unit: ${scooterState.isMiles ? 'MPH' : 'KM/H'}`);
 }
 
 function customSpeedPrompt() {
@@ -858,22 +2028,23 @@ function customSpeedPrompt() {
     const num = parseInt(input.trim(), 10);
     if (!isNaN(num) && num >= 10 && num <= 99) {
       applySpeedLimit(num, 'custom');
-    } else {
-      alert("Please enter a valid number between 10 and 99.");
     }
   }
 }
 
+/* ==========================================================================
+   WEB BLUETOOTH CONNECTION
+   ========================================================================== */
 async function handleConnectClick() {
   if (isConnected) return disconnectScooter();
   if (isDemoMode) toggleDemoMode();
+
   if (!navigator.bluetooth) {
-    return alert("Web Bluetooth is not supported in this browser.\n\n• On Android: Open in Google Chrome\n• On iPhone: Open in Bluefy browser\n• On PC/Mac: Open in Chrome or Edge.");
+    return alert("Web Bluetooth is not supported in this browser.\n• Android: Google Chrome\n• iPhone: Bluefy Browser\n• PC/Mac: Chrome/Edge");
   }
 
   try {
     updateStatus("connecting", "Searching...");
-    log("Scanning for Bluetooth devices...", "log-warn");
     bluetoothDevice = await navigator.bluetooth.requestDevice({
       filters: [
         { namePrefix: 'MK' }, { namePrefix: 'PRO' }, { namePrefix: 'vc' },
@@ -884,7 +2055,6 @@ async function handleConnectClick() {
       return await navigator.bluetooth.requestDevice({ acceptAllDevices: true, optionalServices: [SERVICE_FEE0, SERVICE_FFF0] });
     });
 
-    log(`Selected: ${bluetoothDevice.name || 'MK-083'}`);
     bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
     updateStatus("connecting", "Connecting GATT...");
     gattServer = await bluetoothDevice.gatt.connect();
@@ -893,54 +2063,50 @@ async function handleConnectClick() {
     try {
       service = await gattServer.getPrimaryService(SERVICE_FEE0);
       activeChar = await service.getCharacteristic(CHAR_FEE2);
-      log("Attached to primary FEE0/FEE2 channel.", "log-ack");
     } catch (e) {
       service = await gattServer.getPrimaryService(SERVICE_FFF0);
       activeChar = await service.getCharacteristic(CHAR_FFF1);
-      log("Attached to secondary FFF0/FFF1 channel.", "log-ack");
     }
 
     await activeChar.startNotifications();
     activeChar.addEventListener('characteristicvaluechanged', handleNotification);
-    log("Subscribed to telemetry stream.", "log-ack");
     updateStatus("connected", "Connected");
     isConnected = true;
-    devName.textContent = bluetoothDevice.name || "MK-083";
-    btnConnect.classList.add('connected');
-    btnConnect.querySelector('#connectLabel').textContent = "Disconnect";
-    btnConnect.querySelector('#connectIcon').textContent = "🔌";
-    startRideTimer();
-    showToast("Scooter Connected! Ready.", "✅");
 
-    setTimeout(() => {
-      sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x01, 0x00, 0x5B]), "Handshake #1");
-      setTimeout(() => {
-        sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0xFA, 0x01, 0x00, 0xFB]), "Handshake #2");
-        setTimeout(() => {
-          sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x31, 0x01, 0x01, 0x8D]), "Handshake #3");
-          setTimeout(() => {
-            sendCommand(CMD_SET_MAX_SPEED, [0], "Query Limit");
-          }, 250);
-        }, 200);
-      }, 200);
-    }, 400);
+    devName.textContent = bluetoothDevice.name || "MK-083 (Connected)";
+    connectTile.classList.add('connected');
+    connectTitle.textContent = bluetoothDevice.name || "MK-083 Connected";
+    connectDesc.textContent = "Battery & Telemetry Active";
+    connectBtn.textContent = "Disconnect";
+    startTimer();
+    showToast("Scooter Connected");
+    setTimeout(sendWakeupPackets, 350);
+
   } catch (err) {
-    log(`Connection error: ${err.message}`, 'log-err');
+    log(`Connection failed: ${err.message}`, 'log-err');
     disconnectScooter();
   }
 }
 
-async function sendRawDirect(bytes, label = "") {
+async function sendWakeupPackets() {
+  log("Sending wakeup handshake...", 'log-ack');
+  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x01, 0x00, 0x5B]));
+  await new Promise(r => setTimeout(r, 80));
+  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0xFA, 0x01, 0x00, 0xFB]));
+  await new Promise(r => setTimeout(r, 80));
+  await sendRawDirect(new Uint8Array([0xFA, 0xAF, 0xA5, 0x5A, 0x31, 0x01, 0x01, 0x8D]));
+  await new Promise(r => setTimeout(r, 80));
+  await sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit");
+}
+
+async function sendRawDirect(bytes) {
   try {
     if (activeChar.writeValueWithoutResponse) {
       await activeChar.writeValueWithoutResponse(bytes);
     } else {
       await activeChar.writeValue(bytes);
     }
-    log(`TX: ${toHex(bytes)} [${label}]`, 'log-tx');
-  } catch (e) {
-    log(`Direct write err: ${e.message}`, 'log-err');
-  }
+  } catch (e) {}
 }
 
 function disconnectScooter() {
@@ -948,9 +2114,7 @@ function disconnectScooter() {
     if (bluetoothDevice && bluetoothDevice.gatt && bluetoothDevice.gatt.connected) {
       bluetoothDevice.gatt.disconnect();
     }
-  } catch (e) {
-    console.warn("Disconnect notice:", e);
-  }
+  } catch (e) {}
   onDisconnected();
 }
 
@@ -958,13 +2122,14 @@ function onDisconnected() {
   isConnected = false;
   activeChar = null;
   updateStatus("offline", "Offline");
-  btnConnect.classList.remove('connected');
-  btnConnect.querySelector('#connectLabel').textContent = "Connect Scooter";
-  btnConnect.querySelector('#connectIcon').textContent = "🔗";
-  devName.textContent = "MK-083 (Not Connected)";
+  connectTile.classList.remove('connected');
+  connectTitle.textContent = "Connect Scooter";
+  connectDesc.textContent = "MK-083 • Bluetooth GATT";
+  connectBtn.textContent = "Connect";
+  devName.textContent = "MK-083 (PRO-VC)";
   renderSpeedometer(0.0);
-  log("Scooter disconnected.", "log-warn");
   if (scooterState.sessionTimer) clearInterval(scooterState.sessionTimer);
+  showToast("Disconnected");
 }
 
 function updateStatus(state, text) {
@@ -972,6 +2137,9 @@ function updateStatus(state, text) {
   statusLabel.textContent = text;
 }
 
+/* ==========================================================================
+   TELEMETRY DISPATCHER
+   ========================================================================== */
 function handleNotification(event) {
   const raw = new Uint8Array(event.target.value.buffer);
   if (raw.length < 4) return;
@@ -987,6 +2155,7 @@ function handleNotification(event) {
     processScooterFrame(code, data);
     offset = frameEnd;
   }
+  checkEcoThrottleTicker();
 }
 
 function processScooterFrame(code, data) {
@@ -1008,15 +2177,19 @@ function processScooterFrame(code, data) {
         scooterState.currentAmps = currentAmps;
         scooterState.battery = battery;
 
-        if (speed > scooterState.topSpeed) {
-          scooterState.topSpeed = speed;
-          valTopSpeed.innerHTML = `${speed.toFixed(1)} <small>${scooterState.isMiles ? 'mph' : 'km/h'}</small>`;
-        }
         renderSpeedometer(speed);
-        txtBattery.textContent = `${battery} %`;
-        barBattery.style.width = `${battery}%`;
-        txtVoltage.textContent = `${voltage} V`;
-        txtCurrent.textContent = `${currentAmps} A`;
+        txtBattery.innerHTML = `${battery} <small>%</small>`;
+        txtVoltage.innerHTML = `${voltage} <small>V</small>`;
+
+        const liveWatts = Math.round(parseFloat(voltage) * parseFloat(currentAmps));
+        if (liveWatts > peakWatts) {
+          peakWatts = liveWatts;
+          if (valPeakWatts) valPeakWatts.textContent = peakWatts;
+        }
+        if (valWatts) valWatts.innerHTML = `${liveWatts} <small>W</small>`;
+
+        updateSprintEngine(speed);
+        updateCockpit();
       }
       break;
 
@@ -1034,7 +2207,7 @@ function processScooterFrame(code, data) {
           let tripKm = (tripRaw / 100.0);
           if (scooterState.isMiles) tripKm = tripKm * 0.621371;
           scooterState.tripKm = tripKm;
-          valTrip.innerHTML = `${tripKm.toFixed(2)} <small>${scooterState.isMiles ? 'mi' : 'km'}</small>`;
+          valTrip.textContent = tripKm.toFixed(2);
         }
         if (data.length >= 6) {
           const odoRaw = (data[4] << 8) | data[5];
@@ -1044,17 +2217,11 @@ function processScooterFrame(code, data) {
           valOdo.innerHTML = `${odo} <small>${scooterState.isMiles ? 'mi' : 'km'}</small>`;
         }
 
-        lastObservedHeadlight = headlight;
-        lastObservedGear = gear;
         scooterState.gear = gear || 3;
         scooterState.headlight = headlight;
         scooterState.cruise = cruise;
         scooterState.locked = locked;
-
         updateGearUI();
-        updateLightUI();
-        updateCruiseUI();
-        updateLockUI();
       }
       break;
 
@@ -1070,228 +2237,92 @@ function processScooterFrame(code, data) {
 
     case CMD_SET_MAX_SPEED:
       if (data.length >= 1) {
-        const confirmedLimit = data[0];
-        scooterState.activeLimit = confirmedLimit;
-        activeLimitTag.textContent = `Limit: ${confirmedLimit} km/h`;
-        log(`Controller confirmed active limit = ${confirmedLimit} km/h`, 'log-ack');
+        const confirmed = data[0];
+        scooterState.activeLimit = confirmed;
+        log(`Limit confirmed: ${confirmed} km/h`, 'log-ack');
       }
       break;
-
-    case CMD_PARAM_WRITE:
-      log(`Controller EEPROM parameter saved successfully.`, 'log-ack');
-      break;
   }
 }
 
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'AudioVolumeDown' || e.key === 'VolumeDown' || e.code === 'AudioVolumeDown' || e.code === 'VolumeDown') {
-    if (stealthEnabled) {
-      log("🔊 Physical Volume Down button pressed -> Transmitting 20 km/h limit!", 'log-warn');
-      triggerStealthPanic("Phone Volume Key");
-    }
-  }
-});
-
-let ecoThrottleStartTime = null;
-let isSimulatingEcoDemo = false;
-
-function checkEcoThrottleTicker() {
-  const isEco = (scooterState.gear === 1);
-  const isFullThrottle = isEco && (
-    (scooterState.throttle && scooterState.throttle >= 80) ||
-    (scooterState.throttleRaw && scooterState.throttleRaw >= 2000) ||
-    (scooterState.speed >= 12 && parseFloat(scooterState.currentAmps || 0) >= 3.0)
-  );
-
-  if (txtEcoGearStatus) {
-    txtEcoGearStatus.textContent = isEco ? "ECO (Gear 1) 🟢" : `Gear ${scooterState.gear} (Switch to ECO)`;
-    txtEcoGearStatus.style.color = isEco ? "#34d399" : "#94a3b8";
-    if (pillEcoGear) pillEcoGear.style.borderColor = isEco ? "rgba(16, 185, 129, 0.4)" : "rgba(255,255,255,0.15)";
-  }
-
-  if (txtEcoThrottleStatus) {
-    txtEcoThrottleStatus.textContent = isFullThrottle ? "100% (HELD) 🚀" : `${scooterState.throttle || 0}%`;
-    txtEcoThrottleStatus.style.color = isFullThrottle ? "#ef4444" : "#94a3b8";
-    if (pillEcoThrottle) pillEcoThrottle.style.borderColor = isFullThrottle ? "rgba(239, 68, 68, 0.4)" : "rgba(255,255,255,0.15)";
-  }
-
-  if (isSimulatingEcoDemo) return;
-
-  if (stealthEnabled && isEco && isFullThrottle) {
-    if (!ecoThrottleStartTime) {
-      ecoThrottleStartTime = Date.now();
-      log("⚡ [Eco 2s Gesture] Full throttle detected in ECO mode. Timer started...", "log-warn");
-    }
-    const elapsed = (Date.now() - ecoThrottleStartTime) / 1000.0;
-    const pct = Math.min(100, (elapsed / 2.0) * 100);
-    if (barEcoCountdown) barEcoCountdown.style.width = pct + "%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(2.0, elapsed).toFixed(1) + "s / 2.0s";
-    if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = `🚨 HOLDING THROTTLE... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
-      txtEcoPrompt.style.color = "#f59e0b";
-    }
-    if (elapsed >= 2.0) {
-      ecoThrottleStartTime = null;
-      triggerEcoThrottlePanic();
-    }
-  } else {
-    if (ecoThrottleStartTime) {
-      ecoThrottleStartTime = null;
-      if (barEcoCountdown) barEcoCountdown.style.width = "0%";
-      if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "0.0s / 2.0s";
-      if (txtEcoPrompt) {
-        txtEcoPrompt.textContent = "Double-click to ECO & pin throttle for 2s to lock";
-        txtEcoPrompt.style.color = "var(--text-muted)";
-      }
-    }
-  }
+async function sendCustomHex() {
+  const input = document.getElementById('customHexInput');
+  if (!input) return;
+  const raw = input.value.trim().replace(/[^0-9a-fA-F]/g, '');
+  if (raw.length < 2 || raw.length % 2 !== 0) return alert("Invalid hex string");
+  const bytes = new Uint8Array(raw.length / 2);
+  for (let i = 0; i < raw.length; i += 2) bytes[i / 2] = parseInt(raw.substr(i, 2), 16);
+  await sendRawDirect(bytes);
+  showToast("Hex Frame Sent");
 }
 
-setInterval(checkEcoThrottleTicker, 100);
-
-async function triggerEcoThrottlePanic() {
-  log("🚨 [TRIGGERED] 5-SECOND ECO FULL-THROTTLE GESTURE DETECTED!", "log-err");
-  log(">>> Auto-reverting Sport limit (47 -> 20 km/h) & switching ECO -> SPORT...", "log-warn");
-  await applySpeedLimit(20, 'limit');
-  await sendCommand(CMD_SET_GEAR, [3], "Auto-switch ECO -> SPORT (Gear 3)");
-  scooterState.gear = 3;
-  updateGearUI();
-  modeBadge.textContent = "🛡️ LIMITED (20 KM/H)";
-  modeBadge.style.color = "#34d399";
-  gearBadge.textContent = "⚙️ GEAR 3 (SPORT)";
-  gearBadge.style.color = "#34d399";
-  showToast("🛡️ ECO GESTURE: 20 KM/H LOCKED & SWITCHED TO SPORT!", "🛡️");
-  if (navigator.vibrate) navigator.vibrate([350, 150, 350, 150, 600]);
-
-  if (barEcoCountdown) barEcoCountdown.style.width = "100%";
-  if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "2.0s / 2.0s - TRIGGERED!";
-  if (txtEcoPrompt) {
-    txtEcoPrompt.textContent = "✅ TRIGGERED! Sport is now 20 km/h & gear switched to Sport!";
-    txtEcoPrompt.style.color = "#34d399";
-  }
-  setTimeout(() => {
-    if (barEcoCountdown) barEcoCountdown.style.width = "0%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "0.0s / 2.0s";
-    if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = "Double-click to ECO & pin throttle for 2s to lock";
-      txtEcoPrompt.style.color = "var(--text-muted)";
-    }
-  }, 4000);
-}
-
-function simulateEcoThrottleDemo() {
-  if (isSimulatingEcoDemo) return;
-  isSimulatingEcoDemo = true;
-  log("💡 Running 5-Second Eco Full-Throttle Demo Simulation...", "log-ack");
-  showToast("Demo: Simulating ECO + Full Throttle...", "💡");
-
-  scooterState.gear = 1;
-  scooterState.throttle = 100;
-  updateGearUI();
-  gearBadge.textContent = "⚙️ GEAR 1 (ECO)";
-  gearBadge.style.color = "#10b981";
-
-  if (txtEcoGearStatus) {
-    txtEcoGearStatus.textContent = "ECO (Gear 1) 🟢";
-    txtEcoGearStatus.style.color = "#34d399";
-  }
-  if (txtEcoThrottleStatus) {
-    txtEcoThrottleStatus.textContent = "100% (HELD) 🚀";
-    txtEcoThrottleStatus.style.color = "#ef4444";
-  }
-
-  let start = Date.now();
-  const demoTimer = setInterval(() => {
-    const elapsed = (Date.now() - start) / 1000.0;
-    const pct = Math.min(100, (elapsed / 2.0) * 100);
-    if (barEcoCountdown) barEcoCountdown.style.width = pct + "%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(2.0, elapsed).toFixed(1) + "s / 2.0s";
-    if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = `🚨 [DEMO] HOLDING THROTTLE... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
-      txtEcoPrompt.style.color = "#f59e0b";
-    }
-    if (elapsed >= 2.0) {
-      clearInterval(demoTimer);
-      isSimulatingEcoDemo = false;
-      scooterState.throttle = 0;
-      triggerEcoThrottlePanic();
-    }
-  }, 100);
-}
-
+/* ==========================================================================
+   DEMO MODE
+   ========================================================================== */
 let demoInterval = null;
 
 function toggleDemoMode() {
   isDemoMode = !isDemoMode;
-  const btn = document.getElementById('demoToggleBtn');
+  const btn = document.getElementById('demoBtn');
   const banner = document.getElementById('demoBanner');
 
   if (isDemoMode) {
     btn.textContent = "Disable Demo";
-    banner.style.background = "rgba(16, 185, 129, 0.15)";
-    banner.style.borderColor = "#10b981";
-    banner.querySelector('span').innerHTML = "🟢 <strong>Demo Active:</strong> Simulating MK-083 telemetry!";
+    banner.style.background = "rgba(48, 209, 88, 0.12)";
+    banner.style.borderColor = "rgba(48, 209, 88, 0.35)";
+    banner.querySelector('span').innerHTML = "Simulation Active (MK-083 Telemetry)";
     updateStatus("connected", "Demo Online");
     devName.textContent = "MK-083 (Simulated)";
-    activeLimitTag.textContent = "Limit: 47 km/h";
-    scooterState.battery = 91;
-    scooterState.voltage = 39.2;
-    scooterState.odometerKm = 218;
+    connectTitle.textContent = "MK-083 Demo Connected";
+    connectDesc.textContent = "Simulated 36V 350W Motor";
+    connectBtn.textContent = "Disconnect";
+    scooterState.battery = 94;
+    scooterState.voltage = 39.8;
+    scooterState.odometerKm = 248;
     scooterState.tripKm = 5.40;
     scooterState.activeLimit = 47;
-    valOdo.innerHTML = `218 <small>km</small>`;
-    valTrip.innerHTML = `5.40 <small>km</small>`;
-    txtBattery.textContent = "91 %";
-    barBattery.style.width = "91%";
-    txtVoltage.textContent = "39.2 V";
-    txtCurrent.textContent = "3.2 A";
-    startRideTimer();
+    valOdo.innerHTML = `248 <small>km</small>`;
+    valTrip.textContent = "5.40";
+    txtBattery.innerHTML = `94 <small>%</small>`;
+    txtVoltage.innerHTML = `39.8 <small>V</small>`;
+    startTimer();
 
-    let simSpd = 18.0;
+    let simSpd = 20.0;
     demoInterval = setInterval(() => {
-      simSpd += (Math.random() * 2.2 - 1.0);
-      if (simSpd > 46.8) simSpd = 46.8;
-      if (simSpd < 12.0) simSpd = 12.0;
+      simSpd += (Math.random() * 2.4 - 1.1);
+      if (simSpd > 46.5) simSpd = 46.5;
+      if (simSpd < 14.0) simSpd = 14.0;
       renderSpeedometer(simSpd);
-      if (simSpd > scooterState.topSpeed) {
-        scooterState.topSpeed = simSpd;
-        valTopSpeed.innerHTML = `${simSpd.toFixed(1)} <small>km/h</small>`;
-      }
-    }, 300);
-    log("Demo mode started. All dials, buttons and triggers active.", "log-ack");
-    showToast("Demo Mode Active", "💡");
+    }, 250);
+    showToast("Demo Simulation Active");
   } else {
     btn.textContent = "Enable Demo";
     banner.style.background = "";
     banner.style.borderColor = "";
-    banner.querySelector('span').innerHTML = "💡 <strong>Demo Mode:</strong> Test dials & gesture offline";
+    banner.querySelector('span').textContent = "Simulation Mode Available";
     updateStatus("offline", "Offline");
-    devName.textContent = "MK-083 (Not Connected)";
-    activeLimitTag.textContent = "Limit: — km/h";
+    devName.textContent = "MK-083 (PRO-VC)";
+    connectTitle.textContent = "Connect Scooter";
+    connectDesc.textContent = "MK-083 • Bluetooth GATT";
+    connectBtn.textContent = "Connect";
     renderSpeedometer(0.0);
-    txtBattery.textContent = "-- %";
-    barBattery.style.width = "0%";
-    txtVoltage.textContent = "--.- V";
-    txtCurrent.textContent = "0.0 A";
+    txtBattery.innerHTML = `-- <small>%</small>`;
+    txtVoltage.innerHTML = `--.- <small>V</small>`;
     if (demoInterval) clearInterval(demoInterval);
     if (scooterState.sessionTimer) clearInterval(scooterState.sessionTimer);
-    log("Demo mode stopped.", "log-warn");
+    showToast("Demo Stopped");
   }
 }
 
 function simulateDemoReply(code, data) {
   setTimeout(() => {
     if (code === CMD_SET_MAX_SPEED) {
-      const spd = data[0] || 47;
-      log(`RX (Demo): 5A 3C 01 ${spd.toString(16).padStart(2,'0').toUpperCase()} [Confirmed ${spd} km/h]`, 'log-rx');
-      activeLimitTag.textContent = `Limit: ${spd} km/h`;
-    } else if (code === CMD_PARAM_WRITE) {
-      log(`RX (Demo): 5A D2 01 00 [EEPROM Parameter P${data[0]+1} Written]`, 'log-rx');
-    } else if (code === CMD_END_TRIP) {
-      log(`RX (Demo): 5A 47 01 01 [Trip Cleared]`, 'log-rx');
+      log(`RX (Demo): 5A 3C 01 ${data[0].toString(16).padStart(2,'0').toUpperCase()} [Confirmed ${data[0]} km/h]`, 'log-rx');
     }
   }, 100);
 }
+
+updateSprintTargetUI();
 </script>
 </body>
 </html>
