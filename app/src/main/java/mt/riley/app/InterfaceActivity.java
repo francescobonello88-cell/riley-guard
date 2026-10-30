@@ -21,6 +21,7 @@ import android.os.Looper;
 import android.util.Base64;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -65,7 +66,8 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
         s.setDomStorageEnabled(true);
         s.setGeolocationEnabled(true);
         webView.setBackgroundColor(0xFF07090E);
-        webView.setWebViewClient(new WebViewClient() {
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
                 pendingGeoOrigin = origin;
