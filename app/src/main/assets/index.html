@@ -538,6 +538,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
       </div>
     </div>
     <canvas id="gpsTrail" class="gps-trail" width="412" height="120"></canvas>
+    <div id="gpsEventsLine" style="font-size:9.5px;color:#c4b5d2;margin:-4px 0 9px;line-height:1.6;font-weight:700;letter-spacing:.2px"></div>
     <div class="gps-meta-grid">
       <div class="gps-meta"><span>Altitude</span><strong id="gpsAlt">— m</strong></div>
       <div class="gps-meta"><span>Heading</span><strong id="gpsHdg">—°</strong></div>
@@ -881,7 +882,9 @@ function updateRangeUI() {
 const gpsState = {
   on: false, watchId: null, demoTimer: null,
   lat: null, lon: null, acc: null, alt: null, hdg: null, speedKmh: null,
-  trail: [], distKm: 0, lastFixAt: null
+  trail: [], distKm: 0, lastFixAt: null,
+  stops: [], batteryMarks: [], batterySeen: {}, lastBattery: null,
+  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null
 };
 const GPS_SESSION_CAP_KM = 5;
 
@@ -895,6 +898,11 @@ function toggleGps() {
   if (gpsState.on) { stopGps(); return; }
   gpsState.on = true;
   gpsToggleBtn.textContent = '■ Stop GPS';
+  gpsState.trail = []; gpsState.distKm = 0; gpsState.lat = null; gpsState.lon = null;
+  gpsState.stops = []; gpsState.batteryMarks = []; gpsState.batterySeen = {};
+  gpsState.lastBattery = null; gpsState.stopStartAt = null; gpsState.stopStartPt = null;
+  gpsState.stopRecorded = false; gpsState.endPt = null;
+  updateGpsEventsLine();
   if (isDemoMode) {
     startGpsDemo();
     return;
@@ -918,6 +926,8 @@ function stopGps() {
     gpsState.watchId = null;
   }
   if (gpsState.demoTimer) { clearInterval(gpsState.demoTimer); gpsState.demoTimer = null; }
+  if (gpsState.lat !== null) { gpsState.endPt = [gpsState.lat, gpsState.lon]; drawGpsTrail(); }
+  updateGpsEventsLine();
   setGpsPill('', 'GPS Off');
   log('🛰️ GPS tracking stopped.', 'log-warn');
 }
@@ -955,6 +965,7 @@ function ingestGpsFix(f) {
   gpsState.alt = f.alt; gpsState.hdg = f.hdg;
   gpsState.speedKmh = f.spd != null ? f.spd * 3.6 : null;
   gpsState.lastFixAt = Date.now();
+  trackGpsEvents(f);
   updateGpsUI();
   drawGpsTrail();
 }
@@ -1018,9 +1029,41 @@ function drawGpsTrail() {
   ctx.shadowColor = 'rgba(249,115,24,.8)'; ctx.shadowBlur = 8;
   ctx.stroke();
   ctx.shadowBlur = 0;
+  // ---- event markers: stops >20s, battery drops, end point ----
+  (gpsState.stops || []).forEach(function (st) {
+    const x = px(st.lon), y = py(st.lat);
+    ctx.fillStyle = '#ef4444';
+    ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,.95)';
+    ctx.font = '700 7px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(st.dur + 's', x, y - 6);
+  });
+  (gpsState.batteryMarks || []).forEach(function (bm) {
+    const x = px(bm.lon), y = py(bm.lat);
+    ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.arc(x, y, 3.5, 0, Math.PI * 2); ctx.stroke();
+    ctx.fillStyle = 'rgba(186,230,253,.95)';
+    ctx.font = '700 7px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(bm.pct + '%', x, y + 12);
+  });
+  if (gpsState.endPt) {
+    const ex = px(gpsState.endPt[1]), ey = py(gpsState.endPt[0]);
+    ctx.strokeStyle = '#e2e8f0'; ctx.lineWidth = 1.5;
+    ctx.strokeRect(ex - 3.5, ey - 3.5, 7, 7);
+    ctx.fillStyle = 'rgba(226,232,240,.95)';
+    ctx.font = '700 7px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('END', ex, ey + 14);
+  }
   // start dot (slime)
   ctx.fillStyle = '#a3e635';
   ctx.beginPath(); ctx.arc(px(t[0][1]), py(t[0][0]), 4.5, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = 'rgba(163,230,53,.95)';
+  ctx.font = '700 7px "JetBrains Mono", monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('START', px(t[0][1]), py(t[0][0]) - 8);
   // current position (pumpkin, pulsing ring)
   const last = t[t.length - 1];
   const cx = px(last[1]), cy = py(last[0]);
@@ -1029,6 +1072,59 @@ function drawGpsTrail() {
   ctx.beginPath(); ctx.arc(cx, cy, pulse, 0, Math.PI*2); ctx.stroke();
   ctx.fillStyle = '#fb923c';
   ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); ctx.fill();
+}
+
+function trackGpsEvents(f) {
+  const now = Date.now();
+  const spdKmh = (f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : (scooterState.speed || 0);
+
+  // ---- stops longer than 20 s ----
+  if (spdKmh < 1.5) {
+    if (gpsState.stopStartAt == null) {
+      gpsState.stopStartAt = now;
+      gpsState.stopStartPt = [f.lat, f.lon];
+      gpsState.stopRecorded = false;
+    } else if (!gpsState.stopRecorded && (now - gpsState.stopStartAt) >= 20000) {
+      gpsState.stops.push({ lat: gpsState.stopStartPt[0], lon: gpsState.stopStartPt[1], dur: Math.round((now - gpsState.stopStartAt) / 1000) });
+      gpsState.stopRecorded = true;
+      updateGpsEventsLine();
+    }
+  } else {
+    if (gpsState.stopStartAt != null && gpsState.stopRecorded && gpsState.stops.length) {
+      gpsState.stops[gpsState.stops.length - 1].dur = Math.round((now - gpsState.stopStartAt) / 1000);
+      updateGpsEventsLine();
+    }
+    gpsState.stopStartAt = null;
+    gpsState.stopStartPt = null;
+    gpsState.stopRecorded = false;
+  }
+
+  // ---- battery milestones (100, 90, 80, ...) ----
+  const bat = scooterState.battery;
+  if (bat != null && !isNaN(bat)) {
+    if (gpsState.lastBattery == null) gpsState.lastBattery = bat;
+    for (let pct = 100; pct >= 10; pct -= 10) {
+      if (gpsState.lastBattery > pct && bat <= pct && !gpsState.batterySeen[pct]) {
+        gpsState.batterySeen[pct] = true;
+        gpsState.batteryMarks.push({ lat: f.lat, lon: f.lon, pct: pct });
+        updateGpsEventsLine();
+      }
+    }
+    gpsState.lastBattery = bat;
+  }
+}
+
+function updateGpsEventsLine() {
+  const el = document.getElementById('gpsEventsLine');
+  if (!el) return;
+  const parts = [];
+  if (gpsState.stops.length) {
+    parts.push('\u23F8 ' + gpsState.stops.length + ' stop' + (gpsState.stops.length > 1 ? 's' : '') + ' over 20s \u00B7 ' + gpsState.stops.map(function (s) { return s.dur + 's'; }).join(', '));
+  }
+  if (gpsState.batteryMarks.length) {
+    parts.push('\uD83D\uDD0B ' + gpsState.batteryMarks.map(function (b) { return b.pct + '%'; }).join(' \u00B7 '));
+  }
+  el.textContent = parts.length ? parts.join('   \u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels';
 }
 
 function startGpsDemo() {

@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Base64;
+import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -37,6 +38,9 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
     private final Map<String, String> found = new LinkedHashMap<>(); // name -> address
     private AlertDialog scanDialog;
     private AlertDialog pickDialog;
+    private static final int REQ_LOCATION = 11;
+    private String pendingGeoOrigin;
+    private GeolocationPermissions.Callback pendingGeoCallback;
 
     private final ScanCallback pickerScan = new ScanCallback() {
         @Override
@@ -59,8 +63,23 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
         WebSettings s = webView.getSettings();
         s.setJavaScriptEnabled(true);
         s.setDomStorageEnabled(true);
+        s.setGeolocationEnabled(true);
         webView.setBackgroundColor(0xFF07090E);
-        webView.setWebViewClient(new WebViewClient());
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
+                pendingGeoOrigin = origin;
+                pendingGeoCallback = callback;
+                if (hasLocationPermission()) {
+                    callback.invoke(origin, true, false);
+                    pendingGeoCallback = null;
+                } else {
+                    requestPermissions(new String[]{
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION}, REQ_LOCATION);
+                }
+            }
+        });
         webView.addJavascriptInterface(new Bridge(), "RileyBridge");
         webView.loadUrl("file:///android_asset/index.html");
         setContentView(webView);
@@ -105,11 +124,23 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQ_LOCATION) {
+            if (pendingGeoCallback != null) {
+                pendingGeoCallback.invoke(pendingGeoOrigin, hasLocationPermission(), false);
+                pendingGeoCallback = null;
+            }
+            return;
+        }
         if (requestCode == 9 && Build.VERSION.SDK_INT >= 31
                 && checkSelfPermission(Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             startPickerScan();
         }
+    }
+
+    private boolean hasLocationPermission() {
+        return checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
     }
 
     private BluetoothLeScanner getScanner() {
