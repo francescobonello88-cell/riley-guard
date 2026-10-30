@@ -542,7 +542,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     <div class="gps-meta-grid">
       <div class="gps-meta"><span>Altitude</span><strong id="gpsAlt">— m</strong></div>
       <div class="gps-meta"><span>Heading</span><strong id="gpsHdg">—°</strong></div>
-      <div class="gps-meta"><span>GPS Speed</span><strong id="gpsSpd">— km/h</strong></div>
+      <div class="gps-meta"><span>Scooter Speed</span><strong id="gpsSpd">— km/h</strong></div>
       <div class="gps-meta"><span>Distance</span><strong id="gpsDist">0.00 km</strong></div>
     </div>
   </div>
@@ -963,7 +963,8 @@ function ingestGpsFix(f) {
   }
   gpsState.lat = f.lat; gpsState.lon = f.lon; gpsState.acc = f.acc;
   gpsState.alt = f.alt; gpsState.hdg = f.hdg;
-  gpsState.speedKmh = f.spd != null ? f.spd * 3.6 : null;
+  const scooterKmh = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null) ? scooterState.speed : null;
+  gpsState.speedKmh = scooterKmh != null ? scooterKmh : (f.spd != null ? f.spd * 3.6 : null);
   gpsState.lastFixAt = Date.now();
   trackGpsEvents(f);
   updateGpsUI();
@@ -1076,7 +1077,8 @@ function drawGpsTrail() {
 
 function trackGpsEvents(f) {
   const now = Date.now();
-  const spdKmh = (f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : (scooterState.speed || 0);
+  const hasScooterSpd = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null);
+  const spdKmh = hasScooterSpd ? scooterState.speed : ((f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : 0);
 
   // ---- stops longer than 20 s ----
   if (spdKmh < 1.5) {

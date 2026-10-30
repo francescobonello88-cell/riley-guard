@@ -39,6 +39,17 @@ src = src.replace(old, """  gpsState.on = true;
   gpsState.stopRecorded = false; gpsState.endPt = null;
   updateGpsEventsLine();""", 1)
 
+
+# ---- GPS: use SCOOTER speed instead of GPS speed ----
+old_speed = "gpsState.speedKmh = f.spd != null ? f.spd * 3.6 : null;"
+assert old_speed in src
+src = src.replace(old_speed, """const scooterKmh = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null) ? scooterState.speed : null;
+  gpsState.speedKmh = scooterKmh != null ? scooterKmh : (f.spd != null ? f.spd * 3.6 : null);""", 1)
+
+old_lbl = "<span>GPS Speed</span>"
+assert old_lbl in src
+src = src.replace(old_lbl, "<span>Scooter Speed</span>", 1)
+
 # ---- GPS: track events on each fix ----
 old = """  gpsState.lastFixAt = Date.now();
   updateGpsUI();"""
@@ -108,7 +119,8 @@ old = "function startGpsDemo() {"
 assert old in src
 tracker = '''function trackGpsEvents(f) {
   const now = Date.now();
-  const spdKmh = (f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : (scooterState.speed || 0);
+  const hasScooterSpd = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null);
+  const spdKmh = hasScooterSpd ? scooterState.speed : ((f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : 0);
 
   // ---- stops longer than 20 s ----
   if (spdKmh < 1.5) {
