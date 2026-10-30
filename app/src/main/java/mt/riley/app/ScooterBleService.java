@@ -206,6 +206,7 @@ public class ScooterBleService extends Service {
                 .setContentTitle("Riley Speed Guard Active")
                 .setContentText("Monitoring 2s Eco Limiter in background")
                 .setOngoing(true)
+                .setColor(0xFFF59E0B)
                 .setContentIntent(pi)
                 .build();
 
