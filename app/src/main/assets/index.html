@@ -429,6 +429,15 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
 .gps-meta strong{font-size:12px;color:var(--ghost);font-weight:800}
 @media(max-width:380px){.range-val{font-size:38px}.gps-meta-grid{grid-template-columns:repeat(2,1fr)}}
 
+
+  /* ---- centered speedometer ---- */
+  .speedo-card{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .speedo-wrap{position:relative;width:240px;max-width:100%;height:172px;margin:0 auto;overflow:hidden}
+  .speedo-svg{position:absolute;left:50%;top:0;width:240px;height:240px;transform:translateX(-50%) rotate(-90deg);transform-origin:50% 50%}
+  .speedo-display{position:absolute;left:0;right:0;top:66px;width:auto;text-align:center}
+  .speedo-val{text-align:center}
+  .speedo-unit-btn{margin:8px auto 0}
+  .range-modes{grid-template-columns:repeat(3,1fr)}
 </style>
 </head>
 <body>
@@ -498,11 +507,11 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </div>
   </div>
 
-  <!-- 🔮 ESTIMATED RANGE (varies by ECO / DRIVE / SPORT / RACE) -->
+  <!-- 🔮 ESTIMATED RANGE (varies by ECO / DRIVE / SPORT) -->
   <div class="card range-card">
     <div class="section-header">
       <span class="section-title">🔮 Estimated Range</span>
-      <span class="text-action" id="rangeModeTag" style="cursor:default;">MODE: RACE</span>
+      <span class="text-action" id="rangeModeTag" style="cursor:default;">MODE: &#8212;</span>
     </div>
     <div class="range-main">
       <div class="range-val" id="valRange">--.-</div>
@@ -513,9 +522,8 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
       <div class="range-chip" id="rcEco"><span>ECO</span><strong id="rngEco">-- km</strong></div>
       <div class="range-chip" id="rcDrive"><span>DRIVE</span><strong id="rngDrive">-- km</strong></div>
       <div class="range-chip" id="rcSport"><span>SPORT</span><strong id="rngSport">-- km</strong></div>
-      <div class="range-chip active" id="rcRace"><span>RACE</span><strong id="rngRace">-- km</strong></div>
     </div>
-    <div class="range-note">Estimates blend battery %, ride mode &amp; live speed — RACE drinks charge fastest, ECO sips it.</div>
+    <div class="range-note">Estimates blend battery %, ride mode &amp; live speed — SPORT drinks charge fastest, ECO sips it.</div>
   </div>
 
   <!-- 🛰️ GPS POSITION BAR -->
@@ -534,7 +542,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
         <div class="gps-bar-marker" id="gpsBarMarker">🎃</div>
       </div>
       <div class="gps-bar-labels">
-        <span>Start</span><span id="gpsBarMid">0.00 km travelled</span><span>Session 5 km</span>
+        <span>Start</span><span id="gpsBarMid">0.00 km travelled</span><span>Session 50 km</span>
       </div>
     </div>
     <canvas id="gpsTrail" class="gps-trail" width="412" height="120"></canvas>
@@ -835,14 +843,12 @@ const RANGE_PACK_WH = 378; // ~36V 10.5Ah pack
 const RANGE_MODES = {
   ECO:   { nominalKmh: 15, baseW: 120, wPerKmh: 5.2 },
   DRIVE: { nominalKmh: 22, baseW: 190, wPerKmh: 7.4 },
-  SPORT: { nominalKmh: 32, baseW: 260, wPerKmh: 10.5 },
-  RACE:  { nominalKmh: 47, baseW: 380, wPerKmh: 14.5 }
+  SPORT: { nominalKmh: 32, baseW: 260, wPerKmh: 10.5 }
 };
 
 function activeRideMode() {
   if (scooterState.gear === 1) return 'ECO';
   if (scooterState.gear === 2) return 'DRIVE';
-  if (scooterState.gear === 3 && (scooterState.activeLimit || 0) >= 45) return 'RACE';
   return 'SPORT';
 }
 
@@ -870,7 +876,7 @@ function updateRangeUI() {
   rangeModeTag.textContent = `MODE: ${mode}`;
   const pct = hasData ? Math.max(4, Math.min(100, (cur / 55) * 100)) : 0;
   barRange.style.width = pct + '%';
-  for (const [key, elId] of [['ECO','rcEco'],['DRIVE','rcDrive'],['SPORT','rcSport'],['RACE','rcRace']]) {
+  for (const [key, elId] of [['ECO','rcEco'],['DRIVE','rcDrive'],['SPORT','rcSport']]) {
     const chip = document.getElementById(elId);
     chip.classList.toggle('active', key === mode);
     document.getElementById('rng' + key.charAt(0) + key.slice(1).toLowerCase()).textContent =
@@ -886,7 +892,7 @@ const gpsState = {
   stops: [], batteryMarks: [], batterySeen: {}, lastBattery: null,
   stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null
 };
-const GPS_SESSION_CAP_KM = 5;
+const GPS_SESSION_CAP_KM = 50;
 
 function haversineKm(lat1, lon1, lat2, lon2) {
   const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLon = (lon2 - lon1) * Math.PI / 180;
@@ -1236,7 +1242,7 @@ async function applySpeedLimit(kmh, type = 'custom') {
   activeLimitTag.textContent = `Limit: ${kmh} km/h`;
   updateRangeUI();
   if (type === 'unlimit') {
-    modeBadge.textContent = "⚡ RACE — UNLIMITED (47 KM/H)";
+    modeBadge.textContent = "⚡ SPORT — UNLIMITED (47 KM/H)";
     modeBadge.style.color = "#fbbf24";
     showToast("UNLIMITED TO 47 KM/H! 🚀", "⚡");
     if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
