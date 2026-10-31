@@ -898,7 +898,7 @@ const gpsState = {
   lat: null, lon: null, acc: null, alt: null, hdg: null, speedKmh: null,
   trail: [], distKm: 0, lastFixAt: null,
   stops: [], batteryMarks: [], batterySeen: {}, lastBattery: null,
-  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null
+  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null, pollTimer: null
 };
 const GPS_SESSION_CAP_KM = 50;
 
@@ -917,6 +917,9 @@ function toggleGps() {
   gpsState.lastBattery = null; gpsState.stopStartAt = null; gpsState.stopStartPt = null;
   gpsState.stopRecorded = false; gpsState.endPt = null;
   gmapsLastLat = null; gmapsLastLon = null; gmapsLastLoadAt = 0;
+  try { if (window.RileyBridge && RileyBridge.setGpsTracking) { RileyBridge.clearTrack(); RileyBridge.setGpsTracking(true); } } catch (e) {}
+  if (gpsState.pollTimer) clearInterval(gpsState.pollTimer);
+  gpsState.pollTimer = setInterval(mergeNativeTrack, 3000);
   updateGpsEventsLine();
   if (isDemoMode) {
     startGpsDemo();
@@ -941,6 +944,8 @@ function stopGps() {
     gpsState.watchId = null;
   }
   if (gpsState.demoTimer) { clearInterval(gpsState.demoTimer); gpsState.demoTimer = null; }
+  if (gpsState.pollTimer) { clearInterval(gpsState.pollTimer); gpsState.pollTimer = null; }
+  try { if (window.RileyBridge && RileyBridge.setGpsTracking) RileyBridge.setGpsTracking(false); } catch (e) {}
   if (gpsState.lat !== null) { gpsState.endPt = [gpsState.lat, gpsState.lon]; drawGpsTrail(); }
   updateGpsEventsLine();
   setGpsPill('', 'GPS Off');
@@ -1001,6 +1006,7 @@ function updateGpsUI() {
   const pct = Math.min(100, (distKm / GPS_SESSION_CAP_KM) * 100);
   gpsBarFill.style.width = pct + '%';
   gpsBarMarker.style.left = pct + '%';
+  updateGpsEventsLine();
 }
 
 function drawGpsTrail() {
@@ -1114,6 +1120,47 @@ function openInGoogleMaps() {
   window.open('https://www.google.com/maps?q=' + pair, '_blank');
 }
 
+function mergeNativeTrack() {
+  if (!gpsState.on) return;
+  if (!window.RileyBridge || !RileyBridge.getTrackJson) return;
+  let pts = [];
+  try { pts = JSON.parse(RileyBridge.getTrackJson() || '[]'); } catch (e) { return; }
+  if (!pts || !pts.length) return;
+  let changed = false;
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    if (p.lat == null || p.lon == null) continue;
+    const last = gpsState.trail.length ? gpsState.trail[gpsState.trail.length - 1] : null;
+    if (!last) { gpsState.trail.push([p.lat, p.lon]); changed = true; continue; }
+    const d = haversineKm(last[0], last[1], p.lat, p.lon);
+    if (d > 0.005) {
+      gpsState.trail.push([p.lat, p.lon]);
+      gpsState.distKm += d;
+      gpsState.lat = p.lat; gpsState.lon = p.lon;
+      if (p.spd != null) gpsState.speedKmh = p.spd;
+      changed = true;
+    }
+    if (p.bat != null && p.bat >= 0) {
+      if (gpsState.lastBattery == null) gpsState.lastBattery = p.bat;
+      for (let pct = 100; pct >= 10; pct -= 10) {
+        if (gpsState.lastBattery > pct && p.bat <= pct && !gpsState.batterySeen[pct]) {
+          gpsState.batterySeen[pct] = true;
+          gpsState.batteryMarks.push({ lat: p.lat, lon: p.lon, pct: pct });
+          updateGpsEventsLine();
+        }
+      }
+      gpsState.lastBattery = p.bat;
+    }
+  }
+  if (gpsState.trail.length > 600) gpsState.trail.splice(0, gpsState.trail.length - 600);
+  if (changed) {
+    if (gpsState.lat !== null) updateGoogleMap({ lat: gpsState.lat, lon: gpsState.lon });
+    drawGpsTrail();
+    updateGpsUI();
+    updateGpsEventsLine();
+  }
+}
+
 function trackGpsEvents(f) {
   const now = Date.now();
   const hasScooterSpd = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null);
@@ -1165,7 +1212,8 @@ function updateGpsEventsLine() {
   if (gpsState.batteryMarks.length) {
     parts.push('\uD83D\uDD0B ' + gpsState.batteryMarks.map(function (b) { return b.pct + '%'; }).join(' \u00B7 '));
   }
-  el.textContent = parts.length ? parts.join('   \u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels';
+  const solo = (typeof isConnected !== 'undefined' && !isConnected) ? '\uD83D\uDEB6 GPS-only mode   \u2022   ' : '';
+  el.textContent = solo + (parts.length ? parts.join('   \u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels');
 }
 
 function startGpsDemo() {

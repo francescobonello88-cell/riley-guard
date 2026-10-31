@@ -1,0 +1,91 @@
+
+# ---- NATIVE GPS TRIP SYNC (works without scooter / screen off) ----
+# start native tracking alongside web GPS
+old = """  gpsState.stopRecorded = false; gpsState.endPt = null;
+  gmapsLastLat = null; gmapsLastLon = null; gmapsLastLoadAt = 0;
+  updateGpsEventsLine();"""
+assert old in src
+src = src.replace(old, """  gpsState.stopRecorded = false; gpsState.endPt = null;
+  gmapsLastLat = null; gmapsLastLon = null; gmapsLastLoadAt = 0;
+  try { if (window.RileyBridge && RileyBridge.setGpsTracking) { RileyBridge.clearTrack(); RileyBridge.setGpsTracking(true); } } catch (e) {}
+  if (gpsState.pollTimer) clearInterval(gpsState.pollTimer);
+  gpsState.pollTimer = setInterval(mergeNativeTrack, 3000);
+  updateGpsEventsLine();""", 1)
+
+# stop native tracking with the web session
+old = """  if (gpsState.demoTimer) { clearInterval(gpsState.demoTimer); gpsState.demoTimer = null; }"""
+assert old in src
+src = src.replace(old, """  if (gpsState.demoTimer) { clearInterval(gpsState.demoTimer); gpsState.demoTimer = null; }
+  if (gpsState.pollTimer) { clearInterval(gpsState.pollTimer); gpsState.pollTimer = null; }
+  try { if (window.RileyBridge && RileyBridge.setGpsTracking) RileyBridge.setGpsTracking(false); } catch (e) {}""", 1)
+
+# merge native points into the trail
+old = "function trackGpsEvents(f) {"
+assert old in src
+merge = '''function mergeNativeTrack() {
+  if (!gpsState.on) return;
+  if (!window.RileyBridge || !RileyBridge.getTrackJson) return;
+  let pts = [];
+  try { pts = JSON.parse(RileyBridge.getTrackJson() || '[]'); } catch (e) { return; }
+  if (!pts || !pts.length) return;
+  let changed = false;
+  for (let i = 0; i < pts.length; i++) {
+    const p = pts[i];
+    if (p.lat == null || p.lon == null) continue;
+    const last = gpsState.trail.length ? gpsState.trail[gpsState.trail.length - 1] : null;
+    if (!last) { gpsState.trail.push([p.lat, p.lon]); changed = true; continue; }
+    const d = haversineKm(last[0], last[1], p.lat, p.lon);
+    if (d > 0.005) {
+      gpsState.trail.push([p.lat, p.lon]);
+      gpsState.distKm += d;
+      gpsState.lat = p.lat; gpsState.lon = p.lon;
+      if (p.spd != null) gpsState.speedKmh = p.spd;
+      changed = true;
+    }
+    if (p.bat != null && p.bat >= 0) {
+      if (gpsState.lastBattery == null) gpsState.lastBattery = p.bat;
+      for (let pct = 100; pct >= 10; pct -= 10) {
+        if (gpsState.lastBattery > pct && p.bat <= pct && !gpsState.batterySeen[pct]) {
+          gpsState.batterySeen[pct] = true;
+          gpsState.batteryMarks.push({ lat: p.lat, lon: p.lon, pct: pct });
+          updateGpsEventsLine();
+        }
+      }
+      gpsState.lastBattery = p.bat;
+    }
+  }
+  if (gpsState.trail.length > 600) gpsState.trail.splice(0, gpsState.trail.length - 600);
+  if (changed) {
+    if (gpsState.lat !== null) updateGoogleMap({ lat: gpsState.lat, lon: gpsState.lon });
+    drawGpsTrail();
+    updateGpsUI();
+    updateGpsEventsLine();
+  }
+}
+
+function trackGpsEvents(f) {'''
+src = src.replace(old, merge, 1)
+
+# poll timer field
+old = """  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null
+};"""
+assert old in src
+src = src.replace(old, """  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null, pollTimer: null
+};""", 1)
+
+# GPS-only badge in the markers line
+old = """  el.textContent = parts.length ? parts.join('   \\u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels';"""
+assert old in src
+src = src.replace(old, """  const solo = (typeof isConnected !== 'undefined' && !isConnected) ? '\\uD83D\\uDEB6 GPS-only mode   \\u2022   ' : '';
+  el.textContent = solo + (parts.length ? parts.join('   \\u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels');""", 1)
+
+# refresh the badge with every UI update
+old = """  gpsBarFill.style.width = pct + '%';
+  gpsBarMarker.style.left = pct + '%';
+}"""
+assert old in src
+src = src.replace(old, """  gpsBarFill.style.width = pct + '%';
+  gpsBarMarker.style.left = pct + '%';
+  updateGpsEventsLine();
+}""", 1)
+

@@ -294,6 +294,16 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
             i.setAction(ScooterBleService.ACTION_DISCONNECT);
             startService(i);
         }
+        @JavascriptInterface public void setGpsTracking(boolean on) {
+            ScooterBleService.setGpsTrackingStatic(on);
+        }
+        @JavascriptInterface public String getTrackJson() {
+            return ScooterBleService.getTrackJsonStatic();
+        }
+        @JavascriptInterface public void clearTrack() {
+            ScooterBleService.clearTrackStatic();
+        }
+
         @JavascriptInterface public void openMaps(String latlon) {
             try {
                 String[] p = latlon.split(",");

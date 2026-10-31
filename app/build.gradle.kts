@@ -7,8 +7,8 @@ android {
         applicationId = "mt.riley.app"
         minSdk = 24
         targetSdk = 34
-        versionCode = 13
-        versionName = "2.4"
+        versionCode = 14
+        versionName = "2.5"
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

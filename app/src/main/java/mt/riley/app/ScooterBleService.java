@@ -27,6 +27,10 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.ParcelUuid;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -70,6 +74,29 @@ public class ScooterBleService extends Service {
         if (s != null && data != null) s.enqueueWrite(data);
     }
 
+    public static void setGpsTrackingStatic(boolean on) {
+        ScooterBleService s = instance;
+        if (s != null) s.setGpsTracking(on);
+    }
+
+    public static String getTrackJsonStatic() {
+        ScooterBleService s = instance;
+        if (s == null) return "[]";
+        synchronized (s.trackPoints) {
+            StringBuilder sb = new StringBuilder("[");
+            for (int i = 0; i < s.trackPoints.size(); i++) {
+                if (i > 0) sb.append(',');
+                sb.append(s.trackPoints.get(i));
+            }
+            return sb.append(']').toString();
+        }
+    }
+
+    public static void clearTrackStatic() {
+        ScooterBleService s = instance;
+        if (s != null) synchronized (s.trackPoints) { s.trackPoints.clear(); }
+    }
+
     // ViCont protocol
     private static final UUID SERVICE_FEE0 = UUID.fromString("0000fee0-0000-1000-8000-00805f9b34fb");
     private static final UUID CHAR_FEE2  = UUID.fromString("0000fee2-0000-1000-8000-00805f9b34fb");
@@ -98,6 +125,13 @@ public class ScooterBleService extends Service {
     private BluetoothGattCharacteristic activeChar;
     private PowerManager.WakeLock wakeLock;
     private Vibrator vibrator;
+
+    // GPS trip tracking (independent of the scooter connection)
+    private LocationManager locManager;
+    private LocationListener locListener;
+    private volatile boolean trackingGps = false;
+    private final java.util.ArrayList<String> trackPoints = new java.util.ArrayList<>();
+    private volatile int lastBattery = -1;
 
     private volatile boolean running = false;
     private volatile boolean scanningByFilter = false;
@@ -161,6 +195,7 @@ public class ScooterBleService extends Service {
     @Override
     public void onDestroy() {
         running = false;
+        stopLocationTracking();
         instance = null;
         gattConnected = false;
         webReady = false;
@@ -211,7 +246,14 @@ public class ScooterBleService extends Service {
                 .build();
 
         if (Build.VERSION.SDK_INT >= 34) {
-            startForeground(1, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE);
+            int type = ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE;
+            if (trackingGps) {
+                try {
+                    startForeground(1, n, type | ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION);
+                    return;
+                } catch (Exception ignored) {}
+            }
+            startForeground(1, n, type);
         } else {
             startForeground(1, n);
         }
@@ -556,6 +598,9 @@ public class ScooterBleService extends Service {
 
     private void dispatchFrame(int code, byte[] buf, int off, int len) {
         switch (code) {
+            case 0x10: // motor telemetry: battery % at byte 6
+                if (len >= 7) lastBattery = buf[off + 6] & 0xFF;
+                break;
             case 0x11: // status: gear in bits 0-2
                 if (len >= 1) {
                     currentGear = buf[off] & 0x07;
@@ -624,6 +669,67 @@ public class ScooterBleService extends Service {
     }
 
     // ---------------- Cleanup ----------------
+
+    // ---------------- GPS trip tracking ----------------
+
+    private void setGpsTracking(boolean on) {
+        if (on == trackingGps) return;
+        trackingGps = on;
+        if (on) startLocationTracking(); else stopLocationTracking();
+    }
+
+    private void startLocationTracking() {
+        try {
+            if (locManager == null) locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (locManager == null) { postStatus("GPS unavailable on this device"); return; }
+            if (locListener == null) {
+                locListener = new LocationListener() {
+                    @Override public void onLocationChanged(Location loc) { addTrackPoint(loc); }
+                    @Override public void onProviderEnabled(String provider) {}
+                    @Override public void onProviderDisabled(String provider) {}
+                    public void onStatusChanged(String provider, int status, Bundle extras) {}
+                };
+            }
+            Looper main = Looper.getMainLooper();
+            try { locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000L, 8f, locListener, main); } catch (Exception ignored) {}
+            try { locManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000L, 8f, locListener, main); } catch (Exception ignored) {}
+            startForegroundWithNotification(); // refresh with location service type
+            postStatus("GPS trip recording on (works without the scooter)");
+        } catch (SecurityException e) {
+            postStatus("Location permission is required for GPS trips");
+        }
+    }
+
+    private void stopLocationTracking() {
+        try {
+            if (locManager != null && locListener != null) locManager.removeUpdates(locListener);
+        } catch (Exception ignored) {}
+    }
+
+    private void addTrackPoint(Location loc) {
+        if (loc == null) return;
+        synchronized (trackPoints) {
+            if (!trackPoints.isEmpty()) {
+                String last = trackPoints.get(trackPoints.size() - 1);
+                try {
+                    int li = last.indexOf("\"lat\":");
+                    int lo = last.indexOf("\"lon\":");
+                    double llat = Double.parseDouble(last.substring(li + 6, last.indexOf(',', li)).trim());
+                    double llon = Double.parseDouble(last.substring(lo + 6, last.indexOf(',', lo)).trim());
+                    float[] d = new float[1];
+                    Location.distanceBetween(llat, llon, loc.getLatitude(), loc.getLongitude(), d);
+                    if (d[0] < 4f) return; // ignore tiny jitter
+                } catch (Exception ignored) {}
+            }
+            String point = String.format(java.util.Locale.US,
+                    "{\"lat\":%.6f,\"lon\":%.6f,\"spd\":%.2f,\"t\":%d,\"bat\":%d}",
+                    loc.getLatitude(), loc.getLongitude(),
+                    (loc.hasSpeed() ? loc.getSpeed() * 3.6f : 0f),
+                    System.currentTimeMillis(), lastBattery);
+            trackPoints.add(point);
+            while (trackPoints.size() > 3000) trackPoints.remove(0);
+        }
+    }
 
     private void closeGatt() {
         if (gatt != null) {
