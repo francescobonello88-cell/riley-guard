@@ -14,6 +14,7 @@ import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -293,6 +294,21 @@ public class InterfaceActivity extends Activity implements ScooterBleService.Web
             i.setAction(ScooterBleService.ACTION_DISCONNECT);
             startService(i);
         }
+        @JavascriptInterface public void openMaps(String latlon) {
+            try {
+                String[] p = latlon.split(",");
+                Intent geo = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("geo:" + p[0] + "," + p[1] + "?q=" + p[0] + "," + p[1] + "(Scooter)"));
+                try {
+                    geo.setPackage("com.google.android.apps.maps");
+                    startActivity(geo);
+                } catch (Exception noMaps) {
+                    startActivity(new Intent(Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/maps?q=" + p[0] + "," + p[1])));
+                }
+            } catch (Exception ignored) {}
+        }
+
         @JavascriptInterface public void write(String b64) {
             try {
                 byte[] data = Base64.decode(b64, Base64.DEFAULT);
