@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Riley Speed Unlocker 🎃 Halloween Edition</title>
-  <meta name="theme-color" content="#0a0514">
+  <title>Riley Speed Unlocker 🎄 Christmas Edition</title>
+  <meta name="theme-color" content="#04140e">
+
 <script>
 (function () {
   if (navigator.bluetooth) return;
@@ -96,7 +97,7 @@
 })();
 </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Creepster&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Mountains+of+Christmas:wght@700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07090e;
@@ -322,79 +323,6 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(56,189,24
 @media(max-width:380px){body{padding:calc(12px + env(safe-area-inset-top)) 10px 30px}.app-container{gap:11px}.card{padding:13px;border-radius:18px}.brand-title{font-size:19px}.brand-sub{font-size:9px;letter-spacing:1.5px}.status-badge{padding:6px 9px;font-size:11px}.speedo-card{padding:18px 8px 13px}.speedo-wrap{max-width:100%}.presets-wrap{gap:6px}.preset-pill{padding-left:10px;padding-right:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 
-/* ==================== 🎃 HALLOWEEN THEME ==================== */
-:root{
-  --bg:#0c0512;
-  --card-bg:rgba(26,12,38,0.82);
-  --card-border:rgba(249,115,22,0.16);
-  --pumpkin:#f97318;
-  --pumpkin-light:#fb923c;
-  --slime:#a3e635;
-  --slime-deep:#65a30d;
-  --grape:#a855f7;
-  --grape-deep:#7e22ce;
-  --blood:#ef4444;
-  --ghost:#f1f5f9;
-  --text-muted:#c4b5d4;
-  --text-dim:#8b7aa8;
-}
-body{
-  background:
-    radial-gradient(760px 420px at 50% -8%, rgba(249,115,22,.16), transparent 62%),
-    radial-gradient(700px 480px at 112% 22%, rgba(168,85,247,.15), transparent 60%),
-    radial-gradient(680px 520px at -12% 105%, rgba(163,230,53,.08), transparent 58%),
-    radial-gradient(340px 340px at 88% 6%, rgba(251,146,60,.10), transparent 70%),
-    var(--bg);
-  background-attachment:fixed;
-}
-body:before{background-image:linear-gradient(rgba(249,115,22,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,.035) 1px,transparent 1px);mask-image:radial-gradient(ellipse at top,#000 15%,transparent 72%)}
-/* floating spooky decor */
-.hw-decor{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.hw-decor span{position:absolute;font-style:normal;filter:drop-shadow(0 0 8px rgba(249,115,22,.4));opacity:.45;animation:hwFloat 9s ease-in-out infinite;will-change:transform}
-.hw-moon{position:absolute;right:-40px;top:-60px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle at 38% 38%, #ffe4b8, #f97318 58%, rgba(168,85,247,.25) 100%);opacity:.14;filter:blur(2px);box-shadow:0 0 90px 30px rgba(249,115,22,.18)}
-@keyframes hwFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-18px) rotate(6deg)}}
-@keyframes hwFlicker{0%,100%{opacity:1}92%{opacity:1}93%{opacity:.72}94.5%{opacity:1}96%{opacity:.8}97.5%{opacity:1}}
-.app-container{z-index:1}
-.brand-title{font-family:'Creepster',cursive,system-ui;font-size:27px;letter-spacing:2.5px;font-weight:400;background:linear-gradient(180deg,#ffd9a8,#fb923c 48%,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 14px rgba(249,115,22,.5));animation:hwFlicker 5s infinite}
-.brand-sub{color:#b79ae0;letter-spacing:2.4px}
-.status-badge{border-color:rgba(168,85,247,.3);background:rgba(168,85,247,.08)}
-.status-dot.connected{background:var(--slime);box-shadow:0 0 12px var(--slime-deep)}
-.card{background:linear-gradient(160deg,rgba(45,18,66,.86),rgba(16,8,26,.92));border-color:rgba(249,115,22,.14);box-shadow:0 1px 0 rgba(255,160,80,.07) inset,0 22px 44px -24px rgba(0,0,0,.95)}
-.card:before{background:linear-gradient(135deg,rgba(255,160,80,.05),transparent 40%,rgba(168,85,247,.04))}
-.demo-bar{border-color:rgba(251,146,60,.4);background:linear-gradient(90deg,rgba(249,115,22,.14),rgba(168,85,247,.07));color:#fdba74}
-.demo-btn{background:linear-gradient(135deg,#fdba74,#f97316);color:#2a0f05;box-shadow:0 6px 18px -6px rgba(249,115,22,.8)}
-.btn-connect{background:linear-gradient(135deg,#f97318 0%,#c026d3 55%,#7e22ce 100%);border:1px solid rgba(251,146,60,.35);box-shadow:0 12px 30px -10px rgba(249,115,22,.6),inset 0 1px 0 rgba(255,255,255,.22)}
-.btn-connect.connected{background:linear-gradient(135deg,#3f6212,#166534 70%,#14532d);border-color:rgba(163,230,53,.35);color:#d9f99d}
-.speedo-card{background:radial-gradient(circle at 50% 35%,rgba(249,115,22,.13),transparent 62%),linear-gradient(160deg,rgba(45,18,66,.86),rgba(16,8,26,.92))}
-.speedo-card:after{border-color:rgba(249,115,22,.12);box-shadow:0 0 0 18px rgba(249,115,22,.02),0 0 0 38px rgba(168,85,247,.018)}
-.speedo-svg{filter:drop-shadow(0 0 16px rgba(249,115,22,.5))}
-.speedo-val{background:linear-gradient(180deg,#fff,#fdba74 75%,#f97316);-webkit-background-clip:text}
-.speedo-unit-btn{border-color:rgba(249,115,22,.35);color:#fdba74;background:rgba(249,115,22,.1)}
-.hud-badge{border-color:rgba(168,85,247,.25);background:rgba(168,85,247,.07);color:#d8b4fe}
-.hud-badge.highlight{color:#fdba74;border-color:rgba(249,115,22,.4);background:rgba(249,115,22,.1)}
-.speed-btn.unlimit{background:linear-gradient(160deg,rgba(249,115,22,.3),rgba(34,12,6,.95) 72%);border-color:rgba(251,146,60,.5)}
-.speed-btn.unlimit:after{background:#f97316}
-.speed-btn.unlimit .speed-btn-top{color:#fdba74}
-.speed-btn.limit{background:linear-gradient(160deg,rgba(163,230,53,.22),rgba(14,24,8,.95) 72%);border-color:rgba(163,230,53,.42)}
-.speed-btn.limit:after{background:#a3e635}
-.speed-btn.limit .speed-btn-top{color:#bef264}
-.stealth-card{background:linear-gradient(160deg,rgba(127,29,29,.45),rgba(30,8,16,.94) 65%);border-color:rgba(239,68,68,.4)}
-.panic-bar-btn{background:linear-gradient(135deg,#ef4444,#7f1d1d);box-shadow:0 14px 32px -12px rgba(239,68,68,.9),inset 0 1px 0 rgba(255,255,255,.22)}
-.transmitter-card{background:linear-gradient(160deg,rgba(168,85,247,.16),rgba(20,10,32,.92) 60%);border-color:rgba(168,85,247,.32)}
-.text-action{color:#d8b4fe;background:rgba(168,85,247,.14)}
-.hex-input{border-color:rgba(168,85,247,.35);color:#e9d5ff}
-.hex-input:focus{border-color:var(--pumpkin);box-shadow:0 0 0 3px rgba(249,115,22,.18)}
-.hex-send-btn{background:linear-gradient(135deg,#c026d3,#7e22ce)}
-.chip:active{background:rgba(168,85,247,.25)}
-.battery-fill{background:linear-gradient(90deg,#65a30d,#a3e635 55%,#f97316);box-shadow:0 0 12px rgba(163,230,53,.5)}
-.ctrl-btn.active{border-color:var(--pumpkin);color:#fdba74;background:rgba(249,115,22,.1);box-shadow:0 0 0 1px var(--pumpkin),0 8px 20px -8px rgba(249,115,22,.6)}
-.preset-pill:hover{border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.12)}
-.log-box{border-color:rgba(168,85,247,.2);background:rgba(8,2,14,.7)}
-#toast{background:rgba(45,18,66,.92);border:1px solid rgba(249,115,22,.35);box-shadow:0 14px 40px rgba(0,0,0,.6),0 0 22px rgba(249,115,22,.15)}
-input:focus,select:focus,textarea:focus{border-color:rgba(249,115,22,.55)!important;box-shadow:0 0 0 3px rgba(249,115,22,.12)}
-button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outline-color:var(--pumpkin)}
-@media(hover:hover) and (pointer:fine){.btn-connect:hover{filter:brightness(1.08)}}
-
 /* ---- 🔮 Estimated Range card ---- */
 .range-card{background:linear-gradient(160deg,rgba(88,28,135,.5),rgba(16,8,26,.94) 65%);border-color:rgba(168,85,247,.32)}
 .range-main{display:flex;align-items:baseline;justify-content:center;gap:8px;margin:2px 0 8px}
@@ -402,7 +330,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
 .range-unit{font-size:12px;color:var(--text-muted);font-weight:700}
 .range-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.07);overflow:hidden;margin:2px 0 12px}
 .range-fill{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#7e22ce,#f97316 55%,#a3e635);box-shadow:0 0 12px rgba(249,115,22,.5);transition:width .4s ease}
-.range-modes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.range-modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .range-chip{background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:8px 4px;text-align:center;font-size:9.5px;font-weight:800;letter-spacing:.5px;color:var(--text-dim);display:flex;flex-direction:column;gap:3px;transition:.25s}
 .range-chip strong{font-size:13.5px;color:var(--ghost);font-weight:800;letter-spacing:-.3px}
 .range-chip.active{border-color:rgba(249,115,22,.55);background:rgba(249,115,22,.12);box-shadow:0 0 14px rgba(249,115,22,.2);color:#fdba74}
@@ -429,34 +357,193 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
 .gps-meta strong{font-size:12px;color:var(--ghost);font-weight:800}
 @media(max-width:380px){.range-val{font-size:38px}.gps-meta-grid{grid-template-columns:repeat(2,1fr)}}
 
+/* ==================== 🎄 CHRISTMAS THEME ==================== */
+:root{
+  --bg:#04140d;
+  --card-bg:rgba(9,28,20,.60);
+  --card-border:rgba(255,255,255,.15);
+  --xred:#ff4d5e; --xred-deep:#e11d48;
+  --xgreen:#22c55e; --xgreen-deep:#15803d;
+  --gold:#fcd34d; --gold-deep:#f59e0b;
+  --ice:#7dd3fc;
+  --pumpkin:#f59e0b; --slime:#4ade80; --grape:#7dd3fc; --blood:#ef4444; --ghost:#f1f5f9;
+  --text-muted:#b6c6d6; --text-dim:#7e93a6;
+  --ease-liquid:cubic-bezier(.22,1,.36,1);
+}
+body{
+  background:
+    radial-gradient(760px 430px at 50% -8%, rgba(225,29,72,.18), transparent 62%),
+    radial-gradient(720px 480px at 112% 20%, rgba(34,197,94,.16), transparent 60%),
+    radial-gradient(680px 520px at -12% 105%, rgba(252,211,77,.10), transparent 58%),
+    radial-gradient(340px 340px at 88% 6%, rgba(255,77,94,.10), transparent 70%),
+    var(--bg);
+  background-attachment:fixed;
+}
+body:before{background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,197,94,.045) 1px,transparent 1px);mask-image:radial-gradient(ellipse at top,#000 15%,transparent 72%)}
 
-  /* ---- centered speedometer ---- */
-  .speedo-card{display:flex;flex-direction:column;align-items:center;text-align:center}
+/* floating christmas decor + falling snow + light string */
+.xmas-decor{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.xmas-decor .deco{position:absolute;filter:drop-shadow(0 0 8px rgba(252,211,77,.45));opacity:.5;animation:xFloat 9s ease-in-out infinite;will-change:transform}
+.xmas-glow{position:absolute;right:-60px;top:-70px;width:230px;height:230px;border-radius:50%;background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.55), rgba(125,211,252,.35) 45%, rgba(34,197,94,.20) 75%, transparent 78%);opacity:.15;filter:blur(3px);box-shadow:0 0 110px 40px rgba(125,211,252,.14)}
+.snow{position:absolute;top:-6vh;color:#fff;user-select:none;pointer-events:none;animation:snowfall linear infinite;will-change:transform;text-shadow:0 0 8px rgba(190,230,255,.85)}
+.xmas-lights{position:fixed;top:0;left:0;right:0;height:16px;display:flex;justify-content:space-around;align-items:flex-start;pointer-events:none;z-index:0;opacity:.8}
+.xmas-lights i{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor;animation:xLights 1.7s ease-in-out infinite}
+@keyframes xFloat{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-16px) rotate(6deg)}}
+@keyframes snowfall{0%{transform:translate3d(0,-6vh,0) rotate(0deg)}100%{transform:translate3d(var(--drift,30px),110vh,0) rotate(340deg)}}
+@keyframes xLights{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes xShimmer{0%,100%{background-position:0% 50%;filter:drop-shadow(0 2px 12px rgba(255,77,94,.40))}50%{background-position:100% 50%;filter:drop-shadow(0 2px 16px rgba(34,197,94,.50))}}
+@keyframes glow{50%{box-shadow:0 14px 44px -8px rgba(255,77,94,1),inset 0 1px 0 rgba(255,255,255,.25)}}
+.app-container{z-index:1}
+
+/* header */
+.brand-title{font-family:'Mountains of Christmas',cursive,system-ui;font-size:31px;letter-spacing:.5px;font-weight:800;background:linear-gradient(120deg,#fff 0%,#fde68a 28%,#fca5a5 52%,#86efac 78%,#fcd34d 100%);background-size:220% 220%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 14px rgba(255,77,94,.45));animation:xShimmer 7s ease-in-out infinite}
+.brand-sub{color:#9fd7b4;letter-spacing:2.4px}
+.status-badge{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.07)}
+.status-dot.connected{background:#4ade80;box-shadow:0 0 12px #22c55e}
+
+/* cards */
+.card{background:linear-gradient(160deg,rgba(255,255,255,.11),rgba(255,255,255,.045) 46%,rgba(255,255,255,.075));border-color:rgba(255,255,255,.17);box-shadow:0 1px 0 rgba(255,255,255,.16) inset,0 24px 48px -24px rgba(0,0,0,.85)}
+.demo-bar{border-color:rgba(252,211,77,.45);background:linear-gradient(90deg,rgba(252,211,77,.16),rgba(255,77,94,.08));color:#fcd34d}
+.demo-btn{background:linear-gradient(135deg,#fde68a,#f59e0b);color:#3b1f04;box-shadow:0 6px 18px -6px rgba(245,158,11,.8)}
+.btn-connect{background:linear-gradient(135deg,#ff4d5e 0%,#e11d48 55%,#be123c 100%);border:1px solid rgba(253,226,116,.45);box-shadow:0 14px 32px -12px rgba(225,29,72,.75),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn-connect.connected{background:linear-gradient(135deg,#15803d,#166534 70%,#14532d);border-color:rgba(134,239,172,.4);color:#d9f99d}
+
+/* speedometer */
+.speedo-card{background:radial-gradient(circle at 50% 35%,rgba(255,77,94,.16),transparent 62%),linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.045))}
+.speedo-card:after{border-color:rgba(34,197,94,.18);box-shadow:0 0 0 18px rgba(34,197,94,.035),0 0 0 38px rgba(255,77,94,.03)}
+.speedo-svg{filter:drop-shadow(0 0 16px rgba(255,77,94,.45))}
+.speedo-val{background:linear-gradient(180deg,#fff,#ffe9c7 70%,#fcd34d);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.speedo-unit-btn{border-color:rgba(255,255,255,.3);color:#ffe9c7;background:rgba(255,255,255,.10)}
+.hud-badge{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.07);color:#cfe3f5}
+.hud-badge.highlight{color:#fcd34d;border-color:rgba(252,211,77,.45);background:rgba(252,211,77,.12)}
+
+/* speed switch buttons */
+.speed-btn.unlimit{background:linear-gradient(160deg,rgba(252,211,77,.30),rgba(120,12,20,.55) 72%);border-color:rgba(253,226,116,.5)}
+.speed-btn.unlimit:after{background:#f59e0b}
+.speed-btn.unlimit .speed-btn-top{color:#fde68a}
+.speed-btn.limit{background:linear-gradient(160deg,rgba(34,197,94,.28),rgba(6,44,24,.55) 72%);border-color:rgba(134,239,172,.45)}
+.speed-btn.limit:after{background:#22c55e}
+.speed-btn.limit .speed-btn-top{color:#bbf7d0}
+
+/* stealth */
+.stealth-card{background:linear-gradient(160deg,rgba(225,29,72,.22),rgba(40,8,14,.60) 65%);border-color:rgba(255,77,94,.4)}
+.panic-bar-btn{background:linear-gradient(135deg,#ff4d5e,#be123c);box-shadow:0 14px 32px -12px rgba(225,29,72,.9),inset 0 1px 0 rgba(255,255,255,.25)}
+
+/* transmitter */
+.transmitter-card{background:linear-gradient(160deg,rgba(125,211,252,.16),rgba(8,28,44,.60) 60%);border-color:rgba(125,211,252,.35)}
+.text-action{color:#bae6fd;background:rgba(125,211,252,.14)}
+.hex-input{border-color:rgba(125,211,252,.4);color:#dbeafe}
+.hex-input:focus{border-color:#ff4d5e!important;box-shadow:0 0 0 3px rgba(255,77,94,.16)}
+.hex-send-btn{background:linear-gradient(135deg,#38bdf8,#0369a1)}
+.chip:active{background:rgba(125,211,252,.25)}
+
+/* metrics / battery / controls */
+.battery-fill{background:linear-gradient(90deg,#16a34a,#22c55e 45%,#fcd34d);box-shadow:0 0 12px rgba(34,197,94,.6)}
+.ctrl-btn.active{border-color:#fcd34d;color:#fcd34d;background:rgba(252,211,77,.12);box-shadow:0 0 0 1px #f59e0b,0 8px 20px -8px rgba(245,158,11,.6)}
+.preset-pill:hover{border-color:rgba(34,197,94,.55);background:rgba(34,197,94,.14)}
+.log-ack{color:#fcd34d}
+.log-box{border-color:rgba(255,255,255,.10);background:rgba(2,10,7,.66)}
+input:focus,select:focus,textarea:focus{border-color:rgba(255,77,94,.55)!important;box-shadow:0 0 0 3px rgba(255,77,94,.14)}
+button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outline-color:#fcd34d}
+@media(hover:hover) and (pointer:fine){.btn-connect:hover{filter:brightness(1.08)}}
+
+/* ---- 🎁 Estimated Range card ---- */
+.range-card{background:linear-gradient(160deg,rgba(225,29,72,.20),rgba(255,255,255,.05) 68%);border-color:rgba(255,255,255,.17)}
+.range-val{background:linear-gradient(180deg,#fff,#fde68a 70%,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px rgba(252,211,77,.35))}
+.range-fill{background:linear-gradient(90deg,#22c55e,#fcd34d 55%,#ff4d5e);box-shadow:0 0 12px rgba(252,211,77,.5);transition:width .6s var(--ease-liquid)}
+.range-chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.13);color:var(--text-dim)}
+.range-chip strong{color:#f1f5f9}
+.range-chip.active{border-color:rgba(252,211,77,.55);background:rgba(252,211,77,.13);box-shadow:0 0 14px rgba(252,211,77,.22);color:#fde68a}
+.range-chip.active strong{color:#fde68a}
+
+/* ---- 🛰️ GPS position bar ---- */
+.gps-card{background:linear-gradient(160deg,rgba(125,211,252,.16),rgba(255,255,255,.05) 62%);border-color:rgba(255,255,255,.17)}
+.gps-pill{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14);color:var(--text-muted)}
+.gps-pill.locked{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.5);color:#86efac}
+.gps-pill.searching{background:rgba(252,211,77,.14);border-color:rgba(252,211,77,.5);color:#fde68a;animation:pulse 1s infinite}
+.gps-pill.error{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.5);color:#fca5a5}
+.gps-coords{color:#bae6fd}
+.gps-bar-track{background:linear-gradient(90deg,rgba(34,197,94,.22),rgba(252,211,77,.24),rgba(255,77,94,.30));border-color:rgba(255,255,255,.15)}
+.gps-bar-fill{background:linear-gradient(90deg,#22c55e,#fcd34d);opacity:.6}
+.gps-bar-marker{filter:drop-shadow(0 0 6px rgba(255,77,94,.9))}
+.gps-trail{background:rgba(2,10,16,.62);border-color:rgba(125,211,252,.28)}
+.gps-meta{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.13)}
+.gps-meta strong{color:#f1f5f9}
+
+/* ==================== 🩵 LIQUID GLASS · iOS 26 style ==================== */
+:root{--glass-line:rgba(255,255,255,.17);--glass-hi:rgba(255,255,255,.35)}
+.card{
+  backdrop-filter:blur(30px) saturate(190%) brightness(1.05);
+  -webkit-backdrop-filter:blur(30px) saturate(190%);
+  border-color:var(--glass-line);
+  box-shadow:inset 0 1px 0 var(--glass-hi),inset 0 -1px 0 rgba(255,255,255,.07),0 24px 48px -24px rgba(0,0,0,.85);
+  transition:transform .5s var(--ease-liquid),box-shadow .35s ease,border-color .3s ease,background .3s ease;
+}
+.card::before{
+  background:
+    radial-gradient(340px circle at var(--gx,50%) var(--gy,-12%), rgba(255,255,255,.20), transparent 55%),
+    linear-gradient(135deg,rgba(255,255,255,.15),transparent 40%,rgba(255,255,255,.06) 76%,transparent);
+  opacity:.9;
+}
+/* transparent glass boxes around the small stuff */
+.hud-badge,.metric-cell,.battery-card,.gps-meta,.gps-pill,.live-sensor-pill,.preset-pill,.ctrl-btn,.tx-btn,.chip,.status-badge,.range-chip,.speedo-unit-btn,.raw-hex-box{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.14);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+}
+/* silky transitions everywhere */
+.speed-btn,.preset-pill,.ctrl-btn,.tx-btn,.text-action,.demo-btn,.hex-send-btn,.btn-connect,.panic-bar-btn,.status-badge,.range-chip,.gps-pill{
+  transition:transform .45s var(--ease-liquid),box-shadow .35s ease,filter .25s ease,background .3s ease,border-color .3s ease,color .3s ease;
+}
+.speedo-fill{transition:stroke-dashoffset .5s var(--ease-liquid)}
+.battery-fill{transition:width .5s var(--ease-liquid)}
+.metric-val,.speedo-val{font-variant-numeric:tabular-nums}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.982)}to{opacity:1;transform:none}}
+#toast{
+  background:rgba(9,26,19,.78);
+  backdrop-filter:blur(26px) saturate(180%);
+  -webkit-backdrop-filter:blur(26px) saturate(180%);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:18px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 18px 40px rgba(0,0,0,.55);
+}
+@media(hover:hover) and (pointer:fine){
+  .speed-btn:hover,.preset-pill:hover,.ctrl-btn:hover,.tx-btn:hover{transform:translateY(-3px)}
+  .card:hover{border-color:rgba(255,255,255,.24);box-shadow:inset 0 1px 0 var(--glass-hi),inset 0 -1px 0 rgba(255,255,255,.07),0 28px 54px -24px rgba(0,0,0,.9)}
+}
+@media(max-width:380px){.brand-title{font-size:27px}}
+
+  /* centered speedometer */
+  .speedo-card{display:flex;flex-direction:column;align-items:center}
   .speedo-wrap{position:relative;width:240px;max-width:100%;height:172px;margin:0 auto;overflow:hidden}
   .speedo-svg{position:absolute;left:50%;top:0;width:240px;height:240px;transform:translateX(-50%) rotate(-90deg);transform-origin:50% 50%}
   .speedo-display{position:absolute;left:0;right:0;top:66px;width:auto;text-align:center}
   .speedo-val{text-align:center}
   .speedo-unit-btn{margin:8px auto 0}
-  .range-modes{grid-template-columns:repeat(3,1fr)}
 </style>
 </head>
 <body>
 
-<div class="hw-decor" aria-hidden="true">
-  <div class="hw-moon"></div>
-  <span style="left:5%;top:9%;font-size:20px;animation-delay:0s">🎃</span>
-  <span style="left:89%;top:16%;font-size:17px;animation-delay:1.4s">👻</span>
-  <span style="left:13%;top:72%;font-size:15px;animation-delay:2.2s">🦇</span>
-  <span style="left:84%;top:78%;font-size:14px;animation-delay:.7s">🕷️</span>
-  <span style="left:46%;top:5%;font-size:13px;animation-delay:1.9s">💀</span>
-  <span style="left:71%;top:40%;font-size:13px;animation-delay:2.8s">🕸️</span>
+<div class="xmas-decor" aria-hidden="true">
+  <div class="xmas-glow"></div>
+  <span class="deco" style="left:5%;top:9%;font-size:20px;animation-delay:0s">🎄</span>
+  <span class="deco" style="left:89%;top:16%;font-size:17px;animation-delay:1.4s">❄️</span>
+  <span class="deco" style="left:13%;top:72%;font-size:15px;animation-delay:2.2s">🎁</span>
+  <span class="deco" style="left:84%;top:78%;font-size:14px;animation-delay:.7s">🔔</span>
+  <span class="deco" style="left:46%;top:5%;font-size:13px;animation-delay:1.9s">⭐</span>
+  <span class="deco" style="left:71%;top:40%;font-size:13px;animation-delay:2.8s">❄️</span>
+</div>
+<div class="xmas-lights" aria-hidden="true">
+  <i style="color:#ff4d5e;animation-delay:0s"></i><i style="color:#fcd34d;animation-delay:.25s"></i><i style="color:#4ade80;animation-delay:.5s"></i><i style="color:#ff4d5e;animation-delay:.75s"></i><i style="color:#fcd34d;animation-delay:1s"></i><i style="color:#4ade80;animation-delay:1.25s"></i><i style="color:#ff4d5e;animation-delay:1.5s"></i><i style="color:#fcd34d;animation-delay:.4s"></i><i style="color:#4ade80;animation-delay:.9s"></i><i style="color:#ff4d5e;animation-delay:1.3s"></i>
 </div>
 
 <div class="app-container">
   <header>
     <div>
       <div class="brand-title">Riley Speed Unlocker</div>
-      <div class="brand-sub">Volpam MK-083 · Halloween Edition 🎃</div>
+      <div class="brand-sub">Volpam MK-083 · Christmas Edition 🎄</div>
     </div>
     <div class="status-badge">
       <div class="status-dot" id="statusDot"></div>
@@ -465,7 +552,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
   </header>
 
   <div class="demo-bar" id="demoBanner">
-    <span>💡 <strong>Demo Mode:</strong> Test dials & gesture offline</span>
+    <span>🎄 <strong>Demo Mode:</strong> Test dials & gesture offline</span>
     <button class="demo-btn" id="demoToggleBtn" onclick="toggleDemoMode()">Enable Demo</button>
   </div>
 
@@ -502,7 +589,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </div>
     <div class="hud-row">
       <div class="hud-badge" id="gearBadge">⚙️ GEAR 3 (SPORT)</div>
-      <div class="hud-badge highlight" id="modeBadge">⚡ UNLIMITED</div>
+      <div class="hud-badge highlight" id="modeBadge">⚡ UNLIMIT (47 KM/H)</div>
       <div class="hud-badge" id="hudTimer">⏱️ 00:00</div>
     </div>
   </div>
@@ -510,8 +597,8 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
   <!-- 🔮 ESTIMATED RANGE (varies by ECO / DRIVE / SPORT) -->
   <div class="card range-card">
     <div class="section-header">
-      <span class="section-title">🔮 Estimated Range</span>
-      <span class="text-action" id="rangeModeTag" style="cursor:default;">MODE: &#8212;</span>
+      <span class="section-title">🎁 Estimated Range</span>
+      <span class="text-action" id="rangeModeTag" style="cursor:default;">MODE: —</span>
     </div>
     <div class="range-main">
       <div class="range-val" id="valRange">--.-</div>
@@ -520,7 +607,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     <div class="range-bar"><div class="range-fill" id="barRange"></div></div>
     <div class="range-modes">
       <div class="range-chip" id="rcEco"><span>ECO</span><strong id="rngEco">-- km</strong></div>
-      <div class="range-chip" id="rcDrive"><span>DRIVE</span><strong id="rngDrive">-- km</strong></div>
+      <div class="range-chip" id="rcDrive"><span>DRIVE · 20</span><strong id="rngDrive">-- km</strong></div>
       <div class="range-chip" id="rcSport"><span>SPORT</span><strong id="rngSport">-- km</strong></div>
     </div>
     <div class="range-note">Estimates blend battery %, ride mode &amp; live speed — SPORT drinks charge fastest, ECO sips it.</div>
@@ -539,22 +626,22 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     <div class="gps-bar">
       <div class="gps-bar-track">
         <div class="gps-bar-fill" id="gpsBarFill"></div>
-        <div class="gps-bar-marker" id="gpsBarMarker">🎃</div>
+        <div class="gps-bar-marker" id="gpsBarMarker">🎅</div>
       </div>
       <div class="gps-bar-labels">
         <span>Start</span><span id="gpsBarMid">0.00 km travelled</span><span>Session 50 km</span>
       </div>
     </div>
     <div style="position:relative;margin:0 0 8px">
-      <iframe id="gmapsFrame" style="width:100%;height:170px;border:1px solid rgba(168,85,247,.28);border-radius:12px;background:rgba(0,0,0,.45);display:block" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      <div id="gmapsPlaceholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(10,6,18,.94);color:#c4b5d2;font-size:11px;font-weight:800;text-align:center;padding:12px;line-height:1.5">🗺️ Start GPS to load Google Maps</div>
+      <iframe id="gmapsFrame" style="width:100%;height:170px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(0,0,0,.45);display:block" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div id="gmapsPlaceholder" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(6,12,10,.92);color:#a7f3d0;font-size:11px;font-weight:700;text-align:center;padding:10px">🗺️ Start GPS to load Google Maps</div>
     </div>
     <div style="display:flex;gap:8px;margin:0 0 9px">
-      <button class="preset-pill" style="flex:1;font-size:10.5px;padding:7px 6px;font-weight:800" onclick="openInGoogleMaps()">🧭 Open in Google Maps</button>
+      <button class="preset-pill" style="flex:1;font-size:10px;padding:7px" onclick="openInGoogleMaps()">🧭 Open in Google Maps</button>
     </div>
-    <div style="font-size:9.5px;color:#c4b5d2;font-weight:800;margin:0 0 5px;letter-spacing:.3px">🛣️ Trip trail &amp; markers</div>
+    <div style="font-size:9.5px;color:#a7f3d0;font-weight:800;margin:0 0 5px">🛣️ Trip trail &amp; markers</div>
     <canvas id="gpsTrail" class="gps-trail" width="412" height="120"></canvas>
-    <div id="gpsEventsLine" style="font-size:9.5px;color:#c4b5d2;margin:-4px 0 9px;line-height:1.6;font-weight:700;letter-spacing:.2px"></div>
+    <div id="gpsEventsLine" style="font-size:9.5px;color:#c4b5d2;margin:-2px 0 9px;line-height:1.5;font-weight:700">Markers: START/END points, stops over 20s, battery level drops</div>
     <div class="gps-meta-grid">
       <div class="gps-meta"><span>Altitude</span><strong id="gpsAlt">— m</strong></div>
       <div class="gps-meta"><span>Heading</span><strong id="gpsHdg">—°</strong></div>
@@ -565,9 +652,9 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
 
   <div class="switch-grid">
     <button class="speed-btn unlimit" onclick="applySpeedLimit(47, 'unlimit')">
-      <div class="speed-btn-top"><span>🚀 Fast Track</span><span>P10 + 0x3C</span></div>
+      <div class="speed-btn-top"><span>⚡ Unlimit</span><span>P10 + 0x3C</span></div>
       <div class="speed-btn-main">47 <span class="unit">KM/H</span></div>
-      <div class="speed-btn-desc">Full unlimit • P10 EEPROM & Gear 3</div>
+      <div class="speed-btn-desc">Unlimit • P10 EEPROM • Gear 3</div>
     </button>
     <button class="speed-btn limit" onclick="applySpeedLimit(20, 'limit')">
       <div class="speed-btn-top"><span>🛡️ Commute</span><span>P10 + 0x3C</span></div>
@@ -576,14 +663,14 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </button>
   </div>
 
-  <!-- STEALTH PANIC TRIGGERS (ECO 5S GESTURE & EMERGENCY LOCK) -->
+  <!-- STEALTH PANIC TRIGGERS (ECO 2S GESTURE & EMERGENCY LOCK) -->
   <div class="card stealth-card" id="stealthCard">
     <div class="stealth-toggle-row">
       <div class="stealth-title-group">
         <span class="stealth-badge-icon">🚨</span>
         <div>
           <div class="stealth-title">Stealth Panic Limiter (20 KM/H)</div>
-          <div class="stealth-sub">Full-throttle Eco gesture & emergency speed lock</div>
+          <div class="stealth-sub">2-second ECO gesture (no throttle) & emergency speed lock</div>
         </div>
       </div>
       <label class="toggle-switch">
@@ -593,43 +680,43 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </div>
 
     <div style="margin-top: 10px;">
-      <!-- USER PHYSICAL TRIGGER: 5-SECOND ECO FULL-THROTTLE GESTURE -->
-      <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); padding: 10px; margin-bottom: 8px;">
+      <!-- USER TRIGGER: 2-SECOND ECO GESTURE (THROTTLE-FREE) -->
+      <div style="background: rgba(252, 211, 77, 0.10); border: 1px solid rgba(252, 211, 77, 0.38); border-radius: var(--radius-md); padding: 10px; margin-bottom: 8px; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-          <div style="font-size: 12px; font-weight: 800; color: #fbbf24;">⚡ ECO 5-SECOND FULL-THROTTLE GESTURE</div>
-          <span class="badge-mini" style="background: rgba(245, 158, 11, 0.25); color: #fbbf24;">Active Trigger</span>
+          <div style="font-size: 12px; font-weight: 800; color: #fcd34d;">⚡ ECO 2-SECOND GESTURE (NO THROTTLE NEEDED)</div>
+          <span class="badge-mini" style="background: rgba(252, 211, 77, 0.25); color: #fcd34d;">Active Trigger</span>
         </div>
         <div style="font-size: 11px; color: var(--text-dim); line-height: 1.4; margin-bottom: 8px;">
-          Switch to <strong>ECO mode</strong> and hold <strong>Full Throttle for 2 seconds</strong>:
-          <br>• Automatically reverts Sport limit from <strong>47 ➔ 20 km/h</strong>!
+          Switch to <strong>ECO mode</strong> and keep it there for <strong>2 seconds</strong> — throttle can be held, half or untouched, it does <strong>not</strong> matter:
+          <br>• Automatically reverts limit from <strong>47 ➔ 20 km/h</strong>!
           <br>• Automatically shifts scooter back from <strong>ECO ➔ SPORT mode</strong>.
           <br>• <em>Will NEVER trigger while riding in Drive or Sport!</em>
         </div>
 
         <div style="display: flex; gap: 6px; margin-bottom: 6px; flex-wrap: wrap;">
           <span id="pillEcoGear" class="live-sensor-pill">⚙️ Gear: <strong id="txtEcoGearStatus">Drive / Sport</strong></span>
-          <span id="pillEcoThrottle" class="live-sensor-pill">🚀 Throttle: <strong id="txtEcoThrottleStatus">0%</strong></span>
+          <span id="pillEcoThrottle" class="live-sensor-pill">🚀 Throttle: <strong id="txtEcoThrottleStatus">0% — ignored 🎄</strong></span>
         </div>
 
-        <div style="background: rgba(0,0,0,0.4); border-radius: 8px; padding: 4px 6px; border: 1px solid rgba(255,255,255,0.08); margin-bottom: 6px;">
+        <div style="background: rgba(255,255,255,0.06); border-radius: 8px; padding: 4px 6px; border: 1px solid rgba(255,255,255,0.12); margin-bottom: 6px;">
           <div style="display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; margin-bottom: 3px;">
             <span style="color: #94a3b8;">Gesture Countdown</span>
-            <span id="txtEcoCountdownVal" style="color: #fbbf24; font-family: monospace;">0.0s / 2.0s</span>
+            <span id="txtEcoCountdownVal" style="color: #fcd34d; font-family: monospace;">0.0s / 2.0s</span>
           </div>
           <div style="height: 8px; background: rgba(255,255,255,0.08); border-radius: 4px; overflow: hidden;">
-            <div id="barEcoCountdown" style="height: 100%; width: 0%; background: linear-gradient(90deg, #f59e0b, #ef4444); border-radius: 4px; transition: width 0.1s linear;"></div>
+            <div id="barEcoCountdown" style="height: 100%; width: 0%; background: linear-gradient(90deg, #fcd34d, #ff4d5e); border-radius: 4px; transition: width 0.1s linear;"></div>
           </div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span id="txtEcoPrompt" style="font-size: 10px; color: var(--text-muted); font-style: italic;">Double-click to ECO & pin throttle for 2s to lock</span>
-          <button class="preset-pill" style="padding: 3px 8px; font-size: 10px; background: rgba(245,158,11,0.15); border-color: rgba(245,158,11,0.4); color: #fbbf24;" onclick="simulateEcoThrottleDemo()">⚡ Test 2s Demo</button>
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px;">
+          <span id="txtEcoPrompt" style="font-size: 10px; color: var(--text-muted); font-style: italic;">Sit in ECO for 2 s (any throttle) to lock — a quick ECO flip works too</span>
+          <button class="preset-pill" style="padding: 3px 8px; font-size: 10px; background: rgba(252,211,77,0.15); border-color: rgba(252,211,77,0.4); color: #fcd34d;" onclick="simulateEcoThrottleDemo()">⚡ Test 2s Demo</button>
         </div>
       </div>
 
-      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: var(--radius-md); margin-bottom: 6px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.06); padding: 8px 10px; border-radius: var(--radius-md); margin-bottom: 6px; border: 1px solid rgba(255,255,255,0.10); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);">
         <span style="font-size: 11px; color: var(--text-muted);">🔊 1-Click Pocket Trigger:</span>
-        <span style="font-size: 11px; font-weight: 700; color: #34d399;">Phone Volume Down Key</span>
+        <span style="font-size: 11px; font-weight: 700; color: #86efac;">Phone Volume Down Key</span>
       </div>
 
       <button class="panic-bar-btn" onclick="triggerStealthPanic('Emergency Panic Button')">
@@ -645,7 +732,7 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </div>
     <div class="tx-buttons-grid">
       <button class="tx-btn" style="border-color: rgba(245,158,11,0.4);" onclick="applySpeedLimit(47, 'unlimit')">
-        <div class="tx-btn-hdr"><span style="color: #fbbf24;">🚀 TRANSMIT 47 KM/H UNLOCK</span><span class="badge-mini">3 Frames</span></div>
+        <div class="tx-btn-hdr"><span style="color: #fcd34d;">⚡ TRANSMIT UNLIMIT (47 KM/H)</span><span class="badge-mini">3 Frames</span></div>
         <div class="tx-hex-preview">0x3C Limit (47) • P10 EEPROM (47) • Gear 3</div>
       </button>
       <button class="tx-btn" style="border-color: rgba(16,185,129,0.4);" onclick="applySpeedLimit(20, 'limit')">
@@ -897,10 +984,16 @@ const gpsState = {
   on: false, watchId: null, demoTimer: null,
   lat: null, lon: null, acc: null, alt: null, hdg: null, speedKmh: null,
   trail: [], distKm: 0, lastFixAt: null,
+  fixLat: null, fixLon: null,        // latest displayed fix (may be a weak one)
+  sessionStartAt: null, lastGoodAt: null,
   stops: [], batteryMarks: [], batterySeen: {}, lastBattery: null,
-  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null, pollTimer: null
+  stopStartAt: null, stopStartPt: null, stopRecorded: false, endPt: null,
+  nativePoll: null
 };
 const GPS_SESSION_CAP_KM = 50;
+const GPS_ACC_MAX_M = 50;      // never count distance from fixes worse than this
+const GPS_MAX_SPEED_KMH = 130; // plausibility clamp: no single hop may exceed this speed
+const GPS_MIN_HOP_KM = 0.004;  // ignore sub-4m jitter
 
 function haversineKm(lat1, lon1, lat2, lon2) {
   const R = 6371, dLat = (lat2 - lat1) * Math.PI / 180, dLon = (lon2 - lon1) * Math.PI / 180;
@@ -910,17 +1003,22 @@ function haversineKm(lat1, lon1, lat2, lon2) {
 
 function toggleGps() {
   if (gpsState.on) { stopGps(); return; }
-  gpsState.on = true;
-  gpsToggleBtn.textContent = '■ Stop GPS';
-  gpsState.trail = []; gpsState.distKm = 0; gpsState.lat = null; gpsState.lon = null;
+  // 🎄 fresh session on every start — kills stale/accumulated bogus totals like "8192 km"
+  gpsState.lat = null; gpsState.lon = null;
+  gpsState.fixLat = null; gpsState.fixLon = null;
+  gpsState.trail = []; gpsState.distKm = 0;
   gpsState.stops = []; gpsState.batteryMarks = []; gpsState.batterySeen = {};
   gpsState.lastBattery = null; gpsState.stopStartAt = null; gpsState.stopStartPt = null;
   gpsState.stopRecorded = false; gpsState.endPt = null;
-  gmapsLastLat = null; gmapsLastLon = null; gmapsLastLoadAt = 0;
+  if (typeof updateGpsEventsLine === 'function') updateGpsEventsLine();
+  gpsState.lastFixAt = null; gpsState.lastGoodAt = null;
+  gpsState.sessionStartAt = Date.now();
+  resetGpsReadouts();
+  gpsState.on = true;
+  gpsToggleBtn.textContent = '■ Stop GPS';
   try { if (window.RileyBridge && RileyBridge.setGpsTracking) { RileyBridge.clearTrack(); RileyBridge.setGpsTracking(true); } } catch (e) {}
-  if (gpsState.pollTimer) clearInterval(gpsState.pollTimer);
-  gpsState.pollTimer = setInterval(mergeNativeTrack, 3000);
-  updateGpsEventsLine();
+  if (gpsState.nativePoll) clearInterval(gpsState.nativePoll);
+  gpsState.nativePoll = setInterval(mergeNativeTrack, 3000);
   if (isDemoMode) {
     startGpsDemo();
     return;
@@ -944,10 +1042,13 @@ function stopGps() {
     gpsState.watchId = null;
   }
   if (gpsState.demoTimer) { clearInterval(gpsState.demoTimer); gpsState.demoTimer = null; }
-  if (gpsState.pollTimer) { clearInterval(gpsState.pollTimer); gpsState.pollTimer = null; }
   try { if (window.RileyBridge && RileyBridge.setGpsTracking) RileyBridge.setGpsTracking(false); } catch (e) {}
-  if (gpsState.lat !== null) { gpsState.endPt = [gpsState.lat, gpsState.lon]; drawGpsTrail(); }
+  if (gpsState.nativePoll) { clearInterval(gpsState.nativePoll); gpsState.nativePoll = null; }
+  const endLat = gpsState.lat != null ? gpsState.lat : gpsState.fixLat;
+  const endLon = gpsState.lon != null ? gpsState.lon : gpsState.fixLon;
+  if (endLat != null) gpsState.endPt = [endLat, endLon];
   updateGpsEventsLine();
+  drawGpsTrail();
   setGpsPill('', 'GPS Off');
   log('🛰️ GPS tracking stopped.', 'log-warn');
 }
@@ -955,6 +1056,19 @@ function stopGps() {
 function setGpsPill(cls, text) {
   gpsPill.className = 'gps-pill' + (cls ? ' ' + cls : '');
   gpsPill.textContent = text;
+}
+
+function resetGpsReadouts() {
+  const unit = scooterState.isMiles ? 'mi' : 'km';
+  gpsCoords.innerHTML = `--.—————, --.—————<br>± — m accuracy`;
+  gpsAlt.textContent = '— m';
+  gpsHdg.textContent = '—°';
+  gpsSpd.textContent = `— km/h`;
+  gpsDist.textContent = `0.00 ${unit}`;
+  gpsBarMid.textContent = `0.00 ${unit} travelled`;
+  gpsBarFill.style.width = '0%';
+  gpsBarMarker.style.left = '0%';
+  drawGpsTrail();
 }
 
 function onGpsErr(err) {
@@ -970,22 +1084,51 @@ function onGpsFix(pos) {
 }
 
 function ingestGpsFix(f) {
-  const hadPrev = gpsState.lat !== null;
-  if (hadPrev) {
-    const d = haversineKm(gpsState.lat, gpsState.lon, f.lat, f.lon);
-    if (d > 0.005) { // ignore sub-5m jitter
-      gpsState.distKm += d;
-      gpsState.trail.push([f.lat, f.lon]);
-      if (gpsState.trail.length > 600) gpsState.trail.shift();
-    }
-  } else {
-    gpsState.trail.push([f.lat, f.lon]);
+  if (!isFinite(f.lat) || !isFinite(f.lon) || Math.abs(f.lat) > 90 || Math.abs(f.lon) > 180) return;
+  const now = Date.now();
+  const accOk = (f.acc == null) || (f.acc <= GPS_ACC_MAX_M);
+
+  // 🛟 Weak fix: show it, but NEVER let it touch the distance counter or the baseline.
+  if (!accOk) {
+    gpsState.fixLat = f.lat; gpsState.fixLon = f.lon;
+    gpsState.acc = f.acc; gpsState.alt = f.alt; gpsState.hdg = f.hdg;
+    gpsState.speedKmh = bestSpeedKmh(f.spd);
+    gpsState.lastFixAt = now;
+    updateGpsUI();
+    return;
   }
-  gpsState.lat = f.lat; gpsState.lon = f.lon; gpsState.acc = f.acc;
-  gpsState.alt = f.alt; gpsState.hdg = f.hdg;
-  const scooterKmh = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null) ? scooterState.speed : null;
-  gpsState.speedKmh = scooterKmh != null ? scooterKmh : (f.spd != null ? f.spd * 3.6 : null);
-  gpsState.lastFixAt = Date.now();
+
+  if (gpsState.lat === null) {
+    gpsState.lat = f.lat; gpsState.lon = f.lon;
+    gpsState.trail.push([f.lat, f.lon]);
+  } else {
+    const d = haversineKm(gpsState.lat, gpsState.lon, f.lat, f.lon);
+    const dt = gpsState.lastGoodAt ? Math.max(0.3, (now - gpsState.lastGoodAt) / 1000) : 5;
+    const maxHopKm = Math.max(0.05, (GPS_MAX_SPEED_KMH * dt) / 3600);
+    if (d > maxHopKm) {
+      // 🚧 Teleport / signal jump: re-baseline silently and count nothing.
+      gpsState.trail.push([f.lat, f.lon]);
+    } else {
+      if (d >= GPS_MIN_HOP_KM) {
+        gpsState.distKm += d;
+        gpsState.trail.push([f.lat, f.lon]);
+      }
+    }
+    gpsState.lat = f.lat; gpsState.lon = f.lon;
+  }
+
+  // ⏱️ Hard safety net: total distance can never outrun elapsed time at 130 km/h (+2 km slack).
+  if (gpsState.sessionStartAt) {
+    const elapsedH = (now - gpsState.sessionStartAt) / 3600000;
+    const maxKm = 2 + elapsedH * GPS_MAX_SPEED_KMH;
+    if (gpsState.distKm > maxKm) gpsState.distKm = maxKm;
+  }
+  if (gpsState.trail.length > 600) gpsState.trail.shift();
+
+  gpsState.fixLat = f.lat; gpsState.fixLon = f.lon;
+  gpsState.acc = f.acc; gpsState.alt = f.alt; gpsState.hdg = f.hdg;
+  gpsState.speedKmh = bestSpeedKmh(f.spd);
+  gpsState.lastFixAt = now; gpsState.lastGoodAt = now;
   trackGpsEvents(f);
   updateGoogleMap(f);
   updateGpsUI();
@@ -994,9 +1137,11 @@ function ingestGpsFix(f) {
 
 function updateGpsUI() {
   const { lat, lon, acc, alt, hdg, speedKmh, distKm } = gpsState;
-  if (lat === null) return;
+  const dLat = gpsState.fixLat != null ? gpsState.fixLat : lat;
+  const dLon = gpsState.fixLon != null ? gpsState.fixLon : lon;
+  if (dLat === null) return;
   gpsCoords.innerHTML =
-    `${lat.toFixed(6)}, ${lon.toFixed(6)}<br>± ${acc != null ? Math.round(acc) : '—'} m accuracy`;
+    `${dLat.toFixed(6)}, ${dLon.toFixed(6)}<br>± ${acc != null ? Math.round(acc) : '—'} m accuracy`;
   gpsAlt.textContent = alt != null ? `${Math.round(alt)} m` : '— m';
   gpsHdg.textContent = hdg != null ? `${Math.round(hdg)}°` : '—°';
   gpsSpd.textContent = speedKmh != null ? `${speedKmh.toFixed(1)} km/h` : '— km/h';
@@ -1006,7 +1151,6 @@ function updateGpsUI() {
   const pct = Math.min(100, (distKm / GPS_SESSION_CAP_KM) * 100);
   gpsBarFill.style.width = pct + '%';
   gpsBarMarker.style.left = pct + '%';
-  updateGpsEventsLine();
 }
 
 function drawGpsTrail() {
@@ -1018,18 +1162,18 @@ function drawGpsTrail() {
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   ctx.clearRect(0, 0, cssW, cssH);
   // faint grid
-  ctx.strokeStyle = 'rgba(168,85,247,.12)'; ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(125,211,252,.15)'; ctx.lineWidth = 1;
   for (let x = 20; x < cssW; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, cssH); ctx.stroke(); }
   for (let y = 15; y < cssH; y += 30) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(cssW, y); ctx.stroke(); }
   const t = gpsState.trail;
   if (t.length < 2) {
-    ctx.fillStyle = 'rgba(196,181,212,.55)';
+    ctx.fillStyle = 'rgba(182,198,214,.6)';
     ctx.font = '600 11px "Inter Tight", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(t.length === 1 ? '📍 Fix acquired — ride to draw your trail…' : 'Start GPS to see where you are 🎃', cssW/2, cssH/2);
+    ctx.fillText(t.length === 1 ? '📍 Fix acquired — ride to draw your trail…' : 'Start GPS to see where you are 🎄', cssW/2, cssH/2);
     if (t.length === 1) {
       const [la, lo] = t[0];
-      ctx.fillStyle = '#f97318';
+      ctx.fillStyle = '#fcd34d';
       ctx.beginPath(); ctx.arc(cssW/2, cssH/2, 6, 0, Math.PI*2); ctx.fill();
     }
     return;
@@ -1048,11 +1192,11 @@ function drawGpsTrail() {
   ctx.beginPath();
   ctx.moveTo(px(t[0][1]), py(t[0][0]));
   for (let i = 1; i < t.length; i++) ctx.lineTo(px(t[i][1]), py(t[i][0]));
-  ctx.strokeStyle = '#f97318'; ctx.lineWidth = 2.5;
-  ctx.shadowColor = 'rgba(249,115,24,.8)'; ctx.shadowBlur = 8;
+  ctx.strokeStyle = '#ff4d5e'; ctx.lineWidth = 2.5;
+  ctx.shadowColor = 'rgba(255,77,94,.85)'; ctx.shadowBlur = 8;
   ctx.stroke();
   ctx.shadowBlur = 0;
-  // ---- event markers: stops >20s, battery drops, end point ----
+  // ---- trip markers: stops >20s, battery drops, START/END ----
   (gpsState.stops || []).forEach(function (st) {
     const x = px(st.lon), y = py(st.lat);
     ctx.fillStyle = '#ef4444';
@@ -1080,93 +1224,31 @@ function drawGpsTrail() {
     ctx.textAlign = 'center';
     ctx.fillText('END', ex, ey + 14);
   }
-  // start dot (slime)
-  ctx.fillStyle = '#a3e635';
-  ctx.beginPath(); ctx.arc(px(t[0][1]), py(t[0][0]), 4.5, 0, Math.PI*2); ctx.fill();
   ctx.fillStyle = 'rgba(163,230,53,.95)';
   ctx.font = '700 7px "JetBrains Mono", monospace';
   ctx.textAlign = 'center';
   ctx.fillText('START', px(t[0][1]), py(t[0][0]) - 8);
-  // current position (pumpkin, pulsing ring)
+  // start dot (green)
+  ctx.fillStyle = '#22c55e';
+  ctx.beginPath(); ctx.arc(px(t[0][1]), py(t[0][0]), 4.5, 0, Math.PI*2); ctx.fill();
+  // current position (gold, pulsing ring)
   const last = t[t.length - 1];
   const cx = px(last[1]), cy = py(last[0]);
   const pulse = 7 + Math.sin(Date.now() / 300) * 2.5;
-  ctx.strokeStyle = 'rgba(249,115,24,.45)'; ctx.lineWidth = 2;
+  ctx.strokeStyle = 'rgba(252,211,77,.5)'; ctx.lineWidth = 2;
   ctx.beginPath(); ctx.arc(cx, cy, pulse, 0, Math.PI*2); ctx.stroke();
-  ctx.fillStyle = '#fb923c';
+  ctx.fillStyle = '#fcd34d';
   ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI*2); ctx.fill();
 }
 
-let gmapsLastLoadAt = 0, gmapsLastLat = null, gmapsLastLon = null;
-
-function updateGoogleMap(f) {
-  const frame = document.getElementById('gmapsFrame');
-  const ph = document.getElementById('gmapsPlaceholder');
-  if (!frame) return;
-  const now = Date.now();
-  const movedKm = (gmapsLastLat != null) ? haversineKm(gmapsLastLat, gmapsLastLon, f.lat, f.lon) : 999;
-  if (movedKm < 0.02 && (now - gmapsLastLoadAt) < 15000) return;
-  gmapsLastLat = f.lat; gmapsLastLon = f.lon; gmapsLastLoadAt = now;
-  frame.src = 'https://maps.google.com/maps?q=' + f.lat.toFixed(6) + ',' + f.lon.toFixed(6) + '&z=17&t=m&output=embed';
-  if (ph) ph.style.display = 'none';
-}
-
-function openInGoogleMaps() {
-  if (gpsState.lat == null) { showToast('No GPS fix yet - start GPS first', '⚠️'); return; }
-  const pair = gpsState.lat + ',' + gpsState.lon;
-  try {
-    if (window.RileyBridge && RileyBridge.openMaps) { RileyBridge.openMaps(pair); return; }
-  } catch (e) {}
-  window.open('https://www.google.com/maps?q=' + pair, '_blank');
-}
-
-function mergeNativeTrack() {
-  if (!gpsState.on) return;
-  if (!window.RileyBridge || !RileyBridge.getTrackJson) return;
-  let pts = [];
-  try { pts = JSON.parse(RileyBridge.getTrackJson() || '[]'); } catch (e) { return; }
-  if (!pts || !pts.length) return;
-  let changed = false;
-  for (let i = 0; i < pts.length; i++) {
-    const p = pts[i];
-    if (p.lat == null || p.lon == null) continue;
-    const last = gpsState.trail.length ? gpsState.trail[gpsState.trail.length - 1] : null;
-    if (!last) { gpsState.trail.push([p.lat, p.lon]); changed = true; continue; }
-    const d = haversineKm(last[0], last[1], p.lat, p.lon);
-    if (d > 0.005) {
-      gpsState.trail.push([p.lat, p.lon]);
-      gpsState.distKm += d;
-      gpsState.lat = p.lat; gpsState.lon = p.lon;
-      if (p.spd != null) gpsState.speedKmh = p.spd;
-      changed = true;
-    }
-    if (p.bat != null && p.bat >= 0) {
-      if (gpsState.lastBattery == null) gpsState.lastBattery = p.bat;
-      for (let pct = 100; pct >= 10; pct -= 10) {
-        if (gpsState.lastBattery > pct && p.bat <= pct && !gpsState.batterySeen[pct]) {
-          gpsState.batterySeen[pct] = true;
-          gpsState.batteryMarks.push({ lat: p.lat, lon: p.lon, pct: pct });
-          updateGpsEventsLine();
-        }
-      }
-      gpsState.lastBattery = p.bat;
-    }
-  }
-  if (gpsState.trail.length > 600) gpsState.trail.splice(0, gpsState.trail.length - 600);
-  if (changed) {
-    if (gpsState.lat !== null) updateGoogleMap({ lat: gpsState.lat, lon: gpsState.lon });
-    drawGpsTrail();
-    updateGpsUI();
-    updateGpsEventsLine();
-  }
+function bestSpeedKmh(gpsSpd) {
+  if (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null) return scooterState.speed;
+  return gpsSpd != null ? gpsSpd * 3.6 : null;
 }
 
 function trackGpsEvents(f) {
   const now = Date.now();
-  const hasScooterSpd = (typeof isConnected !== 'undefined' && isConnected && scooterState.speed != null);
-  const spdKmh = hasScooterSpd ? scooterState.speed : ((f.spd != null && !isNaN(f.spd)) ? f.spd * 3.6 : 0);
-
-  // ---- stops longer than 20 s ----
+  const spdKmh = bestSpeedKmh(f.spd) || 0;
   if (spdKmh < 1.5) {
     if (gpsState.stopStartAt == null) {
       gpsState.stopStartAt = now;
@@ -1186,8 +1268,6 @@ function trackGpsEvents(f) {
     gpsState.stopStartPt = null;
     gpsState.stopRecorded = false;
   }
-
-  // ---- battery milestones (100, 90, 80, ...) ----
   const bat = scooterState.battery;
   if (bat != null && !isNaN(bat)) {
     if (gpsState.lastBattery == null) gpsState.lastBattery = bat;
@@ -1207,13 +1287,64 @@ function updateGpsEventsLine() {
   if (!el) return;
   const parts = [];
   if (gpsState.stops.length) {
-    parts.push('\u23F8 ' + gpsState.stops.length + ' stop' + (gpsState.stops.length > 1 ? 's' : '') + ' over 20s \u00B7 ' + gpsState.stops.map(function (s) { return s.dur + 's'; }).join(', '));
+    parts.push('\u23F8 ' + gpsState.stops.length + ' stop' + (gpsState.stops.length > 1 ? 's' : '') + ' >20s \u00B7 ' + gpsState.stops.map(function (s) { return s.dur + 's'; }).join(', '));
   }
   if (gpsState.batteryMarks.length) {
-    parts.push('\uD83D\uDD0B ' + gpsState.batteryMarks.map(function (b) { return b.pct + '%'; }).join(' \u00B7 '));
+    parts.push('\U0001F50B ' + gpsState.batteryMarks.map(function (b) { return b.pct + '%'; }).join(' \u00B7 '));
   }
-  const solo = (typeof isConnected !== 'undefined' && !isConnected) ? '\uD83D\uDEB6 GPS-only mode   \u2022   ' : '';
-  el.textContent = solo + (parts.length ? parts.join('   \u2022   ') : 'Markers: START / END points, stops over 20s, battery drop levels');
+  const mode = (typeof isConnected !== 'undefined' && isConnected) ? '' : '\U0001F6B6 GPS-only mode';
+  el.textContent = parts.length ? (mode ? mode + '   \u00B7   ' : '') + parts.join('   \u00B7   ') : (mode || 'Markers: START/END points, stops over 20s, battery level drops');
+}
+
+let gmapsLastAt = 0, gmapsLat = null, gmapsLon = null;
+function updateGoogleMap(f) {
+  const frame = document.getElementById('gmapsFrame');
+  const ph = document.getElementById('gmapsPlaceholder');
+  if (!frame || f.lat == null) return;
+  const now = Date.now();
+  const moved = gmapsLat != null ? haversineKm(gmapsLat, gmapsLon, f.lat, f.lon) : 999;
+  if (moved < 0.02 && now - gmapsLastAt < 15000) return;
+  gmapsLat = f.lat; gmapsLon = f.lon; gmapsLastAt = now;
+  frame.src = 'https://maps.google.com/maps?q=' + f.lat.toFixed(6) + ',' + f.lon.toFixed(6) + '&z=17&t=m&output=embed';
+  if (ph) ph.style.display = 'none';
+}
+
+function openInGoogleMaps() {
+  const lat = gpsState.lat != null ? gpsState.lat : gpsState.fixLat;
+  const lon = gpsState.lon != null ? gpsState.lon : gpsState.fixLon;
+  if (lat == null) return showToast('No GPS fix yet', '\u26A0\uFE0F');
+  try { if (window.RileyBridge && RileyBridge.openMaps) { RileyBridge.openMaps(lat + ',' + lon); return; } } catch (e) {}
+  window.open('https://www.google.com/maps?q=' + lat + ',' + lon, '_blank');
+}
+
+function mergeNativeTrack() {
+  if (!window.RileyBridge || !RileyBridge.getTrackJson) return;
+  let pts = [];
+  try { pts = JSON.parse(RileyBridge.getTrackJson() || '[]'); } catch (e) { return; }
+  if (!pts || !pts.length) return;
+  let changed = false;
+  pts.forEach(function (p) {
+    if (p.lat == null || p.lon == null) return;
+    const last = gpsState.trail.length ? gpsState.trail[gpsState.trail.length - 1] : null;
+    if (!last || haversineKm(last[0], last[1], p.lat, p.lon) > 0.005) {
+      if (last) gpsState.distKm += haversineKm(last[0], last[1], p.lat, p.lon);
+      gpsState.trail.push([p.lat, p.lon]);
+      changed = true;
+    }
+    if (p.bat != null && p.bat >= 0 && !isNaN(p.bat)) {
+      if (gpsState.lastBattery == null) gpsState.lastBattery = p.bat;
+      for (let pct = 100; pct >= 10; pct -= 10) {
+        if (gpsState.lastBattery > pct && p.bat <= pct && !gpsState.batterySeen[pct]) {
+          gpsState.batterySeen[pct] = true;
+          gpsState.batteryMarks.push({ lat: p.lat, lon: p.lon, pct: pct });
+          changed = true;
+        }
+      }
+      gpsState.lastBattery = p.bat;
+    }
+  });
+  if (gpsState.trail.length > 600) gpsState.trail.splice(0, gpsState.trail.length - 600);
+  if (changed) { drawGpsTrail(); updateGpsUI(); updateGpsEventsLine(); }
 }
 
 function startGpsDemo() {
@@ -1305,6 +1436,23 @@ function sendCommand(code, data = [], label = '') {
   return writeQueue;
 }
 
+function setLimitTag(kmh) {
+  const n = parseInt(kmh, 10) || 0;
+  activeLimitTag.textContent = `${n >= 45 ? 'Unlimit' : 'Limit'}: ${n} km/h`;
+}
+
+/* 🎄 "Unlimit" (≥45 km/h) ⇒ DRIVE shows 20 km/h instead of 15 — display only */
+function driveNominalKmh() {
+  return ((parseInt(scooterState.activeLimit, 10) || 0) >= 45) ? 20 : 15;
+}
+
+function updateDriveSpeedUI() {
+  RANGE_MODES.DRIVE.nominalKmh = driveNominalKmh();
+  const driveLabel = document.querySelector('#rcDrive > span');
+  if (driveLabel) driveLabel.textContent = `DRIVE · ${driveNominalKmh()}`;
+  updateGearUI();
+}
+
 async function applySpeedLimit(kmh, type = 'custom') {
   if (!isConnected && !isDemoMode && !isSimulatingEcoDemo) {
     showToast("Please connect to scooter first!", "⚠️");
@@ -1320,12 +1468,12 @@ async function applySpeedLimit(kmh, type = 'custom') {
   }
   sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit");
   scooterState.activeLimit = kmh;
-  activeLimitTag.textContent = `Limit: ${kmh} km/h`;
-  updateRangeUI();
+  setLimitTag(kmh);
+  updateDriveSpeedUI();
   if (type === 'unlimit') {
-    modeBadge.textContent = "⚡ SPORT — UNLIMITED (47 KM/H)";
-    modeBadge.style.color = "#fbbf24";
-    showToast("UNLIMITED TO 47 KM/H! 🚀", "⚡");
+    modeBadge.textContent = "⚡ UNLIMIT ACTIVE (47 KM/H)";
+    modeBadge.style.color = "#fcd34d";
+    showToast("UNLIMIT ACTIVATED — 47 KM/H! 🎄", "⚡");
     if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
   } else if (type === 'limit') {
     modeBadge.textContent = "🛡️ LIMITED (20 KM/H)";
@@ -1480,8 +1628,10 @@ function cycleGear() {
 
 function updateGearUI() {
   const names = { 1: "ECO", 2: "DRIVE", 3: "SPORT" };
+  let name = names[scooterState.gear] || "SPORT";
+  if (scooterState.gear === 2) name = `DRIVE · ${driveNominalKmh()} KM/H`;
   document.getElementById('lblGear').textContent = `Gear ${scooterState.gear}`;
-  gearBadge.textContent = `⚙️ GEAR ${scooterState.gear} (${names[scooterState.gear] || 'SPORT'})`;
+  gearBadge.textContent = `⚙️ GEAR ${scooterState.gear} (${name})`;
   updateRangeUI();
 }
 
@@ -1718,9 +1868,10 @@ function processScooterFrame(code, data) {
       if (data.length >= 1) {
         const confirmedLimit = data[0];
         scooterState.activeLimit = confirmedLimit;
-        activeLimitTag.textContent = `Limit: ${confirmedLimit} km/h`;
+        setLimitTag(confirmedLimit);
         log(`Controller confirmed active limit = ${confirmedLimit} km/h`, 'log-ack');
-        updateRangeUI();
+        if (confirmedLimit > 0) updateDriveSpeedUI();
+        else updateRangeUI();
       }
       break;
 
@@ -1739,16 +1890,22 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-let ecoThrottleStartTime = null;
+const ECO_GESTURE_SECONDS = 2.0;
+const ECO_PROMPT_DEFAULT = "Sit in ECO for 2 s (any throttle) to lock — a quick ECO flip works too";
+let ecoGestureStartTime = null;
 let isSimulatingEcoDemo = false;
+
+function resetEcoGestureUI() {
+  if (barEcoCountdown) barEcoCountdown.style.width = "0%";
+  if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "0.0s / 2.0s";
+  if (txtEcoPrompt) {
+    txtEcoPrompt.textContent = ECO_PROMPT_DEFAULT;
+    txtEcoPrompt.style.color = "var(--text-muted)";
+  }
+}
 
 function checkEcoThrottleTicker() {
   const isEco = (scooterState.gear === 1);
-  const isFullThrottle = isEco && (
-    (scooterState.throttle && scooterState.throttle >= 80) ||
-    (scooterState.throttleRaw && scooterState.throttleRaw >= 2000) ||
-    (scooterState.speed >= 12 && parseFloat(scooterState.currentAmps || 0) >= 3.0)
-  );
 
   if (txtEcoGearStatus) {
     txtEcoGearStatus.textContent = isEco ? "ECO (Gear 1) 🟢" : `Gear ${scooterState.gear} (Switch to ECO)`;
@@ -1756,49 +1913,45 @@ function checkEcoThrottleTicker() {
     if (pillEcoGear) pillEcoGear.style.borderColor = isEco ? "rgba(16, 185, 129, 0.4)" : "rgba(255,255,255,0.15)";
   }
 
+  // Throttle is now purely informational — the gesture does NOT need it
   if (txtEcoThrottleStatus) {
-    txtEcoThrottleStatus.textContent = isFullThrottle ? "100% (HELD) 🚀" : `${scooterState.throttle || 0}%`;
-    txtEcoThrottleStatus.style.color = isFullThrottle ? "#ef4444" : "#94a3b8";
-    if (pillEcoThrottle) pillEcoThrottle.style.borderColor = isFullThrottle ? "rgba(239, 68, 68, 0.4)" : "rgba(255,255,255,0.15)";
+    const held = (scooterState.throttle && scooterState.throttle >= 80) || (scooterState.throttleRaw && scooterState.throttleRaw >= 2000);
+    txtEcoThrottleStatus.textContent = `${scooterState.throttle || 0}%${held ? ' (held)' : ''} — ignored 🎄`;
+    txtEcoThrottleStatus.style.color = "#94a3b8";
+    if (pillEcoThrottle) pillEcoThrottle.style.borderColor = "rgba(255,255,255,0.15)";
   }
 
   if (isSimulatingEcoDemo) return;
 
-  if (stealthEnabled && isEco && isFullThrottle) {
-    if (!ecoThrottleStartTime) {
-      ecoThrottleStartTime = Date.now();
-      log("⚡ [Eco 2s Gesture] Full throttle detected in ECO mode. Timer started...", "log-warn");
+  if (stealthEnabled && isEco) {
+    // 🎄 NEW TRIGGER: scooter simply SITS IN ECO for 2 seconds — throttle state doesn't matter
+    if (!ecoGestureStartTime) {
+      ecoGestureStartTime = Date.now();
+      log("🎄 [ECO 2s Gesture] ECO mode detected — 2.0s countdown started (throttle irrelevant)...", "log-warn");
     }
-    const elapsed = (Date.now() - ecoThrottleStartTime) / 1000.0;
-    const pct = Math.min(100, (elapsed / 2.0) * 100);
+    const elapsed = (Date.now() - ecoGestureStartTime) / 1000.0;
+    const pct = Math.min(100, (elapsed / ECO_GESTURE_SECONDS) * 100);
     if (barEcoCountdown) barEcoCountdown.style.width = pct + "%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(2.0, elapsed).toFixed(1) + "s / 2.0s";
+    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(ECO_GESTURE_SECONDS, elapsed).toFixed(1) + "s / 2.0s";
     if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = `🚨 HOLDING THROTTLE... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
+      txtEcoPrompt.textContent = `🎄 IN ECO — LOCKING IN ${(ECO_GESTURE_SECONDS - elapsed).toFixed(1)}s (throttle: irrelevant)...`;
       txtEcoPrompt.style.color = "#f59e0b";
     }
-    if (elapsed >= 2.0) {
-      ecoThrottleStartTime = null;
+    if (elapsed >= ECO_GESTURE_SECONDS) {
+      ecoGestureStartTime = null;
       triggerEcoThrottlePanic();
     }
-  } else {
-    if (ecoThrottleStartTime) {
-      ecoThrottleStartTime = null;
-      if (barEcoCountdown) barEcoCountdown.style.width = "0%";
-      if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "0.0s / 2.0s";
-      if (txtEcoPrompt) {
-        txtEcoPrompt.textContent = "Double-click to ECO & pin throttle for 2s to lock";
-        txtEcoPrompt.style.color = "var(--text-muted)";
-      }
-    }
+  } else if (ecoGestureStartTime) {
+    ecoGestureStartTime = null;
+    resetEcoGestureUI();
   }
 }
 
 setInterval(checkEcoThrottleTicker, 100);
 
 async function triggerEcoThrottlePanic() {
-  log("🚨 [TRIGGERED] 5-SECOND ECO FULL-THROTTLE GESTURE DETECTED!", "log-err");
-  log(">>> Auto-reverting Sport limit (47 -> 20 km/h) & switching ECO -> SPORT...", "log-warn");
+  log("🚨 [TRIGGERED] 2-SECOND ECO GESTURE DETECTED (throttle-free)!", "log-err");
+  log(">>> Auto-reverting limit (47 -> 20 km/h) & switching ECO -> SPORT...", "log-warn");
   await applySpeedLimit(20, 'limit');
   await sendCommand(CMD_SET_GEAR, [3], "Auto-switch ECO -> SPORT (Gear 3)");
   scooterState.gear = 3;
@@ -1807,33 +1960,27 @@ async function triggerEcoThrottlePanic() {
   modeBadge.style.color = "#34d399";
   gearBadge.textContent = "⚙️ GEAR 3 (SPORT)";
   gearBadge.style.color = "#34d399";
-  showToast("🛡️ ECO GESTURE: 20 KM/H LOCKED & SWITCHED TO SPORT!", "🛡️");
+  showToast("🛡️ ECO 2s GESTURE: 20 KM/H LOCKED & BACK TO SPORT!", "🛡️");
   if (navigator.vibrate) navigator.vibrate([350, 150, 350, 150, 600]);
 
   if (barEcoCountdown) barEcoCountdown.style.width = "100%";
-  if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "2.0s / 2.0s - TRIGGERED!";
+  if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "2.0s / 2.0s — TRIGGERED!";
   if (txtEcoPrompt) {
-    txtEcoPrompt.textContent = "✅ TRIGGERED! Sport is now 20 km/h & gear switched to Sport!";
+    txtEcoPrompt.textContent = "✅ TRIGGERED! Limit is now 20 km/h & gear switched to Sport!";
     txtEcoPrompt.style.color = "#34d399";
   }
-  setTimeout(() => {
-    if (barEcoCountdown) barEcoCountdown.style.width = "0%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = "0.0s / 2.0s";
-    if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = "Double-click to ECO & pin throttle for 2s to lock";
-      txtEcoPrompt.style.color = "var(--text-muted)";
-    }
-  }, 4000);
+  setTimeout(resetEcoGestureUI, 4000);
 }
 
 function simulateEcoThrottleDemo() {
   if (isSimulatingEcoDemo) return;
   isSimulatingEcoDemo = true;
-  log("💡 Running 5-Second Eco Full-Throttle Demo Simulation...", "log-ack");
-  showToast("Demo: Simulating ECO + Full Throttle...", "💡");
+  log("💡 Running 2-Second ECO Gesture Demo — throttle stays at 0% to prove it's not needed...", "log-ack");
+  showToast("Demo: sitting in ECO for 2s (throttle untouched)...", "💡");
 
   scooterState.gear = 1;
-  scooterState.throttle = 100;
+  scooterState.throttle = 0;
+  scooterState.throttleRaw = 0;
   updateGearUI();
   gearBadge.textContent = "⚙️ GEAR 1 (ECO)";
   gearBadge.style.color = "#10b981";
@@ -1843,21 +1990,21 @@ function simulateEcoThrottleDemo() {
     txtEcoGearStatus.style.color = "#34d399";
   }
   if (txtEcoThrottleStatus) {
-    txtEcoThrottleStatus.textContent = "100% (HELD) 🚀";
-    txtEcoThrottleStatus.style.color = "#ef4444";
+    txtEcoThrottleStatus.textContent = "0% — ignored 🎄 (not needed!)";
+    txtEcoThrottleStatus.style.color = "#34d399";
   }
 
   let start = Date.now();
   const demoTimer = setInterval(() => {
     const elapsed = (Date.now() - start) / 1000.0;
-    const pct = Math.min(100, (elapsed / 2.0) * 100);
+    const pct = Math.min(100, (elapsed / ECO_GESTURE_SECONDS) * 100);
     if (barEcoCountdown) barEcoCountdown.style.width = pct + "%";
-    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(2.0, elapsed).toFixed(1) + "s / 2.0s";
+    if (txtEcoCountdownVal) txtEcoCountdownVal.textContent = Math.min(ECO_GESTURE_SECONDS, elapsed).toFixed(1) + "s / 2.0s";
     if (txtEcoPrompt) {
-      txtEcoPrompt.textContent = `🚨 [DEMO] HOLDING THROTTLE... ${(2.0 - elapsed).toFixed(1)}s remaining!`;
+      txtEcoPrompt.textContent = `🎄 [DEMO] SITTING IN ECO — ${(ECO_GESTURE_SECONDS - elapsed).toFixed(1)}s left (throttle 0%)`;
       txtEcoPrompt.style.color = "#f59e0b";
     }
-    if (elapsed >= 2.0) {
+    if (elapsed >= ECO_GESTURE_SECONDS) {
       clearInterval(demoTimer);
       isSimulatingEcoDemo = false;
       scooterState.throttle = 0;
@@ -1880,7 +2027,7 @@ function toggleDemoMode() {
     banner.querySelector('span').innerHTML = "🟢 <strong>Demo Active:</strong> Simulating MK-083 telemetry!";
     updateStatus("connected", "Demo Online");
     devName.textContent = "MK-083 (Simulated)";
-    activeLimitTag.textContent = "Limit: 47 km/h";
+    setLimitTag(47);
     scooterState.battery = 91;
     scooterState.voltage = 39.2;
     scooterState.odometerKm = 218;
@@ -1895,7 +2042,7 @@ function toggleDemoMode() {
     startRideTimer();
 
     let simSpd = 18.0;
-    updateRangeUI();
+    updateDriveSpeedUI();
     if (!gpsState.on) toggleGps(); // auto-start demo GPS so the position bar lives
     demoInterval = setInterval(() => {
       simSpd += (Math.random() * 2.2 - 1.0);
@@ -1920,7 +2067,7 @@ function toggleDemoMode() {
     btn.textContent = "Enable Demo";
     banner.style.background = "";
     banner.style.borderColor = "";
-    banner.querySelector('span').innerHTML = "💡 <strong>Demo Mode:</strong> Test dials & gesture offline";
+    banner.querySelector('span').innerHTML = "🎄 <strong>Demo Mode:</strong> Test dials & gesture offline";
     updateStatus("offline", "Offline");
     devName.textContent = "MK-083 (Not Connected)";
     activeLimitTag.textContent = "Limit: — km/h";
@@ -1939,11 +2086,11 @@ function toggleDemoMode() {
 function simulateDemoReply(code, data) {
   setTimeout(() => {
     if (code === CMD_SET_MAX_SPEED) {
-      const spd = data[0] || 47;
+      const spd = data[0] || scooterState.activeLimit || 47;
       log(`RX (Demo): 5A 3C 01 ${spd.toString(16).padStart(2,'0').toUpperCase()} [Confirmed ${spd} km/h]`, 'log-rx');
-      activeLimitTag.textContent = `Limit: ${spd} km/h`;
+      setLimitTag(spd);
       scooterState.activeLimit = spd;
-      updateRangeUI();
+      updateDriveSpeedUI();
     } else if (code === CMD_PARAM_WRITE) {
       log(`RX (Demo): 5A D2 01 00 [EEPROM Parameter P${data[0]+1} Written]`, 'log-rx');
     } else if (code === CMD_END_TRIP) {
@@ -1954,7 +2101,36 @@ function simulateDemoReply(code, data) {
 
 // initial paint of mode-aware range estimates
 scooterState.activeLimit = 47;
-updateRangeUI();
+updateDriveSpeedUI();
+
+/* 🎄 falling snow + 🩵 liquid-glass pointer light */
+(function () {
+  const host = document.querySelector('.xmas-decor');
+  if (host) {
+    const glyphs = ['❄', '❅', '❆', '•', '❄'];
+    for (let i = 0; i < 28; i++) {
+      const s = document.createElement('span');
+      s.className = 'snow';
+      s.textContent = glyphs[i % glyphs.length];
+      s.style.left = (Math.random() * 100).toFixed(2) + '%';
+      s.style.fontSize = (8 + Math.random() * 13).toFixed(1) + 'px';
+      s.style.opacity = (0.25 + Math.random() * 0.55).toFixed(2);
+      s.style.animationDuration = (8 + Math.random() * 13).toFixed(1) + 's';
+      s.style.animationDelay = (-Math.random() * 20).toFixed(1) + 's';
+      s.style.setProperty('--drift', (Math.random() * 120 - 60).toFixed(0) + 'px');
+      host.appendChild(s);
+    }
+  }
+  if (window.matchMedia && window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--gx', (((e.clientX - r.left) / r.width) * 100).toFixed(1) + '%');
+        card.style.setProperty('--gy', (((e.clientY - r.top) / r.height) * 100).toFixed(1) + '%');
+      });
+    });
+  }
+})();
 </script>
 </body>
 </html>

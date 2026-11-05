@@ -624,8 +624,8 @@ public class ScooterBleService extends Service {
     // ---------------- 2-second Eco stealth gesture ----------------
 
     private void evaluateGesture() {
-        boolean held = (currentGear == 1)
-                && (throttlePct >= THROTTLE_PCT_TRIGGER || throttleRaw >= THROTTLE_RAW_TRIGGER);
+        // Christmas build semantics: sitting in ECO for 2s is enough (throttle irrelevant)
+        boolean held = (currentGear == 1);
         long now = System.currentTimeMillis();
         if (held) {
             if (ecoHoldStart == 0L) {
