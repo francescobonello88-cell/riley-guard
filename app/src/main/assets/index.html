@@ -513,7 +513,65 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
   .speed-btn:hover,.preset-pill:hover,.ctrl-btn:hover,.tx-btn:hover{transform:translateY(-3px)}
   .card:hover{border-color:rgba(255,255,255,.24);box-shadow:inset 0 1px 0 var(--glass-hi),inset 0 -1px 0 rgba(255,255,255,.07),0 28px 54px -24px rgba(0,0,0,.9)}
 }
-@media(max-width:380px){.brand-title{font-size:27px}}
+
+/* 🎯 Speedometer centering pass — gap centered at the bottom, number dead-center, orbit ring concentric */
+.speedo-wrap{width:240px;height:184px}
+.speedo-svg{position:absolute;top:0;left:0;transform:rotate(150deg)}
+.speedo-track{stroke:rgba(255,255,255,.10)}
+.speedo-display{top:84px}
+.speedo-val{padding-left:3px}
+.speedo-card:after{top:142px}
+@media(max-width:380px){.brand-title{font-size:27px}.speedo-card:after{top:138px}}
+
+/* ==================== 🩵 MODERN iOS-26 WIDGET PASS ==================== */
+:root{--radius-lg:28px;--radius-md:18px}
+.card{background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.022) 48%,rgba(255,255,255,.045));border-color:rgba(255,255,255,.14)}
+.section-title{font-size:16px;font-weight:800;letter-spacing:-.2px;text-transform:none;color:#fff}
+.speedo-card{background:radial-gradient(circle at 50% 32%,rgba(255,77,94,.16),transparent 60%),linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+.range-card{background:linear-gradient(160deg,rgba(225,29,72,.18),rgba(6,10,8,.72) 68%)}
+.gps-card{background:linear-gradient(160deg,rgba(125,211,252,.16),rgba(6,12,16,.72) 62%)}
+.stealth-card{background:linear-gradient(160deg,rgba(225,29,72,.24),rgba(18,6,9,.76) 65%)}
+.transmitter-card{background:linear-gradient(160deg,rgba(125,211,252,.16),rgba(6,14,20,.74) 60%)}
+.limits-card{background:linear-gradient(160deg,rgba(34,197,94,.15),rgba(6,10,8,.74) 60%)}
+/* white pill primary button, like "Build firmware" */
+.btn-connect{background:linear-gradient(180deg,#ffffff,#eef1f5);color:#9f1239;border:1px solid rgba(255,255,255,.85);border-radius:999px;box-shadow:0 16px 36px -16px rgba(255,255,255,.5),inset 0 1px 0 #fff}
+.btn-connect.connected{background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));color:#86efac;border-color:rgba(134,239,172,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.panic-bar-btn,.demo-btn,.hex-send-btn{border-radius:999px}
+.demo-bar{border-radius:999px}
+.speed-btn{border-radius:26px}
+.hud-badge{border-radius:999px;background:rgba(255,255,255,.08);color:#e2e8f0}
+.preset-pill{border-radius:999px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);font-size:13px;padding:8px 16px;min-height:40px}
+/* segmented pill tabs for the ride modes, like Profile 1 / Profile 2 / Global */
+.range-modes{background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.09);border-radius:999px;padding:5px;gap:4px}
+.range-chip{background:transparent;border-color:transparent;border-radius:999px;box-shadow:none}
+.range-chip.active{background:linear-gradient(180deg,#ffffff,#edf1f5);border-color:transparent;color:#0c1512;box-shadow:0 6px 18px -8px rgba(255,77,94,.55),inset 0 1px 0 #fff}
+.range-chip.active strong{color:#0c1512}
+.range-chip:not(.active){color:#9fb0c0}
+
+/* --- 🎚️ Speed limits section (screenshot style) --- */
+.limits-card .section-header{margin-bottom:6px}
+.limits-state{font-size:10px;font-weight:800;letter-spacing:.6px;color:#fcd34d;background:rgba(252,211,77,.12);border:1px solid rgba(252,211,77,.35);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.limit-row{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.limit-name{font-size:16px;font-weight:700;color:#fff;letter-spacing:-.2px}
+.limit-divider{height:1px;background:rgba(255,255,255,.09);margin:14px 0 4px}
+.limit-block{display:block;margin-top:14px}
+.limit-block + .limit-block{border-top:1px solid rgba(255,255,255,.07);margin-top:16px;padding-top:2px}
+.limit-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.limit-val{display:flex;align-items:baseline;gap:5px}
+.limit-val strong{font-size:27px;font-weight:800;letter-spacing:-1px;color:#fff;font-variant-numeric:tabular-nums}
+.limit-val small{font-size:12px;font-weight:700;color:var(--text-muted)}
+.lim-slider{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;outline:none;--pct:40%}
+.lim-slider::-webkit-slider-runnable-track{height:10px;border-radius:999px;background:linear-gradient(90deg,#22c55e,#fcd34d var(--pct),rgba(255,255,255,.14) var(--pct));box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+.lim-slider::-webkit-slider-thumb{-webkit-appearance:none;width:48px;height:26px;margin-top:-8px;border-radius:999px;background:linear-gradient(180deg,#ffffff,#e8ecf1);box-shadow:0 3px 10px rgba(0,0,0,.5),inset 0 1px 0 #fff;border:1px solid rgba(255,255,255,.9)}
+.lim-slider::-moz-range-track{height:10px;border-radius:999px;background:linear-gradient(90deg,#22c55e,#fcd34d var(--pct),rgba(255,255,255,.14) var(--pct))}
+.lim-slider::-moz-range-thumb{width:46px;height:24px;border-radius:999px;background:#fff;border:1px solid rgba(255,255,255,.9);box-shadow:0 3px 10px rgba(0,0,0,.5)}
+.lim-slider:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(252,211,77,.65)}
+/* white iOS toggle for Lock speed limits */
+.limit-switch .slider{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 3px rgba(0,0,0,.55)}
+.limit-switch .slider:before{background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.5)}
+.limit-switch input:checked+.slider{background:rgba(255,255,255,.95);box-shadow:0 0 16px rgba(255,255,255,.35)}
+.limit-switch input:checked+.slider:before{background:#0c1512;transform:translateX(20px)}
+@media(max-width:380px){.limit-name{font-size:15px}.limit-val strong{font-size:24px}}
 
   /* centered speedometer */
   .speedo-card{display:flex;flex-direction:column;align-items:center}
@@ -572,9 +630,9 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
       <svg class="speedo-svg" viewBox="0 0 220 220">
         <defs>
           <linearGradient id="speedGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#a3e635" />
-            <stop offset="55%" stop-color="#f97318" />
-            <stop offset="100%" stop-color="#e11d48" />
+            <stop offset="0%" stop-color="#ef4444" />
+            <stop offset="55%" stop-color="#fcd34d" />
+            <stop offset="100%" stop-color="#22c55e" />
           </linearGradient>
         </defs>
         <circle class="speedo-track" cx="110" cy="110" r="80" />
@@ -606,9 +664,9 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
     </div>
     <div class="range-bar"><div class="range-fill" id="barRange"></div></div>
     <div class="range-modes">
-      <div class="range-chip" id="rcEco"><span>ECO</span><strong id="rngEco">-- km</strong></div>
+      <div class="range-chip" id="rcEco"><span>ECO · 15</span><strong id="rngEco">-- km</strong></div>
       <div class="range-chip" id="rcDrive"><span>DRIVE · 20</span><strong id="rngDrive">-- km</strong></div>
-      <div class="range-chip" id="rcSport"><span>SPORT</span><strong id="rngSport">-- km</strong></div>
+      <div class="range-chip" id="rcSport"><span>SPORT · 25</span><strong id="rngSport">-- km</strong></div>
     </div>
     <div class="range-note">Estimates blend battery %, ride mode &amp; live speed — SPORT drinks charge fastest, ECO sips it.</div>
   </div>
@@ -661,6 +719,34 @@ button:focus-visible,.preset-pill:focus-visible,.text-action:focus-visible{outli
       <div class="speed-btn-main">20 <span class="unit">KM/H</span></div>
       <div class="speed-btn-desc">Strict 20 km/h limiter</div>
     </button>
+  </div>
+
+  <!-- 🎚️ SPEED LIMITS (Eco / Drive / Sport) -->
+  <div class="card limits-card">
+    <div class="section-header">
+      <span class="section-title">Speed limits</span>
+      <span class="limits-state" id="limitsStateTag">LOCKED · PUSHING</span>
+    </div>
+    <div class="limit-row">
+      <span class="limit-name">Lock speed limits</span>
+      <label class="toggle-switch limit-switch">
+        <input type="checkbox" id="chkLockLimits" checked onchange="onLockLimitsToggle(this.checked)">
+        <span class="slider"></span>
+      </label>
+    </div>
+    <div class="limit-divider"></div>
+    <div class="limit-block">
+      <div class="limit-head"><span class="limit-name">Eco</span><span class="limit-val"><strong id="valEcoLimit">15</strong><small>km/h</small></span></div>
+      <input type="range" class="lim-slider" id="sldEco" min="10" max="25" step="1" value="15" oninput="onLimitSlide('eco', this.value)" onchange="onLimitCommit('eco', this.value)">
+    </div>
+    <div class="limit-block">
+      <div class="limit-head"><span class="limit-name">Drive</span><span class="limit-val"><strong id="valDriveLimit">15</strong><small>km/h</small></span></div>
+      <input type="range" class="lim-slider" id="sldDrive" min="10" max="35" step="1" value="15" oninput="onLimitSlide('drive', this.value)" onchange="onLimitCommit('drive', this.value)">
+    </div>
+    <div class="limit-block">
+      <div class="limit-head"><span class="limit-name">Sport</span><span class="limit-val"><strong id="valSportLimit">25</strong><small>km/h</small></span></div>
+      <input type="range" class="lim-slider" id="sldSport" min="15" max="60" step="1" value="25" oninput="onLimitSlide('sport', this.value)" onchange="onLimitCommit('sport', this.value)">
+    </div>
   </div>
 
   <!-- STEALTH PANIC TRIGGERS (ECO 2S GESTURE & EMERGENCY LOCK) -->
@@ -880,10 +966,13 @@ let scooterState = {
   throttle: 0,
   throttleRaw: 0,
   sessionStartTime: null,
-  sessionTimer: null
+  sessionTimer: null,
+  gearLimits: { eco: 15, drive: 15, sport: 25 }
 };
 
 let stealthEnabled = true;
+let lockLimits = true;
+let sliderPushAcks = 0; // slider-initiated SETs: their echoes don't rewrite global mode state
 let lastObservedHeadlight = false;
 let lastObservedGear = 3;
 
@@ -1441,16 +1530,98 @@ function setLimitTag(kmh) {
   activeLimitTag.textContent = `${n >= 45 ? 'Unlimit' : 'Limit'}: ${n} km/h`;
 }
 
-/* 🎄 "Unlimit" (≥45 km/h) ⇒ DRIVE shows 20 km/h instead of 15 — display only */
+/* 🎚️ per-gear speed limits (Eco / Drive / Sport) — the sliders are the source of truth */
 function driveNominalKmh() {
-  return ((parseInt(scooterState.activeLimit, 10) || 0) >= 45) ? 20 : 15;
+  return scooterState.gearLimits.drive;
+}
+
+function setSliderPct(el) {
+  if (!el) return;
+  const min = +el.min || 0, max = +el.max || 100, v = +el.value;
+  el.style.setProperty('--pct', (((v - min) / (max - min)) * 100).toFixed(1) + '%');
 }
 
 function updateDriveSpeedUI() {
-  RANGE_MODES.DRIVE.nominalKmh = driveNominalKmh();
-  const driveLabel = document.querySelector('#rcDrive > span');
-  if (driveLabel) driveLabel.textContent = `DRIVE · ${driveNominalKmh()}`;
+  const g = scooterState.gearLimits;
+  RANGE_MODES.ECO.nominalKmh = g.eco;
+  RANGE_MODES.DRIVE.nominalKmh = g.drive;
+  RANGE_MODES.SPORT.nominalKmh = g.sport;
+  const active = parseInt(scooterState.activeLimit, 10) || 0;
+  const unlimitKmh = active >= 45 ? active : 47;
+  const pairs = [['sldEco', 'valEcoLimit', g.eco], ['sldDrive', 'valDriveLimit', g.drive], ['sldSport', 'valSportLimit', g.sport]];
+  for (const [sid, vid, v] of pairs) {
+    const s = document.getElementById(sid);
+    if (s) { if (+s.value !== v) s.value = v; setSliderPct(s); }
+    const t = document.getElementById(vid);
+    if (t) t.textContent = v;
+  }
+  const labels = [['rcEco', `ECO · ${g.eco}`], ['rcDrive', `DRIVE · ${g.drive}`], ['rcSport', `SPORT · ${g.sport}`]];
+  for (const [id, txt] of labels) {
+    const el = document.querySelector('#' + id + ' > span');
+    if (el) el.textContent = txt;
+  }
   updateGearUI();
+}
+
+/* global limit changed ⇒ keep gear-limit widgets in sync (Unlimit ⇒ Drive 20 / Sport 47, etc.) */
+function applyLimitSideEffects(kmh) {
+  const g = scooterState.gearLimits;
+  if (kmh >= 45) { g.drive = 20; g.sport = kmh; }
+  else { g.drive = 15; if (kmh > 25) g.sport = kmh; }
+  updateDriveSpeedUI();
+}
+
+function onLimitSlide(kind, v) {
+  v = parseInt(v, 10) || 0;
+  scooterState.gearLimits[kind] = v;
+  const cap = kind.charAt(0).toUpperCase() + kind.slice(1);
+  const t = document.getElementById('val' + cap + 'Limit');
+  if (t) t.textContent = v;
+  setSliderPct(document.getElementById('sld' + cap));
+  const chip = document.querySelector('#rc' + kind.charAt(0).toUpperCase() + kind.slice(1) + ' > span');
+  if (chip && kind !== 'sport') chip.textContent = `${kind.toUpperCase()} · ${v}`;
+  else if (chip) chip.textContent = `SPORT · ${v}`;
+  if (kind === 'eco') RANGE_MODES.ECO.nominalKmh = v;
+  else if (kind === 'drive') RANGE_MODES.DRIVE.nominalKmh = v;
+  else RANGE_MODES.SPORT.nominalKmh = v;
+  if (kind === 'drive') updateGearUI();
+  else updateRangeUI();
+}
+
+async function onLimitCommit(kind, v) {
+  v = parseInt(v, 10) || 0;
+  scooterState.gearLimits[kind] = v;
+  const names = { eco: 'ECO', drive: 'DRIVE', sport: 'SPORT' };
+  if (!lockLimits) {
+    log(`📏 ${names[kind]} limit → ${v} km/h (Lock off — local only)`, 'log-warn');
+    showToast(`${names[kind]} limit ${v} km/h (local only)`, '📏');
+    return;
+  }
+  if (!isConnected && !isDemoMode) { showToast('Connect to scooter to push limits!', '⚠️'); return; }
+  log(`📏 Pushing ${names[kind]} limit → ${v} km/h`, 'log-ack');
+  sliderPushAcks++;
+  await sendCommand(CMD_SET_MAX_SPEED, [v], `Set ${names[kind]} Limit -> ${v}`);
+  if (kind === 'sport') {
+    sliderPushAcks++;
+    await sendCommand(CMD_PARAM_WRITE, [9, v], `Write P10 (Sport) -> ${v}`);
+  }
+  showToast(`${names[kind]} limit pushed: ${v} km/h`, '📏');
+  if (navigator.vibrate) navigator.vibrate(40);
+}
+
+function onLockLimitsToggle(checked) {
+  lockLimits = checked;
+  const tag = document.getElementById('limitsStateTag');
+  if (tag) tag.textContent = checked ? 'LOCKED · PUSHING' : 'UNLOCKED · LOCAL';
+  showToast(checked ? 'Speed limits LOCKED — pushing to scooter 🔒' : 'Speed limits unlocked — sliders stay local', checked ? '🔒' : '🔓');
+  if (checked && (isConnected || isDemoMode)) {
+    const g = scooterState.gearLimits;
+    log('🔒 Lock ON — pushing Eco / Drive / Sport limits...', 'log-warn');
+    sliderPushAcks += 3;
+    sendCommand(CMD_SET_MAX_SPEED, [g.eco], `Set ECO Limit -> ${g.eco}`);
+    sendCommand(CMD_SET_MAX_SPEED, [g.drive], `Set DRIVE Limit -> ${g.drive}`);
+    sendCommand(CMD_SET_MAX_SPEED, [g.sport], `Set SPORT Limit -> ${g.sport}`);
+  }
 }
 
 async function applySpeedLimit(kmh, type = 'custom') {
@@ -1469,7 +1640,7 @@ async function applySpeedLimit(kmh, type = 'custom') {
   sendCommand(CMD_SET_MAX_SPEED, [0], "Query Active Limit");
   scooterState.activeLimit = kmh;
   setLimitTag(kmh);
-  updateDriveSpeedUI();
+  applyLimitSideEffects(kmh);
   if (type === 'unlimit') {
     modeBadge.textContent = "⚡ UNLIMIT ACTIVE (47 KM/H)";
     modeBadge.style.color = "#fcd34d";
@@ -1867,10 +2038,15 @@ function processScooterFrame(code, data) {
     case CMD_SET_MAX_SPEED:
       if (data.length >= 1) {
         const confirmedLimit = data[0];
+        if (sliderPushAcks > 0) {
+          sliderPushAcks--;
+          log(`Controller ack for slider push (limit ${confirmedLimit} km/h)`, 'log-ack');
+          break;
+        }
         scooterState.activeLimit = confirmedLimit;
         setLimitTag(confirmedLimit);
         log(`Controller confirmed active limit = ${confirmedLimit} km/h`, 'log-ack');
-        if (confirmedLimit > 0) updateDriveSpeedUI();
+        if (confirmedLimit > 0) applyLimitSideEffects(confirmedLimit);
         else updateRangeUI();
       }
       break;
@@ -2042,7 +2218,7 @@ function toggleDemoMode() {
     startRideTimer();
 
     let simSpd = 18.0;
-    updateDriveSpeedUI();
+    applyLimitSideEffects(47);
     if (!gpsState.on) toggleGps(); // auto-start demo GPS so the position bar lives
     demoInterval = setInterval(() => {
       simSpd += (Math.random() * 2.2 - 1.0);
@@ -2087,10 +2263,15 @@ function simulateDemoReply(code, data) {
   setTimeout(() => {
     if (code === CMD_SET_MAX_SPEED) {
       const spd = data[0] || scooterState.activeLimit || 47;
+      if (sliderPushAcks > 0) {
+        sliderPushAcks--;
+        log(`RX (Demo): ack for slider push [${spd} km/h]`, 'log-rx');
+        return;
+      }
       log(`RX (Demo): 5A 3C 01 ${spd.toString(16).padStart(2,'0').toUpperCase()} [Confirmed ${spd} km/h]`, 'log-rx');
       setLimitTag(spd);
       scooterState.activeLimit = spd;
-      updateDriveSpeedUI();
+      applyLimitSideEffects(spd);
     } else if (code === CMD_PARAM_WRITE) {
       log(`RX (Demo): 5A D2 01 00 [EEPROM Parameter P${data[0]+1} Written]`, 'log-rx');
     } else if (code === CMD_END_TRIP) {
@@ -2101,7 +2282,7 @@ function simulateDemoReply(code, data) {
 
 // initial paint of mode-aware range estimates
 scooterState.activeLimit = 47;
-updateDriveSpeedUI();
+applyLimitSideEffects(47);
 
 /* 🎄 falling snow + 🩵 liquid-glass pointer light */
 (function () {
